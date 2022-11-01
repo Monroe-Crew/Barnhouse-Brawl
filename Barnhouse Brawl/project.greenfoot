@@ -1,14 +1,19 @@
 #Greenfoot project file
+class.Animal.image=balloon1.png
 class.Chicken.image=elephant2.png
-dependency1.from=Chicken
-dependency1.to=Hurtbox
+class.Hitbox.image=BarnHouseMap.png
+dependency1.from=MyWorld
+dependency1.to=Animal
 dependency1.type=UsesDependency
+dependency2.from=Animal
+dependency2.to=Hitbox
+dependency2.type=UsesDependency
 editor.fx.0.height=1056
 editor.fx.0.width=1936
 editor.fx.0.x=1912
 editor.fx.0.y=-8
 height=1056
-package.numDependencies=1
+package.numDependencies=2
 package.numTargets=7
 project.charset=UTF-8
 publish.hasSource=false

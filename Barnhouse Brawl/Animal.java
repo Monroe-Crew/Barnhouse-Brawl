@@ -7,6 +7,15 @@ public class Animal extends Actor {
     public Animal(int weight, int playerID) {
         this.weight = weight;
         this.playerID = playerID;
+        //Hitbox = attacker
+        //Hurtbox = attacked
+    }
+
+    @Override
+    public void addedToWorld(World world) {
+
+        Hitbox basicPush = new Hitbox(this);
+        getWorld().addObject(basicPush, 100, 100);
     }
 
     enum AnimalType {
@@ -54,7 +63,6 @@ public class Animal extends Actor {
     }
 
     public void basicPush() {
-        // Universal for all characters
     }
 
     public void movement(Direction direction) {
