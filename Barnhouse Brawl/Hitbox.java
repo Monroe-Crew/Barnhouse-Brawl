@@ -1,11 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/**
- * Write a description of class Hitbox here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+import greenfoot.*;
+import java.util.*;
 public class Hitbox extends Actor
 {
     private Actor actor;
@@ -19,15 +13,24 @@ public class Hitbox extends Actor
         hitboxImage.fillRect(0,0,w,h);
         setImage(hitboxImage);
     }
-    
+
     public void addedToWorld(World world) {
         setLocation(actor.getX(), actor.getY());
-        
     }
 
-    public void act() 
-    {
+    public void act(){
         setLocation(actor.getX(), actor.getY());
-        // Add your action code here.
     }    
+
+    public ArrayList<Animal> findTouching(){
+        List<Hurtbox> list = this.getWorld().getObjects(Hurtbox.class);
+        //List of all the animal classes on map
+        ArrayList<Animal> touching = new ArrayList<Animal>();
+        for(Hurtbox animal : list){
+            if(this.intersects(animal)){
+                touching.add((Animal)animal.getActor());
+            }
+        }
+        return touching; //Return array with all animals to push
+    }
 }

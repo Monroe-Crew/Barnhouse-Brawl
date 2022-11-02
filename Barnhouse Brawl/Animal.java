@@ -1,8 +1,14 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+import greenfoot.*; 
+import java.util.*;
 public class Animal extends Actor {
     private int weight;
     private int playerID;
+    private double xVelocity;
+    private double yVelocity;
+    private int pushCooldown = 0;
+    private Hitbox pushBox;
+    private Hurtbox hurtBox;
 
     public Animal(int weight, int playerID) {
         this.weight = weight;
@@ -13,9 +19,10 @@ public class Animal extends Actor {
 
     @Override
     public void addedToWorld(World world) {
-
-        Hitbox basicPush = new Hitbox(this);
-        getWorld().addObject(basicPush, 100, 100);
+        this.pushBox = new Hitbox(this);
+        this.hurtBox = new Hurtbox(this);
+        getWorld().addObject(pushBox, 100, 100);
+        getWorld().addObject(hurtBox, 100, 100);
     }
 
     enum AnimalType {
@@ -30,8 +37,12 @@ public class Animal extends Actor {
     }
 
     public void act() {
+        if(pushCooldown < 11) pushCooldown += 1;
+        updatePosition();
+
         if(playerID==1){
             //Player 1 controls
+            // Q E R F1
             if(Greenfoot.isKeyDown("W")){
                 movement(Direction.UP);
             }
@@ -44,58 +55,97 @@ public class Animal extends Actor {
             if(Greenfoot.isKeyDown("D")){
                 movement(Direction.RIGHT);
             }
+            if(Greenfoot.isKeyDown("E") && pushCooldown > 10){
+                basicPush();
+                pushCooldown = 0;
+            }
         }
         if(playerID==2){
             //Player 2 controls
-            if(Greenfoot.isKeyDown("U")){
+            // U O P F2
+            if(Greenfoot.isKeyDown("I")){
                 movement(Direction.UP);
             }
-            if(Greenfoot.isKeyDown("H")){
+            if(Greenfoot.isKeyDown("J")){
                 movement(Direction.LEFT);
             }
-            if(Greenfoot.isKeyDown("J")){
+            if(Greenfoot.isKeyDown("K")){
                 movement(Direction.DOWN);
             }
-            if(Greenfoot.isKeyDown("K")){
+            if(Greenfoot.isKeyDown("L")){
                 movement(Direction.RIGHT);
             }
         }
     }
 
-    public void basicPush() {
+    public void basicPush(){
+        ArrayList<Animal> touching = pushBox.findTouching();
+        for(Animal animal : touching){
+            int xStrength = (animal.getX() - this.getX()) / (animal.getWeight() * 2);
+            int yStrength = (animal.getY() - this.getY()) / (animal.getWeight() * 2);
+            animal.knockBack(xStrength, yStrength);
+        }
+        //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
     }
 
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
-        int change = 5/weight;
+        int maxSpeed = weight*3;
         switch(direction){
             case UP: 
-            setLocation(getX(), getY()-change);
-            while(this.isTouching(Animal.class)) {
-                setLocation(getX(), getY()+1);
-            }
+            if(Math.abs(yVelocity) < maxSpeed) yVelocity -= 1;
             break;
 
             case DOWN: 
-            setLocation(getX(), getY()+change);
-            while(this.isTouching(Animal.class)) {
-                setLocation(getX(), getY()-1);
-            }
+            if(Math.abs(yVelocity) < maxSpeed) yVelocity += 1;
             break;
 
             case LEFT: 
-            setLocation(getX()-change, getY());
-            while(this.isTouching(Animal.class)) {
-                setLocation(getX()+1, getY());
-            }
+            if(Math.abs(xVelocity) < maxSpeed) xVelocity -= 1;
             break;
 
             case RIGHT: 
-            setLocation(getX()+change, getY());
-            while(this.isTouching(Animal.class)){ 
-                setLocation(getX()-1, getY());
-            }
+            if(Math.abs(xVelocity) < maxSpeed) xVelocity += 1;
+
             break;
         }
+    }
+
+    public void updatePosition(){
+        setLocation(getX() + (int)xVelocity, getY() + (int)yVelocity);
+        Actor intersectingActor = this.getOneIntersectingObject(Animal.class);
+        if(intersectingActor != null){ 
+            if(xVelocity < 0){ 
+                System.out.println(getX() - intersectingActor.getX());
+                int actorDiff =  Math.abs(getX() - intersectingActor.getX() + );
+                setLocation(getX() + actorDiff, getY());
+            }
+            if(xVelocity > 0){ 
+                System.out.println("asdf");
+                setLocation(getX() - Math.abs((getX() - intersectingActor.getX())/2), getY());
+            }
+            if(yVelocity < 0){ 
+                System.out.println("asdf");
+                setLocation(getX(), getY() + Math.abs((getY() - intersectingActor.getY())/2));
+            }
+            if(yVelocity > 0){ 
+                System.out.println("asdf");
+                setLocation(getX(), getY() - Math.abs((getY() - intersectingActor.getY())/2));
+            }
+            xVelocity = 0;
+            yVelocity = 0;
+        }
+        
+        xVelocity *= .9;
+        yVelocity *= .9;
+    }
+
+    public void knockBack(int xStrength, int yStrength){
+        this.xVelocity += xStrength;
+        this.yVelocity += yStrength;
+    }
+
+    public int getWeight(){
+        return this.weight;
     }
 }
