@@ -8,12 +8,26 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Hitbox extends Actor
 {
-    /**
-     * Act - do whatever the Hitbox wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private Actor actor;
+    public Hitbox(Actor actor) {
+        this.actor = actor;
+        int w = actor.getImage().getWidth()+10;
+        int h = actor.getImage().getHeight()+10;
+        GreenfootImage actorImage = actor.getImage();
+        GreenfootImage hitboxImage = new GreenfootImage(w,h);//,);
+        hitboxImage.setColor(new Color(0,0,255,127));
+        hitboxImage.fillRect(0,0,w,h);
+        setImage(hitboxImage);
+    }
+    
+    public void addedToWorld(World world) {
+        setLocation(actor.getX(), actor.getY());
+        
+    }
+
     public void act() 
     {
+        setLocation(actor.getX(), actor.getY());
         // Add your action code here.
     }    
 }
