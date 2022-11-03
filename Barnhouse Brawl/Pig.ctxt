@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Pig
-comment1.params=playerID
-comment1.target=Pig(int)
-comment2.params=
-comment2.target=void\ act()
-numComments=3
