@@ -1,11 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
+import java.awt.Color;
 
-/**
- * Write a description of class Hurtbox here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Hurtbox extends Actor
 {
     private Actor actor;
