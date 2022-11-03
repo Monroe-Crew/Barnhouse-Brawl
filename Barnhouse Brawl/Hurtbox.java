@@ -1,13 +1,11 @@
 import greenfoot.*;
-import java.awt.Color;
-
 public class Hurtbox extends Actor
 {
     private Actor actor;
     public Hurtbox(Actor actor) {
         this.actor = actor;
-        int w = actor.getImage().getWidth()+20;
-        int h = actor.getImage().getHeight()+20;
+        int w = actor.getImage().getWidth()-5;
+        int h = actor.getImage().getHeight()-1;
         GreenfootImage actorImage = actor.getImage();
         GreenfootImage hurtboxImage = new GreenfootImage(w,h);//,);
         hurtboxImage.setColor(new Color(0,0,255,127));

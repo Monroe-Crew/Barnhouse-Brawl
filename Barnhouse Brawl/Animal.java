@@ -8,6 +8,8 @@ public class Animal extends Actor {
     private double yVelocity;
     private String[] controls;
     private int pushCooldown = 0;
+    private int w = this.getImage().getWidth();
+    private int h = this.getImage().getHeight();
     private Hitbox hitBox;
     private Hurtbox hurtBox;
 
@@ -52,15 +54,27 @@ public class Animal extends Actor {
 
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
+            hitBox.turn(Math.abs((90-hitBox.getRotation())));
+            hitBox.setxAdjust(0);
+            hitBox.setyAdjust(20);
         }
         if(Greenfoot.isKeyDown(controls[1])){
             movement(Direction.LEFT);
+            hitBox.turn(Math.abs((180-hitBox.getRotation())));
+            hitBox.setxAdjust(20);
+            hitBox.setyAdjust(0);
         }
         if(Greenfoot.isKeyDown(controls[2])){
             movement(Direction.DOWN);
+            hitBox.turn(Math.abs((270-hitBox.getRotation())));
+            hitBox.setxAdjust(0);
+            hitBox.setyAdjust(-20);
         }
         if(Greenfoot.isKeyDown(controls[3])){
             movement(Direction.RIGHT);
+            hitBox.turn(Math.abs((360-hitBox.getRotation())));
+            hitBox.setxAdjust(-20);
+            hitBox.setyAdjust(0);
         }
         if(Greenfoot.isKeyDown(controls[4]) && pushCooldown > 10){
             basicPush();
