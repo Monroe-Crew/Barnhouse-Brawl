@@ -38,7 +38,7 @@ public class Animal extends Actor {
 
     public void act() {
         if(pushCooldown < 11) pushCooldown += 1;
-        updatePosition();
+        
 
         if(playerID==1){
             //Player 1 controls
@@ -76,13 +76,14 @@ public class Animal extends Actor {
                 movement(Direction.RIGHT);
             }
         }
+        updatePosition();
     }
 
     public void basicPush(){
         ArrayList<Animal> touching = pushBox.findTouching();
         for(Animal animal : touching){
-            int xStrength = (animal.getX() - this.getX()) / (animal.getWeight() * 2);
-            int yStrength = (animal.getY() - this.getY()) / (animal.getWeight() * 2);
+            int xStrength = (int)((animal.getX() - this.getX()) / Math.sqrt(animal.getWeight()*8));
+            int yStrength = (int)((animal.getY() - this.getY()) / Math.sqrt(animal.getWeight()*8));
             animal.knockBack(xStrength, yStrength);
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
@@ -90,49 +91,42 @@ public class Animal extends Actor {
 
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
-        int maxSpeed = weight*3;
+        int maxSpeed = weight;
+        int responsiveness = 3;
         switch(direction){
             case UP: 
-            if(Math.abs(yVelocity) < maxSpeed) yVelocity -= 1;
+            yVelocity -= responsiveness;
             break;
 
             case DOWN: 
-            if(Math.abs(yVelocity) < maxSpeed) yVelocity += 1;
+             yVelocity += responsiveness;
             break;
 
             case LEFT: 
-            if(Math.abs(xVelocity) < maxSpeed) xVelocity -= 1;
+            xVelocity -= responsiveness;
             break;
 
             case RIGHT: 
-            if(Math.abs(xVelocity) < maxSpeed) xVelocity += 1;
+            xVelocity += responsiveness;
 
             break;
         }
+        
+        if(Math.abs(yVelocity) > maxSpeed) yVelocity = yVelocity > 0 ? maxSpeed : -maxSpeed;
+        if(Math.abs(xVelocity) > maxSpeed) xVelocity = xVelocity > 0 ? maxSpeed : -maxSpeed;
     }
 
     public void updatePosition(){
-        setLocation(getX() + (int)xVelocity, getY() + (int)yVelocity);
-        Actor intersectingActor = this.getOneIntersectingObject(Animal.class);
-        if(intersectingActor != null){ 
-            if(xVelocity < 0){ 
-                System.out.println(getX() - intersectingActor.getX());
-                int actorDiff =  Math.abs(getX() - intersectingActor.getX() + );
-                setLocation(getX() + actorDiff, getY());
-            }
-            if(xVelocity > 0){ 
-                System.out.println("asdf");
-                setLocation(getX() - Math.abs((getX() - intersectingActor.getX())/2), getY());
-            }
-            if(yVelocity < 0){ 
-                System.out.println("asdf");
-                setLocation(getX(), getY() + Math.abs((getY() - intersectingActor.getY())/2));
-            }
-            if(yVelocity > 0){ 
-                System.out.println("asdf");
-                setLocation(getX(), getY() - Math.abs((getY() - intersectingActor.getY())/2));
-            }
+        int oldX = getX();
+        int oldY = getY();
+        setLocation(getX() + (int)xVelocity, getY());
+        if(this.getOneIntersectingObject(Animal.class) != null){ 
+            setLocation(oldX, getY());
             xVelocity = 0;
+        }
+        setLocation(getX(), getY() + (int)yVelocity);
+        if(this.getOneIntersectingObject(Animal.class) != null){ 
+            setLocation(getX(), oldY);
             yVelocity = 0;
         }
         
