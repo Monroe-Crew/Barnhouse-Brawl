@@ -54,25 +54,24 @@ public class Animal extends Actor {
 
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
-            hitBox.turn(Math.abs((90-hitBox.getRotation())));
             hitBox.setxAdjust(0);
             hitBox.setyAdjust(20);
         }
         if(Greenfoot.isKeyDown(controls[1])){
             movement(Direction.LEFT);
-            hitBox.turn(Math.abs((180-hitBox.getRotation())));
+            
             hitBox.setxAdjust(20);
             hitBox.setyAdjust(0);
         }
         if(Greenfoot.isKeyDown(controls[2])){
             movement(Direction.DOWN);
-            hitBox.turn(Math.abs((270-hitBox.getRotation())));
+            
             hitBox.setxAdjust(0);
             hitBox.setyAdjust(-20);
         }
         if(Greenfoot.isKeyDown(controls[3])){
             movement(Direction.RIGHT);
-            hitBox.turn(Math.abs((360-hitBox.getRotation())));
+            
             hitBox.setxAdjust(-20);
             hitBox.setyAdjust(0);
         }
@@ -102,18 +101,22 @@ public class Animal extends Actor {
         int responsiveness = 1;
         switch(direction){
             case UP: 
+            hitBox.turn(Math.abs((90-hitBox.getRotation())));
             if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
             break;
 
             case DOWN: 
+            hitBox.turn(Math.abs((270-hitBox.getRotation())));
             if(yVelocity < maxSpeed) yVelocity += responsiveness;
             break;
 
             case LEFT: 
+            hitBox.turn(Math.abs((180-hitBox.getRotation())));
             if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
             break;
 
             case RIGHT: 
+            hitBox.turn(Math.abs((360-hitBox.getRotation())));
             if(xVelocity < maxSpeed) xVelocity += responsiveness;
             break;
         }

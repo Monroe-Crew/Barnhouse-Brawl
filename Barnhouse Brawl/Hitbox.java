@@ -7,7 +7,7 @@ public class Hitbox extends Actor
     private int yAdjust=0;
     public Hitbox(Actor actor) {
         this.actor = actor;
-        int w = actor.getImage().getWidth()+10*3;
+        int w = actor.getImage().getWidth()+10;
         int h = actor.getImage().getHeight()-10;
         GreenfootImage actorImage = actor.getImage();
         GreenfootImage hitboxImage = new GreenfootImage(w,h);
