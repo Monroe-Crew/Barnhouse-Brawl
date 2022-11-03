@@ -9,11 +9,11 @@ public class MyWorld extends World{
     private void prepare(){
         Animal animal = new Animal(5, 1);
         addObject(animal, 669, 673);
-        Animal animal2 = new Animal(1, 0);
+        Animal animal2 = new Animal(1, 2);
         addObject(animal2, 316, 371);
-        Animal animal3 = new Animal(3, 2);
+        Animal animal3 = new Animal(3, 3);
         addObject(animal3, 700, 361);
-        Animal animal4 = new Animal(5, 3);
+        Animal animal4 = new Animal(5, 0);
         addObject(animal4, 1074, 360);
     }
 }

@@ -6,81 +6,71 @@ public class Animal extends Actor {
     private int playerID;
     private double xVelocity;
     private double yVelocity;
+    private String[] controls;
     private int pushCooldown = 0;
-    private Hitbox pushBox;
+    private Hitbox hitBox;
     private Hurtbox hurtBox;
 
-    public Animal(int weight, int playerID) {
-        this.weight = weight;
-        this.playerID = playerID;
-        //Hitbox = attacker
-        //Hurtbox = attacked
-    }
-
-    @Override
-    public void addedToWorld(World world) {
-        this.pushBox = new Hitbox(this);
-        this.hurtBox = new Hurtbox(this);
-        getWorld().addObject(pushBox, 100, 100);
-        getWorld().addObject(hurtBox, 100, 100);
-    }
-
-    enum AnimalType {
+    public static enum AnimalType {
         CHICKEN,
         PIG
     }
-    enum Direction {
+
+    private enum Direction {
         UP,
         DOWN,
         LEFT,
         RIGHT
     }
 
+    public Animal(int weight, int playerID) {
+        this.weight = weight;
+        this.playerID = playerID;
+
+        /* Control order:
+         * Index 0 - Up
+         * Index 1 - Left
+         * Index 2 - Down
+         * Index 3 - Right
+         * Index 4 - Basic Push
+         */
+        controls = new String[]{"-","-","-","-","-"};
+        if(playerID==1) controls = new String[]{"W","A","S","D","Q"};
+        if(playerID==2) controls = new String[]{"I","J","K","L","U"};
+    }
+
+    @Override
+    public void addedToWorld(World world) {
+        this.hitBox = new Hitbox(this);
+        this.hurtBox = new Hurtbox(this);
+        getWorld().addObject(hitBox, 100, 100);
+        getWorld().addObject(hurtBox, 100, 100);
+    }
+
     public void act() {
         if(pushCooldown < 11) pushCooldown += 1;
-        
 
-        if(playerID==1){
-            //Player 1 controls
-            // Q E R F1
-            if(Greenfoot.isKeyDown("W")){
-                movement(Direction.UP);
-            }
-            if(Greenfoot.isKeyDown("A")){
-                movement(Direction.LEFT);
-            }
-            if(Greenfoot.isKeyDown("S")){
-                movement(Direction.DOWN);
-            }
-            if(Greenfoot.isKeyDown("D")){
-                movement(Direction.RIGHT);
-            }
-            if(Greenfoot.isKeyDown("E") && pushCooldown > 10){
-                basicPush();
-                pushCooldown = 0;
-            }
+        if(Greenfoot.isKeyDown(controls[0])){
+            movement(Direction.UP);
         }
-        if(playerID==2){
-            //Player 2 controls
-            // U O P F2
-            if(Greenfoot.isKeyDown("I")){
-                movement(Direction.UP);
-            }
-            if(Greenfoot.isKeyDown("J")){
-                movement(Direction.LEFT);
-            }
-            if(Greenfoot.isKeyDown("K")){
-                movement(Direction.DOWN);
-            }
-            if(Greenfoot.isKeyDown("L")){
-                movement(Direction.RIGHT);
-            }
+        if(Greenfoot.isKeyDown(controls[1])){
+            movement(Direction.LEFT);
+        }
+        if(Greenfoot.isKeyDown(controls[2])){
+            movement(Direction.DOWN);
+        }
+        if(Greenfoot.isKeyDown(controls[3])){
+            movement(Direction.RIGHT);
+        }
+        if(Greenfoot.isKeyDown(controls[4]) && pushCooldown > 10){
+            basicPush();
+            pushCooldown = 0;
         }
         updatePosition();
     }
 
     public void basicPush(){
-        ArrayList<Animal> touching = pushBox.findTouching();
+        ArrayList<Animal> touching = hitBox.findTouching();
         for(Animal animal : touching){
             int xStrength = (int)((animal.getX() - this.getX()) / Math.sqrt(animal.getWeight()*8));
             int yStrength = (int)((animal.getY() - this.getY()) / Math.sqrt(animal.getWeight()*8));
@@ -91,7 +81,7 @@ public class Animal extends Actor {
 
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
-        int maxSpeed = weight;
+        int maxSpeed = 5/(int)Math.sqrt(weight);
         int responsiveness = 3;
         switch(direction){
             case UP: 
@@ -99,7 +89,7 @@ public class Animal extends Actor {
             break;
 
             case DOWN: 
-             yVelocity += responsiveness;
+            yVelocity += responsiveness;
             break;
 
             case LEFT: 
@@ -108,10 +98,9 @@ public class Animal extends Actor {
 
             case RIGHT: 
             xVelocity += responsiveness;
-
             break;
         }
-        
+
         if(Math.abs(yVelocity) > maxSpeed) yVelocity = yVelocity > 0 ? maxSpeed : -maxSpeed;
         if(Math.abs(xVelocity) > maxSpeed) xVelocity = xVelocity > 0 ? maxSpeed : -maxSpeed;
     }
@@ -129,9 +118,9 @@ public class Animal extends Actor {
             setLocation(getX(), oldY);
             yVelocity = 0;
         }
-        
-        xVelocity *= .9;
-        yVelocity *= .9;
+
+        xVelocity *= .8;
+        yVelocity *= .8;
     }
 
     public void knockBack(int xStrength, int yStrength){
