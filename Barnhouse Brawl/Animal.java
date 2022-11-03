@@ -70,10 +70,13 @@ public class Animal extends Actor {
     }
 
     public void basicPush(){
+        int multiplier = 3;
         ArrayList<Animal> touching = hitBox.findTouching();
         for(Animal animal : touching){
-            int xStrength = (int)((animal.getX() - this.getX()) / Math.sqrt(animal.getWeight()*8));
-            int yStrength = (int)((animal.getY() - this.getY()) / Math.sqrt(animal.getWeight()*8));
+            if(animal == this) continue;
+            System.out.println(((animal.getX() - this.getX()) < 0 ? -1 : 1) * (double)animal.getX()/this.getX() * 5);
+            int xStrength = (int)((((animal.getX() - this.getX()) < 0 ? -1 : 1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int yStrength = (int)((((animal.getY() - this.getY()) < 0 ? -1 : 1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
@@ -82,22 +85,22 @@ public class Animal extends Actor {
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
         int maxSpeed = 5/(int)Math.sqrt(weight);
-        int responsiveness = 3;
+        int responsiveness = 1;
         switch(direction){
             case UP: 
-            yVelocity -= responsiveness;
+            if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
             break;
 
             case DOWN: 
-            yVelocity += responsiveness;
+            if(yVelocity < maxSpeed) yVelocity += responsiveness;
             break;
 
             case LEFT: 
-            xVelocity -= responsiveness;
+            if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
             break;
 
             case RIGHT: 
-            xVelocity += responsiveness;
+            if(xVelocity < maxSpeed) xVelocity += responsiveness;
             break;
         }
 
@@ -116,7 +119,7 @@ public class Animal extends Actor {
         setLocation(getX(), getY() + (int)yVelocity);
         if(this.getOneIntersectingObject(Animal.class) != null){ 
             setLocation(getX(), oldY);
-            yVelocity = 0;
+            yVelocity=0;
         }
 
         xVelocity *= .8;

@@ -7,7 +7,7 @@ public class MyWorld extends World{
     }
 
     private void prepare(){
-        Animal animal = new Animal(5, 1);
+        Animal animal = new Animal(1, 1);
         addObject(animal, 669, 673);
         Animal animal2 = new Animal(1, 2);
         addObject(animal2, 316, 371);
