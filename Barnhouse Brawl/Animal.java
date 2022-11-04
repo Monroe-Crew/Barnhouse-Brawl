@@ -2,14 +2,14 @@
 import greenfoot.*; 
 import java.util.*;
 public class Animal extends Actor {
+    private int width = this.getImage().getWidth();
+    private int height = this.getImage().getHeight();
     private int weight;
     private int playerID;
     private double xVelocity;
     private double yVelocity;
     private String[] controls;
     private int pushCooldown = 0;
-    private int w = this.getImage().getWidth();
-    private int h = this.getImage().getHeight();
     private Hitbox hitBox;
     private Hurtbox hurtBox;
 
@@ -43,6 +43,10 @@ public class Animal extends Actor {
 
     @Override
     public void addedToWorld(World world) {
+        // Scales up the image
+        GreenfootImage image = getImage();
+        image.scale(image.getWidth()*3, image.getHeight()*3);
+        setImage(image);
         this.hitBox = new Hitbox(this);
         this.hurtBox = new Hurtbox(this);
         getWorld().addObject(hitBox, 100, 100);
@@ -50,45 +54,37 @@ public class Animal extends Actor {
     }
 
     public void act() {
+        // Reloads push cooldown
         if(pushCooldown < 11) pushCooldown += 1;
 
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
-            hitBox.setxAdjust(0);
-            hitBox.setyAdjust(20);
         }
         if(Greenfoot.isKeyDown(controls[1])){
             movement(Direction.LEFT);
-            
-            hitBox.setxAdjust(20);
-            hitBox.setyAdjust(0);
         }
         if(Greenfoot.isKeyDown(controls[2])){
             movement(Direction.DOWN);
-            
-            hitBox.setxAdjust(0);
-            hitBox.setyAdjust(-20);
         }
         if(Greenfoot.isKeyDown(controls[3])){
             movement(Direction.RIGHT);
-            
-            hitBox.setxAdjust(-20);
-            hitBox.setyAdjust(0);
         }
         if(Greenfoot.isKeyDown(controls[4]) && pushCooldown > 10){
             basicPush();
             pushCooldown = 0;
         }
+        
+        // Update position using velocities
         updatePosition();
     }
 
     public void basicPush(){
+        // Larger multiplier = harder push for all characters
         int multiplier = 3;
         ArrayList<Animal> touching = hitBox.findTouching();
         for(Animal animal : touching){
             if(animal == this) continue;
-            System.out.println(((animal.getX() - this.getX()) < 0 ? -1 : 1) * (double)animal.getX()/this.getX() * 5);
-            int xStrength = (int)((((animal.getX() - this.getX()) < 0 ? -1 : 1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int xStrength = (int)(((animal.getX()/Math.abs(animal.getX())) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             int yStrength = (int)((((animal.getY() - this.getY()) < 0 ? -1 : 1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
         }
@@ -101,46 +97,74 @@ public class Animal extends Actor {
         int responsiveness = 1;
         switch(direction){
             case UP: 
-            hitBox.turn(Math.abs((90-hitBox.getRotation())));
-            if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
-            break;
+                if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
+                break;
 
             case DOWN: 
-            hitBox.turn(Math.abs((270-hitBox.getRotation())));
-            if(yVelocity < maxSpeed) yVelocity += responsiveness;
-            break;
+                if(yVelocity < maxSpeed) yVelocity += responsiveness;
+                break;
 
             case LEFT: 
-            hitBox.turn(Math.abs((180-hitBox.getRotation())));
-            if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
-            break;
+                if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
+                break;
 
             case RIGHT: 
-            hitBox.turn(Math.abs((360-hitBox.getRotation())));
-            if(xVelocity < maxSpeed) xVelocity += responsiveness;
-            break;
+                if(xVelocity < maxSpeed) xVelocity += responsiveness;
+                break;
         }
 
+        // Changes rotation based on velocity.
+        int oldRotation = getRotation();
+        int turnX = (int)(xVelocity*10000);
+        int turnY = (int)(yVelocity*10000);
+        
+        // 100 is the threshold so it never attemts to turn towards its own coordinates
+        if(Math.abs(turnX) > 100 || Math.abs(turnY) > 100){
+            turnTowards(getX()+turnX, getY()+turnY);
+            setRotation(getRotation() + 90);
+        }
+        
+        // Checks for intersection, if there is then undo rotation
+        if(this.getOneIntersectingObject(Animal.class) != null){ 
+            setRotation(oldRotation);
+        }
+        
         if(Math.abs(yVelocity) > maxSpeed) yVelocity = yVelocity > 0 ? maxSpeed : -maxSpeed;
         if(Math.abs(xVelocity) > maxSpeed) xVelocity = xVelocity > 0 ? maxSpeed : -maxSpeed;
     }
 
     public void updatePosition(){
+        int maxVelocity = 50;
+        
+        // Sets max velocity
+        xVelocity = xVelocity > maxVelocity ? maxVelocity : xVelocity;
+        yVelocity = yVelocity > maxVelocity ? maxVelocity : yVelocity;
+        
+        /* 
+         * Checks for intersection for individual X and Y positions. 
+         * If there is intersection then it goes back to previous position.
+        */
+       
         int oldX = getX();
         int oldY = getY();
+        
         setLocation(getX() + (int)xVelocity, getY());
         if(this.getOneIntersectingObject(Animal.class) != null){ 
             setLocation(oldX, getY());
-            xVelocity = 0;
         }
+        
         setLocation(getX(), getY() + (int)yVelocity);
         if(this.getOneIntersectingObject(Animal.class) != null){ 
             setLocation(getX(), oldY);
-            yVelocity=0;
         }
-
-        xVelocity *= .8;
-        yVelocity *= .8;
+        
+        // Friction
+        xVelocity *= .85;
+        yVelocity *= .85;
+        
+        // Adds threshold so it isn't indefinitley multiplying by .9
+        if(Math.abs(xVelocity) < .001) xVelocity = 0;
+        if(Math.abs(yVelocity) < .001) yVelocity = 0;
     }
 
     public void knockBack(int xStrength, int yStrength){

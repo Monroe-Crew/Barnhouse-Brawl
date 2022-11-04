@@ -15,7 +15,7 @@ public class Hurtbox extends Actor
     public void act() 
     {
         setLocation(actor.getX(), actor.getY());
-        // Add your action code here.
+        setRotation(actor.getRotation());
     }  
     public Actor getActor(){
         return this.actor;

@@ -5,31 +5,44 @@ public class Hitbox extends Actor
     private Actor actor;
     private int xAdjust=0;
     private int yAdjust=0;
+    
+    private int boxW;
+    private int boxH;
+    
+    private int actorW;
+    private int actorH;
     public Hitbox(Actor actor) {
         this.actor = actor;
-        int w = actor.getImage().getWidth()+10;
-        int h = actor.getImage().getHeight()-10;
+        actorW = actor.getImage().getWidth();
+        actorH = actor.getImage().getHeight();
+        
+        boxW = actorW+5;
+        boxH = 30;
+        
         GreenfootImage actorImage = actor.getImage();
-        GreenfootImage hitboxImage = new GreenfootImage(w,h);
+        GreenfootImage hitboxImage = new GreenfootImage(boxH,boxW);
         hitboxImage.setColor(new Color(255,0,0,127));
-        hitboxImage.fillRect(0,0,w,h);
+        hitboxImage.fillRect(0,0,boxH,boxW);
         setImage(hitboxImage);
     }
     
-    public void setxAdjust(int x){
+    public void setPosition(int x, int y){
         xAdjust = x;
+        yAdjust = y;
     }
     
-    public void setyAdjust(int y){
-        yAdjust = y;
+    public void setAngle(int angle){
+        setRotation(angle);
     }
 
     public void addedToWorld(World world) {
-        setLocation(actor.getX()-xAdjust, actor.getY()-yAdjust);
+        act();
     }
 
     public void act(){
-        setLocation(actor.getX()-xAdjust, actor.getY()-yAdjust);
+        setLocation(actor.getX(), actor.getY());
+        setRotation(actor.getRotation()-90);
+        move(actorH/2);
     }    
 
     public ArrayList<Animal> findTouching(){
