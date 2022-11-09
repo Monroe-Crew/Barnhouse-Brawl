@@ -7,8 +7,6 @@ public class Pig extends Animal
         super(playerID, 3);
     }
     
-    public void act() 
-    {
-        // Add your action code here.
-    }    
+    public void specialAbility(){
+    }
 }

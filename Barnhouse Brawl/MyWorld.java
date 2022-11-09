@@ -7,13 +7,13 @@ public class MyWorld extends World{
     }
 
     private void prepare(){
-        Animal animal = new Animal(1, 1);
+        Chicken animal = new Chicken(1);
         addObject(animal, 669, 673);
-        Animal animal2 = new Animal(1, 2);
+        Pig animal2 = new Pig(2);
         addObject(animal2, 316, 371);
-        Animal animal3 = new Animal(3, 3);
+        Chicken animal3 = new Chicken(3);
         addObject(animal3, 700, 361);
-        Animal animal4 = new Animal(5, 0);
+        Pig animal4 = new Pig(0);
         addObject(animal4, 1074, 360);
     }
 }
