@@ -4,7 +4,7 @@ public class Chicken extends Animal
 {
 
     public Chicken(int playerID){
-        super(playerID, 1);
+        super(1, playerID);
     }
 
     @Override

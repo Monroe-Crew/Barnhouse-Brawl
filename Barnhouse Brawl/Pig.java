@@ -4,7 +4,7 @@ public class Pig extends Animal
 {
     
     public Pig(int playerID){
-        super(playerID, 3);
+        super(3, playerID);
     }
     
     public void specialAbility(){
