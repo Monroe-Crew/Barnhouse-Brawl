@@ -2,6 +2,7 @@
 class.Animal.image=Pig.png
 class.Chicken.image=elephant2.png
 class.Hitbox.image=BarnHouseMap.png
+class.MyWorld.image=Big.png
 class.Pig.image=Chicken.png
 dependency1.from=MyWorld
 dependency1.to=Animal
