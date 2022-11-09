@@ -84,8 +84,9 @@ public class Animal extends Actor {
         ArrayList<Animal> touching = hitBox.findTouching();
         for(Animal animal : touching){
             if(animal == this) continue;
-            int xStrength = (int)(((animal.getX()/Math.abs(animal.getX())) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
-            int yStrength = (int)((((animal.getY() - this.getY()) < 0 ? -1 : 1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            System.out.println((animal.getX() - this.getX() > 0 ? 1 : -1));
+            int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
