@@ -8,5 +8,6 @@ public class Pig extends Animal
     }
     
     public void specialAbility(){
+        changeDecay(10);
     }
 }

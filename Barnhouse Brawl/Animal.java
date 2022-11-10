@@ -13,6 +13,7 @@ public abstract class Animal extends Actor {
     private int specialCooldown = 0;
     private Hitbox hitBox;
     private Hurtbox hurtBox;
+    private double decay = .85; // Friction
 
     public static enum AnimalType {
         CHICKEN,
@@ -165,8 +166,8 @@ public abstract class Animal extends Actor {
         }
         
         // Friction
-        xVelocity *= .85;
-        yVelocity *= .85;
+        xVelocity *= decay;
+        yVelocity *= decay;
         
         // Adds threshold so it isn't indefinitley multiplying by .9
         if(Math.abs(xVelocity) < .001) xVelocity = 0;
@@ -180,6 +181,10 @@ public abstract class Animal extends Actor {
 
     public int getWeight(){
         return this.weight;
+    }
+    
+    public void changeDecay(double decay){
+        this.decay = decay;
     }
     
     public abstract void specialAbility();
