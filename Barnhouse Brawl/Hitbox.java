@@ -21,7 +21,7 @@ public class Hitbox extends Actor
 
         GreenfootImage actorImage = actor.getImage();
         GreenfootImage hitboxImage = new GreenfootImage(boxH,boxW);
-        if(Constants.debugMode){
+        if(Constants.Settings.debugMode){
             hitboxImage.setColor(new Color(255,0,0,127));
             hitboxImage.fillRect(0,0,boxH,boxW);
         }

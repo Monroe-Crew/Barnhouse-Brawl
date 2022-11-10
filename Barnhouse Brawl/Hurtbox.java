@@ -9,7 +9,7 @@ public class Hurtbox extends Actor
 
         GreenfootImage actorImage = actor.getImage();
         GreenfootImage hurtboxImage = new GreenfootImage(w,h);
-        if(Constants.debugMode){
+        if(Constants.Settings.debugMode){
             hurtboxImage.setColor(new Color(0,0,255,127));
             hurtboxImage.fillRect(0,0,w,h);
         }

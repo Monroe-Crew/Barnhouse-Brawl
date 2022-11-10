@@ -4,7 +4,7 @@ public class Chicken extends Animal
 {
 
     public Chicken(int playerID){
-        super(1, playerID);
+        super(Constants.Chicken.weight, playerID);
     }
 
     @Override
