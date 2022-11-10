@@ -4,11 +4,9 @@ public class Pig extends Animal
 {
     
     public Pig(int playerID){
-        super(playerID, 3);
+        super(Constants.Pig.weight, playerID);
     }
     
-    public void act() 
-    {
-        // Add your action code here.
-    }    
+    public void specialAbility(){
+    }
 }

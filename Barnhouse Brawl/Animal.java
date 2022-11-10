@@ -1,7 +1,7 @@
 
 import greenfoot.*; 
 import java.util.*;
-public class Animal extends Actor {
+public abstract class Animal extends Actor {
     private int width = this.getImage().getWidth();
     private int height = this.getImage().getHeight();
     private int weight;
@@ -10,6 +10,7 @@ public class Animal extends Actor {
     private double yVelocity;
     private String[] controls;
     private int pushCooldown = 0;
+    private int specialCooldown = 0;
     private Hitbox hitBox;
     private Hurtbox hurtBox;
 
@@ -35,10 +36,11 @@ public class Animal extends Actor {
          * Index 2 - Down
          * Index 3 - Right
          * Index 4 - Basic Push
+         * Index 5 - Special Ability 1
          */
-        controls = new String[]{"-","-","-","-","-"};
-        if(playerID==1) controls = new String[]{"W","A","S","D","Q"};
-        if(playerID==2) controls = new String[]{"I","J","K","L","U"};
+        controls = new String[]{"-","-","-","-","-","-"};
+        if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
+        if(playerID==2) controls = new String[]{"I","J","K","L","U","O"};
     }
 
     @Override
@@ -56,7 +58,7 @@ public class Animal extends Actor {
     public void act() {
         // Reloads push cooldown
         if(pushCooldown < 11) pushCooldown += 1;
-
+        if(specialCooldown < 51) specialCooldown += 1;
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
         }
@@ -72,6 +74,10 @@ public class Animal extends Actor {
         if(Greenfoot.isKeyDown(controls[4]) && pushCooldown > 10){
             basicPush();
             pushCooldown = 0;
+        }
+        if(Greenfoot.isKeyDown(controls[5]) && specialCooldown > 50){
+            specialAbility();
+            specialCooldown = 0;
         }
         
         // Update position using velocities
@@ -97,19 +103,19 @@ public class Animal extends Actor {
         int responsiveness = 1;
         switch(direction){
             case UP: 
-                if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
+                yVelocity -= responsiveness;
                 break;
 
             case DOWN: 
-                if(yVelocity < maxSpeed) yVelocity += responsiveness;
+                yVelocity += responsiveness;
                 break;
 
             case LEFT: 
-                if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
+                xVelocity -= responsiveness;
                 break;
 
             case RIGHT: 
-                if(xVelocity < maxSpeed) xVelocity += responsiveness;
+                xVelocity += responsiveness;
                 break;
         }
 
@@ -175,4 +181,6 @@ public class Animal extends Actor {
     public int getWeight(){
         return this.weight;
     }
+    
+    public abstract void specialAbility();
 }

@@ -5,32 +5,35 @@ public class Hitbox extends Actor
     private Actor actor;
     private int xAdjust=0;
     private int yAdjust=0;
-    
+
     private int boxW;
     private int boxH;
-    
+
     private int actorW;
     private int actorH;
     public Hitbox(Actor actor) {
         this.actor = actor;
         actorW = actor.getImage().getWidth();
         actorH = actor.getImage().getHeight();
-        
+
         boxW = actorW+5;
         boxH = 30;
-        
+
         GreenfootImage actorImage = actor.getImage();
         GreenfootImage hitboxImage = new GreenfootImage(boxH,boxW);
-        hitboxImage.setColor(new Color(255,0,0,127));
-        hitboxImage.fillRect(0,0,boxH,boxW);
+        if(Constants.Settings.debugMode){
+            hitboxImage.setColor(new Color(255,0,0,127));
+            hitboxImage.fillRect(0,0,boxH,boxW);
+        }
         setImage(hitboxImage);
+
     }
-    
+
     public void setPosition(int x, int y){
         xAdjust = x;
         yAdjust = y;
     }
-    
+
     public void setAngle(int angle){
         setRotation(angle);
     }
