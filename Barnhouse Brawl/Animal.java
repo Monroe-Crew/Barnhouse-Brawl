@@ -9,10 +9,11 @@ public abstract class Animal extends Actor {
     private double xVelocity;
     private double yVelocity;
     private String[] controls;
-    private int pushCooldown = 0;
-    private int specialCooldown = 0;
-    private Hitbox hitBox;
-    private Hurtbox hurtBox;
+    private int specialCooldown;
+    private int pushCooldownTimer = 0;
+    private int specialCooldownTimer = 0;
+    protected Hitbox hitBox;
+    protected Hurtbox hurtBox;
     private double decay = .85; // Friction
 
     public static enum AnimalType {
@@ -27,8 +28,9 @@ public abstract class Animal extends Actor {
         RIGHT
     }
 
-    public Animal(int weight, int playerID) {
+    public Animal(int weight,int specialCooldownTimer, int playerID) {
         this.weight = weight;
+        this.specialCooldown = specialCooldown;
         this.playerID = playerID;
 
         /* Control order:
@@ -58,8 +60,8 @@ public abstract class Animal extends Actor {
 
     public void act() {
         // Reloads push cooldown
-        if(pushCooldown < 11) pushCooldown += 1;
-        if(specialCooldown < 51) specialCooldown += 1;
+        if(pushCooldownTimer < 11) pushCooldownTimer += 1;
+        if(specialCooldownTimer < 51) specialCooldownTimer += 1;
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
         }
@@ -72,13 +74,13 @@ public abstract class Animal extends Actor {
         if(Greenfoot.isKeyDown(controls[3])){
             movement(Direction.RIGHT);
         }
-        if(Greenfoot.isKeyDown(controls[4]) && pushCooldown > 10){
+        if(Greenfoot.isKeyDown(controls[4]) && pushCooldownTimer > 10){
             basicPush();
-            pushCooldown = 0;
+            pushCooldownTimer = 0;
         }
-        if(Greenfoot.isKeyDown(controls[5]) && specialCooldown > 50){
+        if(Greenfoot.isKeyDown(controls[5]) && specialCooldownTimer > specialCooldown){
             specialAbility();
-            specialCooldown = 0;
+            specialCooldownTimer = 0;
         }
         
         // Update position using velocities
@@ -101,7 +103,7 @@ public abstract class Animal extends Actor {
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
         int maxSpeed = 5/(int)Math.sqrt(weight);
-        int responsiveness = 1;
+        double responsiveness = .8;
         switch(direction){
             case UP: 
                 yVelocity -= responsiveness;

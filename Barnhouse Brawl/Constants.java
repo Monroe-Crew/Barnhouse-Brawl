@@ -10,5 +10,6 @@ public class Constants
     
     public static final class Pig{
         public static final int weight = 3;
+        public static final int slideLength = 3;
     }
 }
