@@ -9,11 +9,25 @@ public class Projectile extends Actor{
     }
     public void act(){
         this.move(10);
-        Actor a = getOneIntersectingObject(Animal.class);
+        Animal a = (Animal)getOneIntersectingObject(Animal.class);
         if(a != null && a != animal){
-            //bump actor
+            //Add a stun mechanic in the future
+            int x = Math.abs(a.getX()-this.getX());
+            int y = Math.abs(a.getY()-this.getY());
+            double angle = Math.tan(y/x);
+            if(angle<=90){
+                a.knockBack(-10,-10);
+            }
+            else if(angle<=180){
+                a.knockBack(-10,10);
+            }
+            else if(angle<=270){
+                a.knockBack(10,10);
+            }
+            else{
+                a.knockBack(10,-10);
+            }
             this.getWorld().removeObject(this);
         }
-        //Move the object
     }    
 }
