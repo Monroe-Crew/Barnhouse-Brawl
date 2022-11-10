@@ -1,7 +1,7 @@
 
 import greenfoot.*; 
 import java.util.*;
-public class Animal extends Actor {
+public abstract class Animal extends Actor {
     private int width = this.getImage().getWidth();
     private int height = this.getImage().getHeight();
     private int weight;
@@ -10,6 +10,7 @@ public class Animal extends Actor {
     private double yVelocity;
     private String[] controls;
     private int pushCooldown = 0;
+    private int specialCooldown = 0;
     private Hitbox hitBox;
     private Hurtbox hurtBox;
 
@@ -35,10 +36,11 @@ public class Animal extends Actor {
          * Index 2 - Down
          * Index 3 - Right
          * Index 4 - Basic Push
+         * Index 5 - Special Ability 1
          */
-        controls = new String[]{"-","-","-","-","-"};
-        if(playerID==1) controls = new String[]{"W","A","S","D","Q"};
-        if(playerID==2) controls = new String[]{"I","J","K","L","U"};
+        controls = new String[]{"-","-","-","-","-","-"};
+        if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
+        if(playerID==2) controls = new String[]{"I","J","K","L","U","O"};
     }
 
     @Override
@@ -56,7 +58,7 @@ public class Animal extends Actor {
     public void act() {
         // Reloads push cooldown
         if(pushCooldown < 11) pushCooldown += 1;
-
+        if(specialCooldown < 51) specialCooldown += 1;
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
         }
@@ -73,6 +75,10 @@ public class Animal extends Actor {
             basicPush();
             pushCooldown = 0;
         }
+        if(Greenfoot.isKeyDown(controls[5]) && specialCooldown > 50){
+            specialAbility();
+            specialCooldown = 0;
+        }
         
         // Update position using velocities
         updatePosition();
@@ -84,8 +90,8 @@ public class Animal extends Actor {
         ArrayList<Animal> touching = hitBox.findTouching();
         for(Animal animal : touching){
             if(animal == this) continue;
-            int xStrength = (int)(((animal.getX()/Math.abs(animal.getX())) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
-            int yStrength = (int)((((animal.getY() - this.getY()) < 0 ? -1 : 1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
@@ -97,19 +103,19 @@ public class Animal extends Actor {
         int responsiveness = 1;
         switch(direction){
             case UP: 
-                if(yVelocity > -maxSpeed) yVelocity -= responsiveness;
+                yVelocity -= responsiveness;
                 break;
 
             case DOWN: 
-                if(yVelocity < maxSpeed) yVelocity += responsiveness;
+                yVelocity += responsiveness;
                 break;
 
             case LEFT: 
-                if(xVelocity > -maxSpeed) xVelocity -= responsiveness;
+                xVelocity -= responsiveness;
                 break;
 
             case RIGHT: 
-                if(xVelocity < maxSpeed) xVelocity += responsiveness;
+                xVelocity += responsiveness;
                 break;
         }
 
@@ -175,4 +181,6 @@ public class Animal extends Actor {
     public int getWeight(){
         return this.weight;
     }
+    
+    public abstract void specialAbility();
 }
