@@ -9,6 +9,7 @@ public class Pig extends Animal
     }
 
     public void act(){
+        //Animate air for special
         super.act();
         if(specialAbilityTimer > Constants.Pig.slideLength * 60){
             activated = false; 
