@@ -8,6 +8,7 @@ public class Hitbox extends Actor
 
     private int boxW;
     private int boxH;
+    private int hitboxIndent;
 
     private int actorW;
     private int actorH;
@@ -15,18 +16,8 @@ public class Hitbox extends Actor
         this.actor = actor;
         actorW = actor.getImage().getWidth();
         actorH = actor.getImage().getHeight();
-
-        boxW = actorW+5;
-        boxH = 30;
-
-        GreenfootImage actorImage = actor.getImage();
-        GreenfootImage hitboxImage = new GreenfootImage(boxH,boxW);
-        if(Constants.Settings.debugMode){
-            hitboxImage.setColor(new Color(255,0,0,127));
-            hitboxImage.fillRect(0,0,boxH,boxW);
-        }
-        setImage(hitboxImage);
-
+        resetIndent();
+        resetSize();
     }
 
     public void setPosition(int x, int y){
@@ -45,8 +36,32 @@ public class Hitbox extends Actor
     public void act(){
         setLocation(actor.getX(), actor.getY());
         setRotation(actor.getRotation()-90);
-        move(actorH/2);
-    }    
+        move(hitboxIndent);
+    }
+
+    public void setSize(int boxW, int boxH){
+        GreenfootImage actorImage = actor.getImage();
+        GreenfootImage hitboxImage = new GreenfootImage(boxH,boxW);
+        if(Constants.Settings.debugMode){
+            hitboxImage.setColor(new Color(255,0,0,127));
+            hitboxImage.fillRect(0,0,boxH,boxW);
+        }
+        setImage(hitboxImage);
+    }
+
+    public void resetSize(){
+        boxW = actorW+5;
+        boxH = 30;
+        setSize(boxW, boxH);
+    }
+
+    public void setIndent(int hitboxIndent){
+        this.hitboxIndent = hitboxIndent;
+    }
+
+    public void resetIndent(){
+        this.hitboxIndent = actorH/2;
+    }
 
     public ArrayList<Animal> findTouching(){
         List<Hurtbox> list = this.getWorld().getObjects(Hurtbox.class);
