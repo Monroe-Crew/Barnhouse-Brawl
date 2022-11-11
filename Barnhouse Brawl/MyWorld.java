@@ -3,7 +3,7 @@ import java.util.*;
 public class MyWorld extends World{
     public MyWorld(){    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1280, 960, 1); 
+        super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1); 
         prepare();
     }
 
@@ -21,10 +21,10 @@ public class MyWorld extends World{
     public void act(){
         List<Projectile> list = getObjects(Projectile.class);
         for(Actor a : list){
-            if(a.getX()==0||a.getX()>=1270){
+            if(a.getX()==0||a.getX()>=Constants.Settings.worldWidth-10){
                 removeObject(a);
             }
-            else if(a.getY()==0||a.getY()==this.getHeight()){
+            else if(a.getY()==0||a.getY()>=Constants.Settings.worldHeight-10){
                 removeObject(a);
             }
         }
