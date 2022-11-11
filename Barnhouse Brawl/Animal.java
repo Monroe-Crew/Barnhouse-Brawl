@@ -9,7 +9,7 @@ public abstract class Animal extends Actor {
     private double xVelocity;
     private double yVelocity;
     private String[] controls;
-    private int specialCooldown;
+    private double specialCooldown;
     private int pushCooldownTimer = 0;
     private int specialCooldownTimer = 0;
     protected Hitbox hitBox;
@@ -28,7 +28,7 @@ public abstract class Animal extends Actor {
         RIGHT
     }
 
-    public Animal(int weight,int specialCooldownTimer, int playerID) {
+    public Animal(int weight,double specialCooldown, int playerID) {
         this.weight = weight;
         this.specialCooldown = specialCooldown;
         this.playerID = playerID;
@@ -60,8 +60,8 @@ public abstract class Animal extends Actor {
 
     public void act() {
         // Reloads push cooldown
-        if(pushCooldownTimer < 11) pushCooldownTimer += 1;
-        if(specialCooldownTimer < 51) specialCooldownTimer += 1;
+        if(pushCooldownTimer < 10000) pushCooldownTimer += 1;
+        if(specialCooldownTimer < 10000) specialCooldownTimer += 1;
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
         }
@@ -74,11 +74,11 @@ public abstract class Animal extends Actor {
         if(Greenfoot.isKeyDown(controls[3])){
             movement(Direction.RIGHT);
         }
-        if(Greenfoot.isKeyDown(controls[4]) && pushCooldownTimer > 10){
+        if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
             basicPush();
             pushCooldownTimer = 0;
         }
-        if(Greenfoot.isKeyDown(controls[5]) && specialCooldownTimer > specialCooldown){
+        if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
             specialAbility();
             specialCooldownTimer = 0;
         }
@@ -103,7 +103,7 @@ public abstract class Animal extends Actor {
     public void movement(Direction direction) {
         // Physics: The heavier the slower you are
         int maxSpeed = 5/(int)Math.sqrt(weight);
-        double responsiveness = .8;
+        double responsiveness = Constants.Animal.movementResponsiveness;
         switch(direction){
             case UP: 
                 yVelocity -= responsiveness;
