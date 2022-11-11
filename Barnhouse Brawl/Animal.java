@@ -134,7 +134,7 @@ public abstract class Animal extends Actor {
         }
         
         // Checks for intersection, if there is then undo rotation
-        if(this.getOneIntersectingObject(Animal.class) != null){ 
+        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null ){ 
             setRotation(oldRotation);
         }
         
@@ -158,12 +158,12 @@ public abstract class Animal extends Actor {
         int oldY = getY();
         
         setLocation(getX() + (int)xVelocity, getY());
-        if(this.getOneIntersectingObject(Animal.class) != null){ 
+        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
             setLocation(oldX, getY());
         }
         
         setLocation(getX(), getY() + (int)yVelocity);
-        if(this.getOneIntersectingObject(Animal.class) != null){ 
+        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
             setLocation(getX(), oldY);
         }
         
