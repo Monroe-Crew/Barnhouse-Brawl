@@ -5,6 +5,7 @@ public class Projectile extends Actor{
     Actor animal;
     public Projectile(Actor actor){
         this.animal = actor;
+        getImage().scale(50, 60);
         this.setRotation(actor.getRotation()-90);
     }
 
