@@ -24,7 +24,7 @@ public class Pig extends Animal
     }
 
     public void specialAbility(){
-        changeDecay(1);
+        changeDecay(.95);
 
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();

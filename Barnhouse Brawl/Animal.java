@@ -101,6 +101,8 @@ public abstract class Animal extends Actor {
     }
 
     public void movement(Direction direction) {
+        double oldXVelocity = 0 + xVelocity;
+        double oldYVelocity = 0 + yVelocity;
         // Physics: The heavier the slower you are
         int maxSpeed = 5/(int)Math.sqrt(weight);
         double responsiveness = Constants.Animal.movementResponsiveness;
@@ -138,8 +140,8 @@ public abstract class Animal extends Actor {
             setRotation(oldRotation);
         }
         
-        if(Math.abs(yVelocity) > maxSpeed) yVelocity = yVelocity > 0 ? maxSpeed : -maxSpeed;
-        if(Math.abs(xVelocity) > maxSpeed) xVelocity = xVelocity > 0 ? maxSpeed : -maxSpeed;
+        if(Math.abs(yVelocity) > maxSpeed) yVelocity = oldYVelocity;
+        if(Math.abs(xVelocity) > maxSpeed) xVelocity = oldXVelocity;
     }
 
     public void updatePosition(){
