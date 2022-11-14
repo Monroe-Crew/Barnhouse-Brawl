@@ -5,20 +5,22 @@ public class MyWorld extends World{
     boolean start = false;
     public MyWorld(){    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1); 
+        super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
     }
 
     private void prepare(){
         GreenfootSound sound = new GreenfootSound("mapBackground.mp3");
         Chicken animal = new Chicken(1);
-        addObject(animal, 669, 673);
+        addObject(animal, 200, Constants.Settings.worldHeight-200);
         Pig animal2 = new Pig(2);
-        addObject(animal2, 316, 371);
+        addObject(animal2, 200, 200);
         Chicken animal3 = new Chicken(3);
-        addObject(animal3, 700, 361);
+        addObject(animal3, Constants.Settings.worldWidth-200, 200);
         Pig animal4 = new Pig(0);
-        addObject(animal4, 1074, 360);
+        addObject(animal4, Constants.Settings.worldWidth-200, Constants.Settings.worldHeight-200);
+        Timer timer = new Timer(2,0);
+        addObject(timer, Constants.Settings.worldWidth/2+50, 12);
     }
     
     public void act(){
