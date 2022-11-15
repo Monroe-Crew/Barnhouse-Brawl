@@ -12,6 +12,7 @@ public abstract class Animal extends Actor {
     private double specialCooldown;
     private int pushCooldownTimer = 0;
     private int specialCooldownTimer = 0;
+    private boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
     private double decay = .85; // Friction
@@ -78,9 +79,16 @@ public abstract class Animal extends Actor {
             specialAbility();
             specialCooldownTimer = 0;
         }
-        
+
+        if(getX()<100 || getX()>1198 ||
+        getY()<100 || getY()>870){
+            removeAnimal();
+        }
+
         // Update position using velocities
-        updatePosition();
+        if(this.dead == false){
+            updatePosition();
+        }
     }
 
     public void basicPush(){
@@ -104,71 +112,71 @@ public abstract class Animal extends Actor {
         double responsiveness = Constants.Animal.movementResponsiveness;
         switch(direction){
             case UP: 
-                yVelocity -= responsiveness;
-                break;
+            yVelocity -= responsiveness;
+            break;
 
             case DOWN: 
-                yVelocity += responsiveness;
-                break;
+            yVelocity += responsiveness;
+            break;
 
             case LEFT: 
-                xVelocity -= responsiveness;
-                break;
+            xVelocity -= responsiveness;
+            break;
 
             case RIGHT: 
-                xVelocity += responsiveness;
-                break;
+            xVelocity += responsiveness;
+            break;
         }
 
         // Changes rotation based on velocity.
         int oldRotation = getRotation();
         int turnX = (int)(xVelocity*10000);
         int turnY = (int)(yVelocity*10000);
-        
+
         // 100 is the threshold so it never attemts to turn towards its own coordinates
         if(Math.abs(turnX) > 100 || Math.abs(turnY) > 100){
             turnTowards(getX()+turnX, getY()+turnY);
             setRotation(getRotation() + 90);
         }
-        
+
         // Checks for intersection, if there is then undo rotation
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null ){ 
             setRotation(oldRotation);
         }
-        
+
         if(Math.abs(yVelocity) > maxSpeed) yVelocity = oldYVelocity;
         if(Math.abs(xVelocity) > maxSpeed) xVelocity = oldXVelocity;
     }
 
     public void updatePosition(){
         int maxVelocity = 50;
-        
+
         // Sets max velocity
         xVelocity = xVelocity > maxVelocity ? maxVelocity : xVelocity;
         yVelocity = yVelocity > maxVelocity ? maxVelocity : yVelocity;
-        
+
         /* 
          * Checks for intersection for individual X and Y positions. 
          * If there is intersection then it goes back to previous position.
-        */
-       
+         */
+
         int oldX = getX();
         int oldY = getY();
-        
+
         setLocation(getX() + (int)xVelocity, getY());
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
             setLocation(oldX, getY());
         }
-        
+
         setLocation(getX(), getY() + (int)yVelocity);
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
             setLocation(getX(), oldY);
         }
-        
+
         // Friction
         xVelocity *= decay;
         yVelocity *= decay;
-        
+
         // Adds threshold so it isn't indefinitley multiplying by .9
         if(Math.abs(xVelocity) < .001) xVelocity = 0;
         if(Math.abs(yVelocity) < .001) yVelocity = 0;
@@ -182,10 +190,17 @@ public abstract class Animal extends Actor {
     public int getWeight(){
         return this.weight;
     }
-    
+
     public void changeDecay(double decay){
         this.decay = decay;
     }
-    
+
     public abstract void specialAbility();
+
+    public void removeAnimal(){
+        this.dead = true;
+        this.getWorld().removeObject(this.hurtBox);
+        this.getWorld().removeObject(this.hitBox);
+        this.getWorld().removeObject(this);
+    }
 }
