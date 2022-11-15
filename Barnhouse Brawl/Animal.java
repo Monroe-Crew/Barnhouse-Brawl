@@ -86,9 +86,7 @@ public abstract class Animal extends Actor {
         }
 
         // Update position using velocities
-        if(this.dead == false){
-            updatePosition();
-        }
+        if(!this.dead) updatePosition();
     }
 
     public void basicPush(){
