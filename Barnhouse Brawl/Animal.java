@@ -5,7 +5,7 @@ public abstract class Animal extends Actor {
     private int width = this.getImage().getWidth();
     private int height = this.getImage().getHeight();
     private int weight;
-    private int playerID;
+    private Player player;
     private double xVelocity;
     private double yVelocity;
     private String[] controls;
@@ -16,11 +16,6 @@ public abstract class Animal extends Actor {
     protected Hurtbox hurtBox;
     private double decay = .85; // Friction
 
-    public static enum AnimalType {
-        CHICKEN,
-        PIG
-    }
-
     private enum Direction {
         UP,
         DOWN,
@@ -28,10 +23,10 @@ public abstract class Animal extends Actor {
         RIGHT
     }
 
-    public Animal(int weight,double specialCooldown, int playerID) {
+    public Animal(int weight,double specialCooldown, Player player) {
         this.weight = weight;
         this.specialCooldown = specialCooldown;
-        this.playerID = playerID;
+        this.player = player;
 
         /* Control order:
          * Index 0 - Up
@@ -41,6 +36,7 @@ public abstract class Animal extends Actor {
          * Index 4 - Basic Push
          * Index 5 - Special Ability 1
          */
+        int playerID = player.getPlayerID();
         controls = new String[]{"-","-","-","-","-","-"};
         if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
         if(playerID==2) controls = new String[]{"I","J","K","L","U","O"};

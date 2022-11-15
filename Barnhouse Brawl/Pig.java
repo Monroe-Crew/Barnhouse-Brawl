@@ -4,8 +4,8 @@ public class Pig extends Animal
 {
     private int specialAbilityTimer = 0;
     private boolean activated = false;
-    public Pig(int playerID){
-        super(Constants.Pig.weight,Constants.Pig.specialCooldown, playerID);
+    public Pig(Player player){
+        super(Constants.Pig.weight,Constants.Pig.specialCooldown, player);
     }
 
     public void act(){
