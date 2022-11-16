@@ -28,6 +28,7 @@ public class Timer extends Actor{
             s+=seconds;
         }
         if(minutes==-1){
+            //INSTEAD JUST EDIT THE LIST IN THE MYWORLD
             MyWorld.music.changeWorld();
             Greenfoot.setWorld((new EndScreen()));
         }
