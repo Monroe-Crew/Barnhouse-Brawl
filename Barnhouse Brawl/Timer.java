@@ -28,6 +28,7 @@ public class Timer extends Actor{
             s+=seconds;
         }
         if(minutes==-1){
+            MyWorld.music.changeWorld();
             Greenfoot.setWorld((new EndScreen()));
         }
         image.drawString(s, 5, 100);

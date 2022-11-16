@@ -3,7 +3,8 @@ import greenfoot.*;
 
 public class StartScreen extends World
 {
-
+    boolean start = false;
+    static GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
     public StartScreen()
     {    
 
@@ -21,5 +22,12 @@ public class StartScreen extends World
         addObject(startButton,598,589);
         Title title = new Title();
         addObject(title,634,697);
+        start = true;
+    }
+    public void act(){
+    if(start){
+           titleMusic.setVolume(25);
+           titleMusic.playLoop(); 
+        }
     }
 }
