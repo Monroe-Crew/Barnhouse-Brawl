@@ -12,4 +12,8 @@ public class AllPlayers  {
     public void removePlayer(Player player){
         players.remove(player);
     }
+    
+    public List<Player> getPlayers(){
+        return players;
+    }
 }
