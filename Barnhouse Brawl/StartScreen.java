@@ -10,6 +10,7 @@ public class StartScreen extends World
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -18,5 +19,7 @@ public class StartScreen extends World
     {
         StartButton startButton = new StartButton();
         addObject(startButton,598,589);
+        Title title = new Title();
+        addObject(title,634,697);
     }
 }
