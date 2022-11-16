@@ -29,7 +29,7 @@ public class Timer extends Actor{
         }
         if(minutes==-1){
             //INSTEAD JUST EDIT THE LIST IN THE MYWORLD
-            MyWorld.music.changeWorld();
+            Music.changeWorld();
             Greenfoot.setWorld((new EndScreen()));
         }
         image.drawString(s, 5, 100);
@@ -41,6 +41,10 @@ public class Timer extends Actor{
         if(frame % 60 == 0) {
             seconds--;
             updateImage();
+        }
+        if(seconds == 30){
+            Animal.changeKnockbackMultiplier(
+            Constants.Animal.lowTimeKnockback);
         }
     }    
 }

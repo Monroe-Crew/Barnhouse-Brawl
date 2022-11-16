@@ -4,11 +4,13 @@ public class MyWorld extends World{
     private GreenfootSound sound = new GreenfootSound("mapBackground.mp3");
     boolean start = false;
     List<Animal> animalList;
-    static public Music music = new Music();
-    public MyWorld(){    
+        public MyWorld(){    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         animalList = new ArrayList<>();
+        
+        Animal.changeKnockbackMultiplier(Constants.Animal.defaultKnockback);
+        
         prepare();
     }
 
@@ -33,13 +35,13 @@ public class MyWorld extends World{
         player4.setAnimal(AnimalType.PIG);
         addObject(animal4, Constants.Settings.worldWidth-200, Constants.Settings.worldHeight-200);
 
-        Timer timer = new Timer(2,0);
+        Timer timer = new Timer(0,40);
         addObject(timer, Constants.Settings.worldWidth/2+50, 12);
     }
 
     public void act(){
         if(!start){
-            music.addSound(sound);
+            Music.addSound(sound);
         }
         start=true;
         List<Projectile> projectileList = getObjects(Projectile.class);
@@ -53,7 +55,7 @@ public class MyWorld extends World{
         }
         if(animalList.size()==3){
             //update list of names
-            music.changeWorld();
+            Music.changeWorld();
             //change world
         }
     }

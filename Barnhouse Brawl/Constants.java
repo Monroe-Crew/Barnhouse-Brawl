@@ -8,7 +8,11 @@ public class Constants
     
     public static final class Animal{
         public static final double pushCooldown = .5;
-        public static final double movementResponsiveness = .7;
+        public static final double friction = .9;
+        public static final double movementSpeed = .75;
+        
+        public static final double defaultKnockback = 1;
+        public static final double lowTimeKnockback = 1.5;
     }
     
     public static final class Chicken{

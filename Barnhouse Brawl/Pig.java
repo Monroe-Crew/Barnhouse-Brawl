@@ -15,7 +15,7 @@ public class Pig extends Animal
         if(!this.dead){
             if(specialAbilityTimer > Constants.Pig.slideLength * 60){
                 activated = false; 
-                changeDecay(.85);
+                changeDecay(Constants.Animal.friction);
                 hitBox.resetSize();
                 hitBox.resetIndent();
             }

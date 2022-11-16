@@ -15,7 +15,8 @@ public abstract class Animal extends Actor {
     public boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
-    private double decay = .85; // Friction
+    private double decay = Constants.Animal.friction;
+    private static double knockbackMultiplier = 1;
 
     private enum Direction {
         UP,
@@ -40,7 +41,7 @@ public abstract class Animal extends Actor {
         int playerID = player.getPlayerID();
         controls = new String[]{"-","-","-","-","-","-"};
         if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
-        if(playerID==2) controls = new String[]{"I","J","K","L","U","O"};
+        if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","Z","X"};
     }
 
     @Override
@@ -106,30 +107,29 @@ public abstract class Animal extends Actor {
         double oldXVelocity = 0 + xVelocity;
         double oldYVelocity = 0 + yVelocity;
         // Physics: The heavier the slower you are
-        int maxSpeed = 5/(int)Math.sqrt(weight);
-        double responsiveness = Constants.Animal.movementResponsiveness;
+        double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
         switch(direction){
             case UP: 
-            yVelocity -= responsiveness;
+            yVelocity -= speed;
             break;
 
             case DOWN: 
-            yVelocity += responsiveness;
+            yVelocity += speed;
             break;
 
             case LEFT: 
-            xVelocity -= responsiveness;
+            xVelocity -= speed;
             break;
 
             case RIGHT: 
-            xVelocity += responsiveness;
+            xVelocity += speed;
             break;
         }
 
         // Changes rotation based on velocity.
         int oldRotation = getRotation();
-        int turnX = (int)(xVelocity*10000);
-        int turnY = (int)(yVelocity*10000);
+        int turnX = (int)(xVelocity*1000000);
+        int turnY = (int)(yVelocity*1000000);
 
         // 100 is the threshold so it never attemts to turn towards its own coordinates
         if(Math.abs(turnX) > 100 || Math.abs(turnY) > 100){
@@ -141,9 +141,6 @@ public abstract class Animal extends Actor {
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null ){ 
             setRotation(oldRotation);
         }
-
-        if(Math.abs(yVelocity) > maxSpeed) yVelocity = oldYVelocity;
-        if(Math.abs(xVelocity) > maxSpeed) xVelocity = oldXVelocity;
     }
 
     public void updatePosition(){
@@ -181,8 +178,8 @@ public abstract class Animal extends Actor {
     }
 
     public void knockBack(int xStrength, int yStrength){
-        this.xVelocity += xStrength;
-        this.yVelocity += yStrength;
+        this.xVelocity += (double)xStrength*knockbackMultiplier;
+        this.yVelocity += (double)yStrength*knockbackMultiplier;
     }
 
     public int getWeight(){
@@ -191,6 +188,10 @@ public abstract class Animal extends Actor {
 
     public void changeDecay(double decay){
         this.decay = decay;
+    }
+    
+    public static void changeKnockbackMultiplier(double multiplier){
+        knockbackMultiplier = multiplier;
     }
 
     public abstract void specialAbility();
