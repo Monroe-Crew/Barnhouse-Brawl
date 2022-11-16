@@ -40,6 +40,7 @@ public class MyWorld extends World{
     
     public void act(){
         if(!start){
+           StartScreen.titleMusic.stop();
            sound.setVolume(25);
            sound.playLoop(); 
         }
