@@ -11,7 +11,7 @@ public class StartScreen extends World
 
     private void prepare(){
         StartButton startButton = new StartButton();
-        addObject(startButton,598,589);
+        addObject(startButton,598,700);
         Title title = new Title();
         addObject(title,625,707);
         AllPlayers.reset();
