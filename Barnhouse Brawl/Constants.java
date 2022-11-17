@@ -7,6 +7,10 @@ public class Constants
         public static final int volume = 30;
     }
     
+    public static final class Title{
+        public static final double titleSpinSpeed = .1;
+    }
+    
     public static final class Animal{
         public static final double pushCooldown = .5;
         public static final double friction = .9;
