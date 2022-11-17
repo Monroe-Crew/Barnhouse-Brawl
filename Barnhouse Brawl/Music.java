@@ -2,7 +2,6 @@ import java.util.*;
 import greenfoot.*;
 public class Music  {
     private static GreenfootSound currentlyPlaying;
-
     public static void playMusic(GreenfootSound sound){
         if(currentlyPlaying != null) currentlyPlaying.stop();
         

@@ -12,7 +12,7 @@ public abstract class Animal extends Actor {
     private double specialCooldown;
     private int pushCooldownTimer = 0;
     private int specialCooldownTimer = 0;
-    public boolean dead = false;
+    protected boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
     private double decay = Constants.Animal.friction;

@@ -18,7 +18,7 @@ public class MyWorld extends World{
         Chicken animal1 = new Chicken(player1);
         player1.setAnimal(AnimalType.CHICKEN);
         addObject(animal1, 200, Constants.Settings.worldHeight-200);
-
+        
         Player player2 = new Player(2);
         Pig animal2 = new Pig(player2);
         player2.setAnimal(AnimalType.PIG);
@@ -53,9 +53,11 @@ public class MyWorld extends World{
             }
         }
         if(getObjects(Animal.class).size() == 1){
-            //update list of names
-
-            //change world
+            Music.playMusic(null);
+            for(Animal animal : getObjects(Animal.class)){
+                animal.setPlacement(1);
+            }
+            Greenfoot.setWorld(new EndScreen());
         }
     }
 }

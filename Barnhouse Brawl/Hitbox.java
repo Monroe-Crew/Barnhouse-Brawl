@@ -64,9 +64,12 @@ public class Hitbox extends Actor
     }
 
     public ArrayList<Animal> findTouching(){
-        List<Hurtbox> list = this.getWorld().getObjects(Hurtbox.class);
-        //List of all the animal classes on map
         ArrayList<Animal> touching = new ArrayList<Animal>();
+        
+        if(((Animal)(actor)).dead) return touching;
+        List<Hurtbox> list = this.getWorld().getObjects(Hurtbox.class);
+        
+        //List of all the animal classes on map
         for(Hurtbox animal : list){
             if(this.intersects(animal)){
                 touching.add((Animal)animal.getActor());
