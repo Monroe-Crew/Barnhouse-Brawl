@@ -44,7 +44,9 @@ public abstract class Animal extends Actor {
 
         controls = new String[]{"-","-","-","-","-","-"};
         if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
-        if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","Z","X"};
+        if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","B","N"};
+        if(playerID==3) controls = new String[]{"I","J","K","L","U","O"};
+        if(playerID==4) controls = new String[]{"8","4","5","6","7","9"};
     }
 
     @Override
