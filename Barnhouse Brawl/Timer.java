@@ -29,7 +29,10 @@ public class Timer extends Actor{
         }
         if(minutes==-1){
             //INSTEAD JUST EDIT THE LIST IN THE MYWORLD
-            Music.changeWorld();
+            Music.playMusic(null);
+            for(Animal animal : this.getWorld().getObjects(Animal.class)){
+                animal.setPlacement(1);
+            }
             Greenfoot.setWorld((new EndScreen()));
         }
         image.drawString(s, 5, 100);

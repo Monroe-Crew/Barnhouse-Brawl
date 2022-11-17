@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class EndScreen_Leaderboard here.
  * 
@@ -10,11 +10,22 @@ public class EndScreen_Leaderboard extends Actor
 {
     GreenfootImage image;
     public EndScreen_Leaderboard(){
-        image = new GreenfootImage(200,100);
-        image.setColor(new Color(0,0,255));
-        image.setFont(new Font("Arial", true, false, 50));
-        image.drawString("ahhhhh", 10, 100);
-        setImage(image);
+        List<Player> players = AllPlayers.getPlayers();
+        Set<String> playerStrings = new TreeSet<>();
+        String leaderboard = "Leaderboard \n";
+        for(Player player : players){
+            playerStrings.add(player.getPlacement() + ": Player " + player.getPlayerID());
+        }
+        
+        for(String playerString : playerStrings){
+            leaderboard += playerString + "\n";
+        }
+        
+        GreenfootImage descBg = new GreenfootImage(1000, 500);
+        descBg.setColor(new Color(75, 75, 75, 200));
+        descBg.fillRect(0, 0, 1000, 500);
+        GreenfootImage partDescText = new GreenfootImage(leaderboard, 80, Color.BLACK, null);
+        setImage(partDescText);
     }
     public void act() 
     {

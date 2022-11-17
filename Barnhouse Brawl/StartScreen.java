@@ -5,7 +5,6 @@ public class StartScreen extends World
     static GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
     static public Music music = new Music();
     public StartScreen(){    
-
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
     }
@@ -15,11 +14,12 @@ public class StartScreen extends World
         addObject(startButton,598,589);
         Title title = new Title();
         addObject(title,625,707);
+        AllPlayers.reset();
     }
 
     public void act(){
         if(!start){
-            music.addSound(titleMusic);
+            music.playMusic(titleMusic);
         }
         start=true;
     }

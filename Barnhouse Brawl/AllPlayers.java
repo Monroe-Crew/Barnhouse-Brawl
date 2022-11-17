@@ -1,19 +1,19 @@
 import java.util.*;
 public class AllPlayers  {
-    private List<Player> players;
-    public AllPlayers(){
-        players = new ArrayList<Player>();
-    }
-    
-    public void addPlayer(Player player){
+    private static List<Player> players = new ArrayList<Player>();
+    public static void addPlayer(Player player){
         players.add(player);
     }
     
-    public void removePlayer(Player player){
+    public static void removePlayer(Player player){
         players.remove(player);
     }
     
-    public List<Player> getPlayers(){
+    public static List<Player> getPlayers(){
         return players;
+    }
+    
+    public static void reset(){
+    players = new ArrayList<Player>();
     }
 }

@@ -28,8 +28,10 @@ public abstract class Animal extends Actor {
     public Animal(int weight,double specialCooldown, Player player) {
         this.weight = weight;
         this.specialCooldown = specialCooldown;
+        this.specialCooldownTimer = (int)(specialCooldown*60/2);
         this.player = player;
 
+        
         /* Control order:
          * Index 0 - Up
          * Index 1 - Left
@@ -39,6 +41,7 @@ public abstract class Animal extends Actor {
          * Index 5 - Special Ability 1
          */
         int playerID = player.getPlayerID();
+
         controls = new String[]{"-","-","-","-","-","-"};
         if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
         if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","Z","X"};
@@ -57,9 +60,11 @@ public abstract class Animal extends Actor {
     }
 
     public void act() {
+        
         // Reloads push cooldown
-        if(pushCooldownTimer < 10000) pushCooldownTimer += 1;
-        if(specialCooldownTimer < 10000) specialCooldownTimer += 1;
+        if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
+        if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
+
         if(Greenfoot.isKeyDown(controls[0])){
             movement(Direction.UP);
         }
@@ -81,13 +86,12 @@ public abstract class Animal extends Actor {
             specialCooldownTimer = 0;
         }
 
-        if(getX()<100 || getX()>1198 ||
-        getY()<100 || getY()>870){
-            removeAnimal();
+        if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
+            remove();
         }
 
         // Update position using velocities
-        if(!this.dead) updatePosition();
+        updatePosition();
     }
 
     public void basicPush(){
@@ -110,20 +114,20 @@ public abstract class Animal extends Actor {
         double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
         switch(direction){
             case UP: 
-            yVelocity -= speed;
-            break;
+                yVelocity -= speed;
+                break;
 
             case DOWN: 
-            yVelocity += speed;
-            break;
+                yVelocity += speed;
+                break;
 
             case LEFT: 
-            xVelocity -= speed;
-            break;
+                xVelocity -= speed;
+                break;
 
             case RIGHT: 
-            xVelocity += speed;
-            break;
+                xVelocity += speed;
+                break;
         }
 
         // Changes rotation based on velocity.
@@ -144,6 +148,7 @@ public abstract class Animal extends Actor {
     }
 
     public void updatePosition(){
+        if(dead) return;
         int maxVelocity = 50;
 
         // Sets max velocity
@@ -189,17 +194,22 @@ public abstract class Animal extends Actor {
     public void changeDecay(double decay){
         this.decay = decay;
     }
-    
+
     public static void changeKnockbackMultiplier(double multiplier){
         knockbackMultiplier = multiplier;
     }
 
-    public abstract void specialAbility();
-
-    public void removeAnimal(){
+    public void remove(){
         this.dead = true;
+        player.setPlacement(this.getWorld().getObjects(Animal.class).size());
         this.getWorld().removeObject(this.hurtBox);
         this.getWorld().removeObject(this.hitBox);
-        this.getWorld().removeObject(this);
+        this.getWorld().removeObject(this);        
     }
+    
+    public void setPlacement(int placement){
+        player.setPlacement(placement);
+    }
+    
+    public abstract void specialAbility();
 }

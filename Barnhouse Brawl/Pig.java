@@ -4,7 +4,6 @@ public class Pig extends Animal
 {
     private int specialAbilityTimer = 0;
     private boolean activated = false;
-    private boolean reset = false;
     public Pig(Player player){
         super(Constants.Pig.weight,Constants.Pig.specialCooldown, player);
     }
@@ -12,24 +11,20 @@ public class Pig extends Animal
     public void act(){
         //Animate air for special
         super.act();
-        if(!this.dead){
-            if(specialAbilityTimer > Constants.Pig.slideLength * 60){
-                activated = false; 
-                changeDecay(Constants.Animal.friction);
-                hitBox.resetSize();
-                hitBox.resetIndent();
-            }
-            if(activated){
-                specialAbilityTimer++;
-                basicPush();
-            }
-            else if(!activated&&!reset){
-                GreenfootImage pigImage = new GreenfootImage("Pig.png");
-                pigImage.scale(78,138);
-                setImage(pigImage);
-                reset=true;
-            }
+        if(specialAbilityTimer > Constants.Pig.slideLength * 60){
+            activated = false; 
+            changeDecay(Constants.Animal.friction);
+            hitBox.resetSize();
+            hitBox.resetIndent();
+            GreenfootImage pigImage = new GreenfootImage("Pig.png");
+            pigImage.scale(78,138);
+            setImage(pigImage);
         }
+        if(activated){
+            specialAbilityTimer++;
+            basicPush();
+        }
+
     }
 
     public void specialAbility(){
@@ -42,7 +37,6 @@ public class Pig extends Animal
         hitBox.setSize(actorW+20, actorH+20);
         hitBox.setIndent(0);
 
-        reset=false;
         activated = true;
         specialAbilityTimer = 0;
     }

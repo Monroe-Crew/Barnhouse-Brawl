@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;  
 
 /**
  * Write a description of class EndScreen here.
@@ -26,9 +27,6 @@ public class EndScreen extends World
     private void prepare()
     {
         EndScreen_Leaderboard endScreen_Leaderboard = new EndScreen_Leaderboard();
-        addObject(endScreen_Leaderboard,588,217);
-        endScreen_Leaderboard.setLocation(668,139);
-        
-        for()
+        addObject(endScreen_Leaderboard,Constants.Settings.worldWidth/2,Constants.Settings.worldHeight/2);
     }
 }

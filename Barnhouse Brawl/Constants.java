@@ -4,6 +4,7 @@ public class Constants
         public static final boolean debugMode = false;
         public static final int worldWidth = 1280;
         public static final int worldHeight = 960;
+        public static final int volume = 30;
     }
     
     public static final class Animal{
