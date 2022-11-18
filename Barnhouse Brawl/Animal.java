@@ -17,6 +17,7 @@ public abstract class Animal extends Actor {
     protected Hurtbox hurtBox;
     private double decay = Constants.Animal.friction;
     private static double knockbackMultiplier = 1;
+    private int frame = 0;
 
     private enum Direction {
         UP,
@@ -31,7 +32,6 @@ public abstract class Animal extends Actor {
         this.specialCooldownTimer = (int)(specialCooldown*60/2);
         this.player = player;
 
-        
         /* Control order:
          * Index 0 - Up
          * Index 1 - Left
@@ -62,7 +62,7 @@ public abstract class Animal extends Actor {
     }
 
     public void act() {
-        
+
         // Reloads push cooldown
         if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
         if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
@@ -89,9 +89,16 @@ public abstract class Animal extends Actor {
         }
 
         if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
-            remove();
+            //remove();
+            frame++;
+            animateDeath();
         }
 
+        if(dead){
+            frame++;
+            animateDeath();
+        }
+        
         // Update position using velocities
         updatePosition();
     }
@@ -116,20 +123,20 @@ public abstract class Animal extends Actor {
         double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
         switch(direction){
             case UP: 
-                yVelocity -= speed;
-                break;
+            yVelocity -= speed;
+            break;
 
             case DOWN: 
-                yVelocity += speed;
-                break;
+            yVelocity += speed;
+            break;
 
             case LEFT: 
-                xVelocity -= speed;
-                break;
+            xVelocity -= speed;
+            break;
 
             case RIGHT: 
-                xVelocity += speed;
-                break;
+            xVelocity += speed;
+            break;
         }
 
         // Changes rotation based on velocity.
@@ -202,16 +209,24 @@ public abstract class Animal extends Actor {
     }
 
     public void remove(){
+        animateDeath();
         this.dead = true;
         player.setPlacement(this.getWorld().getObjects(Animal.class).size());
         this.getWorld().removeObject(this.hurtBox);
         this.getWorld().removeObject(this.hitBox);
         this.getWorld().removeObject(this);        
     }
-    
+
     public void setPlacement(int placement){
         player.setPlacement(placement);
     }
     
+    public void animateDeath(){
+            GreenfootImage image = this.getImage();
+            int width = image.getWidth()*.99 < 1 ? 1 : (int)(image.getWidth()*.99);
+            int height = image.getHeight()*.99 < 1 ? 1 : (int)(image.getHeight()*.99);
+            image.scale(width, height);
+    }
+
     public abstract void specialAbility();
 }
