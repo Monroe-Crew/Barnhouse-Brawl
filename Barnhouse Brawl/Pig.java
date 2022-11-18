@@ -29,6 +29,8 @@ public class Pig extends Animal
 
     public void specialAbility(){
         changeDecay(.95);
+        GreenfootSound sound = new GreenfootSound("oink.wav");
+        sound.play();
         GreenfootImage muddyPigImage = new GreenfootImage("MuddyPig.png");
         muddyPigImage.scale(78,138);
         setImage(muddyPigImage);

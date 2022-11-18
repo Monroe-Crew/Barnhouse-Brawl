@@ -15,6 +15,7 @@ public class StartScreen extends World
         Title title = new Title();
         addObject(title,625,707);
         AllPlayers.reset();
+        title.setLocation(638,370);
     }
 
     public void act(){
