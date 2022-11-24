@@ -16,6 +16,10 @@ public abstract class GameWorld extends World
         Animal.changeKnockbackMultiplier(Constants.Animal.defaultKnockback);
     }
     
+    protected void prepare(){
+        setPaintOrder(Animal.class, ParticleEffect.class);
+    }
+    
     public void act(){
         if(!start){
             Music.playMusic(backgroundMusic);

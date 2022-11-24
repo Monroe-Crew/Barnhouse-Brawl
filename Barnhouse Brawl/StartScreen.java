@@ -2,6 +2,7 @@ import greenfoot.*;
 public class StartScreen extends World
 {
     boolean start = false;
+    private ParticleEffect titleParticle;
     static GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
     static public Music music = new Music();
     public StartScreen(){    
@@ -12,13 +13,17 @@ public class StartScreen extends World
     private void prepare(){
         StartButton startButton = new StartButton();
         addObject(startButton,598,700);
+        titleParticle = new ParticleEffect(300,new Color(230, 136, 73,200));
+        addObject(titleParticle,638,370);
         Title title = new Title();
-        addObject(title,625,707);
+        addObject(title,638,370);
         AllPlayers.reset();
-        title.setLocation(638,370);
+        
+        setPaintOrder(Title.class,Particle.class);
     }
 
     public void act(){
+        titleParticle.generateParticles(10);
         if(!start){
             music.playMusic(titleMusic);
         }

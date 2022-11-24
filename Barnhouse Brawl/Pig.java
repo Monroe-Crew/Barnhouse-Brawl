@@ -21,6 +21,7 @@ public class Pig extends Animal
             setImage(pigImage);
         }
         if(activated){
+            walkingParticle.generateParticles(20);
             specialAbilityTimer++;
             basicPush();
         }

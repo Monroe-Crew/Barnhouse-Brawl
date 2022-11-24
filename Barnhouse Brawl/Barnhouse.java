@@ -6,7 +6,9 @@ public class Barnhouse extends GameWorld{
         prepare();
     }
 
-    private void prepare(){
+    protected void prepare(){
+        super.prepare();
+        
         Player player1 = new Player(1);
         Chicken animal1 = new Chicken(player1);
         player1.setAnimal(AnimalType.CHICKEN);
