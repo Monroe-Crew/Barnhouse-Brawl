@@ -1,21 +1,14 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/**
- * Write a description of class SelectionScreen here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class SelectionScreen extends World
-{
-
-    /**
-     * Constructor for objects of class SelectionScreen.
-     * 
-     */
-    public SelectionScreen()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+import greenfoot.*; 
+public class SelectionScreen extends World{
+    public SelectionScreen(){    
+        super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
+        prepare();
+    }
+    
+    private void prepare(){
+        Left left = new Left();
+        addObject(left,338,497);
+        Right right = new Right();
+        addObject(right,883,479);
     }
 }
