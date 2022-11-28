@@ -2,8 +2,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Chicken extends Animal
 {
+    private GreenfootImage normal;
     public Chicken(Player player){
         super(Constants.Chicken.weight,Constants.Chicken.specialCooldown, player);
+        normal = getImage();
+        normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }
     
     @Override

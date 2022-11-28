@@ -2,10 +2,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Pig extends Animal
 {
+    private GreenfootImage normal;
+    private GreenfootImage muddy;
     private int specialAbilityTimer = 0;
     private boolean activated = false;
     public Pig(Player player){
         super(Constants.Pig.weight,Constants.Pig.specialCooldown, player);
+        normal = getImage();
+        muddy = new GreenfootImage("MuddyPig.png");
+        normal.scale(normal.getWidth()*3, normal.getHeight()*3);
+        muddy.scale(muddy.getWidth()*3, muddy.getHeight()*3);
     }
 
     public void act(){
@@ -16,9 +22,7 @@ public class Pig extends Animal
             changeDecay(Constants.Animal.friction);
             hitBox.resetSize();
             hitBox.resetIndent();
-            GreenfootImage pigImage = new GreenfootImage("Pig.png");
-            pigImage.scale(78,138);
-            setImage(pigImage);
+            setImage(normal);
         }
         if(activated){
             walkingParticle.generateParticles(20);
@@ -32,9 +36,7 @@ public class Pig extends Animal
         changeDecay(.95);
         GreenfootSound sound = new GreenfootSound("oink.wav");
         sound.play();
-        GreenfootImage muddyPigImage = new GreenfootImage("MuddyPig.png");
-        muddyPigImage.scale(78,138);
-        setImage(muddyPigImage);
+        setImage(muddy);
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
         hitBox.setSize(actorW+20, actorH+20);

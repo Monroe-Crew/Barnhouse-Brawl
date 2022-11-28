@@ -2,8 +2,8 @@
 import greenfoot.*; 
 import java.util.*;
 public abstract class Animal extends Actor {
-    private int width = this.getImage().getWidth();
-    private int height = this.getImage().getHeight();
+    private int width = getImage().getWidth();
+    private int height = getImage().getHeight();
     private int weight;
     private Player player;
     private double xVelocity;
@@ -32,7 +32,7 @@ public abstract class Animal extends Actor {
         this.specialCooldown = specialCooldown;
         this.specialCooldownTimer = (int)(specialCooldown*60/2);
         this.player = player;
-        
+
         /* Control order:
          * Index 0 - Up
          * Index 1 - Left
@@ -53,14 +53,11 @@ public abstract class Animal extends Actor {
     @Override
     public void addedToWorld(World world) {
         // Scales up the image
-        GreenfootImage image = getImage();
-        image.scale(image.getWidth()*3, image.getHeight()*3);
-        setImage(image);
         this.hitBox = new Hitbox(this);
         this.hurtBox = new Hurtbox(this);
         getWorld().addObject(hitBox, 100, 100);
         getWorld().addObject(hurtBox, 100, 100);
-        
+
         this.walkingParticle = new ParticleEffect(80,new Color(230, 136, 73,200));
         getWorld().addObject(walkingParticle,getX(),getY());
     }
@@ -101,7 +98,7 @@ public abstract class Animal extends Actor {
             frame++;
             animateDeath();
         }
-        
+
         // Update position using velocities
         updatePosition();
     }
@@ -157,7 +154,7 @@ public abstract class Animal extends Actor {
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null ){ 
             setRotation(oldRotation);
         }
-        
+
         walkingParticle.setLocation(getX(),getY());
         walkingParticle.generateParticles(3);
     }
@@ -225,15 +222,17 @@ public abstract class Animal extends Actor {
     public void setPlacement(int placement){
         player.setPlacement(placement);
     }
-    
+
     public void animateDeath(){
-            GreenfootImage image = this.getImage();
-            if(image.getWidth()*.99 < 1 || image.getHeight()*.99 < 1) {
-                remove();
-            }else{
+        GreenfootImage image = getImage();
+        System.out.println(frame);
+        if(image.getWidth()*.99 < 1 || image.getHeight()*.99 < 1) {
+            remove();
+        }else{
             int width =  (int)(image.getWidth()*.99);
             int height =  (int)(image.getHeight()*.99);
             image.scale(width, height);
+            setImage(image);
         }
     }
 

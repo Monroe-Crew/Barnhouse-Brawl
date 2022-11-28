@@ -11,8 +11,9 @@ public class Title extends Actor
     double rotation = 0;
     public void act() 
     {
-        setRotation((int)((Math.sin(rotation)*100)/30));
+        setRotation((int)Math.round((Math.sin(rotation)*100)/30));
         rotation += (Constants.Title.titleSpinSpeed);
+        System.out.println(getRotation());
         //if(rotation == 1) rotation = -1;
     }    
 }
