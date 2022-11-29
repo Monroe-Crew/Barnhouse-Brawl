@@ -6,9 +6,5 @@ public class SelectionScreen extends World{
     }
     
     private void prepare(){
-        Left left = new Left();
-        addObject(left,338,497);
-        Right right = new Right();
-        addObject(right,883,479);
     }
 }
