@@ -20,8 +20,8 @@ public class Barnhouse extends GameWorld{
         addObject(animal2, 200, 200);
 
         Player player3 = new Player(3);
-        Chicken animal3 = new Chicken(player3);
-        player3.setAnimal(AnimalType.CHICKEN);
+        Cow animal3 = new Cow(player3);
+        player3.setAnimal(AnimalType.COW);
         addObject(animal3, Constants.Settings.worldWidth-200, 200);
 
         Player player4 = new Player(4);

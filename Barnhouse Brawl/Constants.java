@@ -35,4 +35,9 @@ public class Constants
         public static final double slideLength = 3;
         public static final double specialCooldown = 5; // Includes slide length
     }
+    
+    public static final class Cow{
+        public static final int weight = 3;
+        public static final double specialCooldown = 10;
+    }
 }
