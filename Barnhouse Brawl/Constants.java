@@ -38,6 +38,7 @@ public class Constants
     
     public static final class Cow{
         public static final int weight = 3;
+        public static final double mooLength = 0.1;
         public static final double specialCooldown = 10;
     }
 }
