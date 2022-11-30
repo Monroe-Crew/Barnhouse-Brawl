@@ -1,8 +1,8 @@
 import greenfoot.*;
+import java.util.*;
 public class SelectorBox extends Actor{
     private String[] controls;  
-    private AnimalType[] animals;
-    private TempImage preview;
+    List<AnimalType> animals;
     int iterate;
     int frame = 30;
     public SelectorBox(int playerID){
@@ -12,34 +12,47 @@ public class SelectorBox extends Actor{
          * Index 2 - Right
          */
 
-        iterate=0;
-        getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
-
         controls = new String[]{"-","-","-"};
         if(playerID==1) controls = new String[]{"1", "A","D"};
         if(playerID==2) controls = new String[]{"2","LEFT","RIGHT"};
         if(playerID==3) controls = new String[]{"3", "J","L"};
         if(playerID==4) controls = new String[]{"4","1","3"};
-
-        animals = new AnimalType[]{AnimalType.PIG, AnimalType.COW, AnimalType.CHICKEN};
-    }
-
-    @Override
-    public void addedToWorld(World world) {
-        preview = new TempImage(animals[0]);
-        getWorld().addObject(preview, getX(), getY());
+        
+        animals =  new ArrayList<AnimalType>(EnumSet.allOf(AnimalType.class));
+        iterate=0;
+        changeImage(animals.get(iterate));
     }
 
     public void act() {
         if(frame < 30) frame++;
 
-        if(Greenfoot.isKeyDown(controls[2]) && frame == 30){
-            iterate = (iterate + 1) % (animals.length);
-            System.out.println(iterate);
-            getWorld().removeObject(preview);
-            preview = new TempImage(animals[iterate]);
-            getWorld().addObject(preview, getX(), getY());
+        if(Greenfoot.isKeyDown(controls[1]) && frame > 15){
+            iterate = iterate == 0 ? animals.size()-1 : iterate-1;
+            changeImage(animals.get(iterate));
             frame = 0;
         }
+        
+        if(Greenfoot.isKeyDown(controls[2]) && frame > 15){
+            iterate = (iterate + 1) % (animals.size());
+            changeImage(animals.get(iterate));
+            frame = 0;
+        }
+    }
+    
+    private void changeImage(AnimalType animal){
+        switch(animals.get(iterate)){
+                case PIG : 
+                setImage(new GreenfootImage("SelectionPig.png"));
+                getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
+                break;
+                case COW : 
+                setImage(new GreenfootImage("SelectionCow.png"));
+                getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
+                break;
+                case CHICKEN :
+                setImage(new GreenfootImage("SelectionChicken.png"));
+                getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
+                break;
+            }
     }
 }

@@ -8,11 +8,14 @@ public class TempImage extends Actor{
     public void changeImage(AnimalType animal){
         switch(animal){
             case PIG : 
-            System.out.println("sdas");
             animalImage = new GreenfootImage("Pig.png");
-            case COW : animalImage = new GreenfootImage("Cow - Copy.png");
+            break;
+            case COW : 
+            animalImage = new GreenfootImage("Cow - Copy.png");
+            break;
             case CHICKEN :
             animalImage = new GreenfootImage("Chicken.png");
+            break;
         }
         animalImage.scale(animalImage.getWidth()*5, animalImage.getHeight()*5);
         setImage(animalImage);
