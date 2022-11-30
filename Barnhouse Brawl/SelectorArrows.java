@@ -22,5 +22,6 @@ public class SelectorArrows extends Actor{
         placeholder.scale((int)tempW, (int)tempH);
         setImage(placeholder);
         frame = 0;
+        if(frame == Integer.MAX_VALUE) frame = 0;
     }
 }
