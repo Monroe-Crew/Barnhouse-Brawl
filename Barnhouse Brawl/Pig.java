@@ -41,7 +41,6 @@ public class Pig extends Animal
         int actorH = getImage().getHeight();
         hitBox.setSize(actorW+20, actorH+20);
         hitBox.setIndent(0);
-
         activated = true;
         specialAbilityTimer = 0;
     }
