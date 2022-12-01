@@ -5,8 +5,11 @@ public class SelectionScreen extends World{
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
     }
-    
+    static GreenfootSound selectionMusic = new GreenfootSound("EndScreen2.mp3");
     private void prepare(){
+        
+        Music.playMusic(selectionMusic);
+        
         SelectorBox selectorBox1 = new SelectorBox(1);
         addObject(selectorBox1,172,655);
         
