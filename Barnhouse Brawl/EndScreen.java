@@ -9,7 +9,8 @@ import java.util.*;
  */
 public class EndScreen extends World
 {
-
+  static GreenfootSound endMusic1 = new GreenfootSound("EndScreen1.mp3");
+  static GreenfootSound endMusic2 = new GreenfootSound("EndScreen2.mp3");
     /**
      * Constructor for objects of class EndScreen.
      * 
