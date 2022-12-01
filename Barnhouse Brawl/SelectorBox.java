@@ -22,18 +22,20 @@ public class SelectorBox extends Actor{
         iterate=0;
         changeImage(animals.get(iterate));
     }
-
+    GreenfootSound swap = new GreenfootSound("shuffle.wav");
     public void act() {
         if(frame < 30) frame++;
 
         if(Greenfoot.isKeyDown(controls[1]) && frame > 15){
             iterate = iterate == 0 ? animals.size()-1 : iterate-1;
+            swap.play();
             changeImage(animals.get(iterate));
             frame = 0;
         }
         
         if(Greenfoot.isKeyDown(controls[2]) && frame > 15){
             iterate = (iterate + 1) % (animals.size());
+            swap.play();
             changeImage(animals.get(iterate));
             frame = 0;
         }
