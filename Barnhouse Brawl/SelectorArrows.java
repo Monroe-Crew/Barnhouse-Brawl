@@ -6,15 +6,27 @@ public class SelectorArrows extends Actor{
     int playerID;
     int frame = 0;
     int time = 0;
-    public SelectorArrows(int ID){
+    int freeze = 0;
+    ArrowDirection direction;
+    public SelectorArrows(int ID, ArrowDirection direction){
         arrow = new GreenfootImage(getImage());
         getImage().scale(30,25);
         playerID = ID;
+        this.direction = direction;
         width = getImage().getWidth();
         height = getImage().getHeight();
     }  
 
     public void act(){
+        if(freeze == 0){
+            animate();
+        }
+        else{
+            freeze--;
+        }
+    }
+    
+    public void animate(){
         frame++;
         time++;
         GreenfootImage placeholder = new GreenfootImage(arrow);
@@ -24,5 +36,17 @@ public class SelectorArrows extends Actor{
         setImage(placeholder);
         frame = 0;
         if(frame == Integer.MAX_VALUE) frame = 0;
+    }
+
+    public int getID(){
+        return playerID;
+    }
+
+    public ArrowDirection getDirection(){
+        return direction;
+    }
+
+    public void freezeAnimation(int time){
+        freeze=time;
     }
 }

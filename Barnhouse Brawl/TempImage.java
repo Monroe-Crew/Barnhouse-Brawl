@@ -11,7 +11,7 @@ public class TempImage extends Actor{
             animalImage = new GreenfootImage("Pig.png");
             break;
             case COW : 
-            animalImage = new GreenfootImage("Cow - Copy.png");
+            animalImage = new GreenfootImage("Cow.png");
             break;
             case CHICKEN :
             animalImage = new GreenfootImage("Chicken.png");

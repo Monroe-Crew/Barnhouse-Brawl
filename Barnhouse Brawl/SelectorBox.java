@@ -5,13 +5,14 @@ public class SelectorBox extends Actor{
     List<AnimalType> animals;
     int iterate;
     int frame = 30;
-    public SelectorBox(int playerID){
+    int playerID;
+    public SelectorBox(int ID){
         /* Control order:
          * Index 0 - Join / Select
          * Index 1 - Left
          * Index 2 - Right
          */
-
+        playerID=ID;
         controls = new String[]{"-","-","-"};
         if(playerID==1) controls = new String[]{"1", "A","D"};
         if(playerID==2) controls = new String[]{"2","LEFT","RIGHT"};
@@ -30,6 +31,7 @@ public class SelectorBox extends Actor{
             iterate = iterate == 0 ? animals.size()-1 : iterate-1;
             changeImage(animals.get(iterate));
             frame = 0;
+            ((SelectionScreen)getWorld()).changeArrow(playerID, ArrowDirection.LEFT);
         }
         
         if(Greenfoot.isKeyDown(controls[2]) && frame > 15){
@@ -42,17 +44,17 @@ public class SelectorBox extends Actor{
     private void changeImage(AnimalType animal){
         switch(animals.get(iterate)){
                 case PIG : 
-                setImage(new GreenfootImage("SelectionPig.png"));
+                setImage(new GreenfootImage("Pig.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case COW : 
-                setImage(new GreenfootImage("SelectionCow.png"));
+                setImage(new GreenfootImage("Cow.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case CHICKEN :
-                setImage(new GreenfootImage("SelectionChicken.png"));
+                setImage(new GreenfootImage("Chicken.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
-            }
+        }
     }
 }
