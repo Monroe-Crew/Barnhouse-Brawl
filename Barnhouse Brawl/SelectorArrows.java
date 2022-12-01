@@ -3,12 +3,13 @@ public class SelectorArrows extends Actor{
     GreenfootImage arrow;
     int width;
     int height;
-
+    int playerID;
     int frame = 0;
     int time = 0;
-    public SelectorArrows(){
+    public SelectorArrows(int ID){
         arrow = new GreenfootImage(getImage());
         getImage().scale(30,25);
+        playerID = ID;
         width = getImage().getWidth();
         height = getImage().getHeight();
     }  
@@ -22,5 +23,6 @@ public class SelectorArrows extends Actor{
         placeholder.scale((int)tempW, (int)tempH);
         setImage(placeholder);
         frame = 0;
+        if(frame == Integer.MAX_VALUE) frame = 0;
     }
 }
