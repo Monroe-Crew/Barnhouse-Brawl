@@ -10,7 +10,7 @@ import java.util.*;
 public class EndScreen extends World
 {
   static GreenfootSound endMusic1 = new GreenfootSound("EndScreen1.mp3");
-  static GreenfootSound endMusic2 = new GreenfootSound("EndScreen2.mp3");
+  
     /**
      * Constructor for objects of class EndScreen.
      * 
@@ -27,6 +27,7 @@ public class EndScreen extends World
      */
     private void prepare()
     {
+        Music.playMusic(endMusic1);
         EndScreen_Leaderboard endScreen_Leaderboard = new EndScreen_Leaderboard();
         addObject(endScreen_Leaderboard,Constants.Settings.worldWidth/2,Constants.Settings.worldHeight/2);
     }
