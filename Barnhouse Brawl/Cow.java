@@ -27,6 +27,8 @@ public class Cow extends Animal
     }    
     @Override
     public void specialAbility(){
+        Moo moo = new Moo();
+        getWorld().addObject(moo, getX(), getY());
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
         hitBox.setSize(actorW+40, actorH+40);

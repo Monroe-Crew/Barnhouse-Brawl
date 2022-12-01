@@ -17,7 +17,7 @@ public abstract class GameWorld extends World
     }
     
     protected void prepare(){
-        setPaintOrder(Animal.class, ParticleEffect.class);
+        setPaintOrder(Moo.class, Animal.class, ParticleEffect.class);
     }
     
     public void act(){
