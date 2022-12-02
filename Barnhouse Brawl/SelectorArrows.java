@@ -1,11 +1,11 @@
 import greenfoot.*; 
 public class SelectorArrows extends Actor{
-    GreenfootImage arrow;
-    int width;
-    int height;
-    int frame = 0;
-    int time = 0;
-    int freeze = 0;
+    private GreenfootImage arrow;
+    private int width;
+    private int height;
+    private int frame = 0;
+    private int time = 0;
+    private int freeze = 0;
     public SelectorArrows(){
         arrow = new GreenfootImage(getImage());
         getImage().scale(30,25);
@@ -14,6 +14,8 @@ public class SelectorArrows extends Actor{
     }  
 
     public void act(){
+        time++;
+        
         if(freeze == 0){
             animate();
         }
@@ -26,12 +28,11 @@ public class SelectorArrows extends Actor{
         //Make arrow bigger
         //Set image to diffrent image when bigger
         freezeAnimation(5);
-        getImage().scale(100,100);
+        getImage().scale(getImage().getWidth()*2,getImage().getHeight()*2);
     }
 
     public void animate(){
         frame++;
-        time++;
         GreenfootImage placeholder = new GreenfootImage(arrow);
         double tempW = 30 + Constants.SelectorScreen.arrowAmplitude*Math.abs(width * Math.sin(time/Constants.SelectorScreen.arrowFrequency));
         double tempH = 30 + Constants.SelectorScreen.arrowAmplitude*Math.abs(height * Math.sin(time/Constants.SelectorScreen.arrowFrequency));

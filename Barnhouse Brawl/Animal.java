@@ -12,13 +12,13 @@ public abstract class Animal extends Actor {
     private double specialCooldown;
     private int pushCooldownTimer = 0;
     private int specialCooldownTimer = 0;
-    protected boolean dead = false;
-    protected Hitbox hitBox;
-    protected Hurtbox hurtBox;
     private double decay = Constants.Animal.friction;
     private static double knockbackMultiplier = 1;
     private int frame = 0;
     protected ParticleEffect walkingParticle;
+    protected boolean dead = false;
+    protected Hitbox hitBox;
+    protected Hurtbox hurtBox;
 
     private enum Direction {
         UP,

@@ -25,6 +25,7 @@ public abstract class GameWorld extends World
             Music.playMusic(backgroundMusic);
         }
         start=true;
+        
         List<Projectile> projectileList = getObjects(Projectile.class);
         for(Actor a : projectileList){
             if(a.getX()==0||a.getX()>=Constants.Settings.worldWidth-10){
