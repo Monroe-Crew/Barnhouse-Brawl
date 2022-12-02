@@ -2,17 +2,21 @@ import greenfoot.*;
 import java.util.*;
 public class SelectorBox extends Actor{
     private String[] controls;  
-    List<AnimalType> animals;
-    int iterate;
-    int frame = 30;
-    int playerID;
+    private List<AnimalType> animals;
+    private LeftArrow leftArrow;
+    private RightArrow rightArrow;
+    private GreenfootSound swap;
+    private int iterate;
+    private int frame = 30;
+    private int playerID;
     public SelectorBox(int ID){
+        this.playerID = ID;
+        
         /* Control order:
          * Index 0 - Join / Select
          * Index 1 - Left
          * Index 2 - Right
-         */
-        playerID=ID;
+         */        
         controls = new String[]{"-","-","-"};
         if(playerID==1) controls = new String[]{"1", "A","D"};
         if(playerID==2) controls = new String[]{"2","LEFT","RIGHT"};
@@ -22,8 +26,18 @@ public class SelectorBox extends Actor{
         animals =  new ArrayList<AnimalType>(EnumSet.allOf(AnimalType.class));
         iterate=0;
         changeImage(animals.get(iterate));
+        
+        swap = new GreenfootSound("shuffle.wav");
+        leftArrow = new LeftArrow();
+        rightArrow = new RightArrow();
     }
-    GreenfootSound swap = new GreenfootSound("shuffle.wav");
+    
+    @Override
+    public void addedToWorld(World world) {
+        getWorld().addObject(leftArrow, (int)(getX() - 100), (int)(getY() + 150));
+        getWorld().addObject(rightArrow, (int)(getX() + 100), (int)(getY() + 150));
+    }
+    
     public void act() {
         if(frame < 30) frame++;
 
@@ -32,7 +46,7 @@ public class SelectorBox extends Actor{
             swap.play();
             changeImage(animals.get(iterate));
             frame = 0;
-            ((SelectionScreen)getWorld()).changeArrow(playerID, ArrowDirection.LEFT);
+            leftArrow.changeArrow();
         }
         
         if(Greenfoot.isKeyDown(controls[2]) && frame > 15){
@@ -40,6 +54,7 @@ public class SelectorBox extends Actor{
             swap.play();
             changeImage(animals.get(iterate));
             frame = 0;
+            rightArrow.changeArrow();
         }
     }
     
@@ -59,4 +74,5 @@ public class SelectorBox extends Actor{
                 break;
         }
     }
+    
 }
