@@ -1,7 +1,7 @@
 public class Constants  
 {
     public static final class Settings{
-        public static final boolean debugMode = true;
+        public static final boolean debugMode = false;
         public static final int worldWidth = 1280;
         public static final int worldHeight = 960;
         public static final int volume = 30;

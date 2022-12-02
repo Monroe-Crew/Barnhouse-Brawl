@@ -12,6 +12,7 @@ public class Goat extends Animal{
         super.act();
         if(specialAbilityTimer > Constants.Goat.dashLength * 60){
             activated = false; 
+            setGoat(false);
             changeDecay(Constants.Animal.friction);
         }
         if(activated){
@@ -28,6 +29,7 @@ public class Goat extends Animal{
         double multiplyer = (1.0/Math.max(getXVelocity(), getYVelocity()));
         setSpeed(getXVelocity()*multiplyer, getYVelocity()*multiplyer);
         changeDecay(.95);
+        setGoat(true);
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
         activated = true;
