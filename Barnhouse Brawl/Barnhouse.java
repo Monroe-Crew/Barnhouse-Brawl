@@ -25,8 +25,8 @@ public class Barnhouse extends GameWorld{
         addObject(animal3, Constants.Settings.worldWidth-200, 200);
 
         Player player4 = new Player(4);
-        Pig animal4 = new Pig(player4);
-        player4.setAnimal(AnimalType.PIG);
+        Goat animal4 = new Goat(player4);
+        player4.setAnimal(AnimalType.GOAT);
         addObject(animal4, Constants.Settings.worldWidth-200, Constants.Settings.worldHeight-200);
 
         Timer timer = new Timer(2,0);

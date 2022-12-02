@@ -1,7 +1,7 @@
 public class Constants  
 {
     public static final class Settings{
-        public static final boolean debugMode = false;
+        public static final boolean debugMode = true;
         public static final int worldWidth = 1280;
         public static final int worldHeight = 960;
         public static final int volume = 30;
@@ -40,5 +40,11 @@ public class Constants
         public static final int weight = 3;
         public static final double mooLength = 0.1;
         public static final double specialCooldown = 10;
+    }
+    
+    public static final class Goat{
+        public static final int weight = 2;
+        public static final double dashLength = 1;
+        public static final double specialCooldown = 5;
     }
 }

@@ -199,6 +199,19 @@ public abstract class Animal extends Actor {
         this.yVelocity += (double)yStrength*knockbackMultiplier;
     }
 
+    public void setSpeed(double xStrength, double yStrength){
+        this.xVelocity *= xStrength;
+        this.yVelocity *= yStrength;
+    }
+
+    public double getXVelocity(){
+        return this.xVelocity;
+    }
+
+    public double getYVelocity(){
+        return this.yVelocity;
+    }
+
     public int getWeight(){
         return this.weight;
     }

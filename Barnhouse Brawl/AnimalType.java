@@ -2,5 +2,6 @@
      public enum AnimalType {
         CHICKEN,
         PIG,
-        COW
+        COW,
+        GOAT
     }
