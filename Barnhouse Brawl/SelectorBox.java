@@ -72,6 +72,10 @@ public class SelectorBox extends Actor{
                 setImage(new GreenfootImage("ChickenSelection.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
+                case GOAT :
+                setImage(new GreenfootImage("GoatSelection.png"));
+                getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
+                break;
         }
     }
     
