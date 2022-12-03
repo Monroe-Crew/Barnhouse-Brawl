@@ -61,15 +61,15 @@ public class SelectorBox extends Actor{
     private void changeImage(AnimalType animal){
         switch(animals.get(iterate)){
                 case PIG : 
-                setImage(new GreenfootImage("Pig.png"));
+                setImage(new GreenfootImage("PigSelection.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case COW : 
-                setImage(new GreenfootImage("Cow.png"));
+                setImage(new GreenfootImage("CowSelection.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case CHICKEN :
-                setImage(new GreenfootImage("Chicken.png"));
+                setImage(new GreenfootImage("ChickenSelection.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
         }

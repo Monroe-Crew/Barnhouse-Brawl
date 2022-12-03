@@ -5,7 +5,8 @@ public class Goat extends Animal{
     private boolean activated = false;
     public Goat(Player player){
         super(Constants.Goat.weight,Constants.Goat.specialCooldown, player);
-        //Scale Image
+        normal = getImage();
+        normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }  
 
     public void act() {
