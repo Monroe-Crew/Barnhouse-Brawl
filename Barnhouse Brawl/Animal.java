@@ -267,7 +267,7 @@ public abstract class Animal extends Actor {
 
     public void animateDeath(){
         GreenfootImage image = getImage();
-        System.out.println(frame);
+        //System.out.println(frame);
         if(image.getWidth()*.99 < 1 || image.getHeight()*.99 < 1) {
             remove();
         }else{
