@@ -8,8 +8,26 @@ public class Pig extends Animal
     private boolean activated = false;
     public Pig(Player player){
         super(Constants.Pig.weight,Constants.Pig.specialCooldown, player);
+        int playerID = player.getPlayerID();
+        switch(playerID){
+            case 1 :
+                setImage("Pig/RedPig.png");
+                muddy = new GreenfootImage("MuddyPig/RedMuddyPig.png");
+                break;
+            case 2 :
+                setImage("Pig/BluePig.png");
+                muddy = new GreenfootImage("MuddyPig/BlueMuddyPig.png");
+                break;
+            case 3 :
+                setImage("Pig/YellowPig.png");
+                muddy = new GreenfootImage("MuddyPig/YellowMuddyPig.png");
+                break;
+            case 4 :
+                setImage("Pig/GreenPig.png");
+                muddy = new GreenfootImage("MuddyPig/GreenMuddyPig.png");
+                break;
+        }
         normal = getImage();
-        muddy = new GreenfootImage("MuddyPig.png");
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
         muddy.scale(muddy.getWidth()*3, muddy.getHeight()*3);
     }
