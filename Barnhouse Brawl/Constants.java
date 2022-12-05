@@ -12,7 +12,7 @@ public class Constants
     }
     
     public static final class SelectorScreen{
-        public static final double arrowFrequency = 10;
+        public static final double arrowFrequency = 20;
         public static final double arrowAmplitude = .25;
     }
     

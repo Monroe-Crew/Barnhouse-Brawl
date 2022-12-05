@@ -122,6 +122,9 @@ public abstract class Animal extends Actor {
 
     public void specialMovement(int rotation){
         double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
+        System.out.println("Speed " + speed);
+        System.out.println("xVelocity " + xVelocity);
+        System.out.println("yVelocity " + yVelocity);
         if(yVelocity>0){
             yVelocity += speed;
         }

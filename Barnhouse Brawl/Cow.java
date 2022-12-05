@@ -7,18 +7,17 @@ public class Cow extends Animal
     private boolean activated = false;
     public Cow(Player player){
         super(Constants.Cow.weight,Constants.Cow.specialCooldown, player);
-        int playerID = player.getPlayerID();
-        switch(playerID){
-            case 1 :
+        switch(player.getColor()){
+            case RED :
                 setImage("Cow/RedCow.png");
                 break;
-            case 2 :
+            case BLUE :
                 setImage("Cow/BlueCow.png");
                 break;
-            case 3 :
+            case YELLOW :
                 setImage("Cow/YellowCow.png");
                 break;
-            case 4 :
+            case GREEN :
                 setImage("Cow/GreenCow.png");
                 break;
         }

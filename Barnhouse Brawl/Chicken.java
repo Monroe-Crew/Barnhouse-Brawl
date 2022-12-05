@@ -3,21 +3,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Chicken extends Animal
 {
     private GreenfootImage normal;
-    int playerID;
     public Chicken(Player player){
         super(Constants.Chicken.weight,Constants.Chicken.specialCooldown, player);
-        playerID = player.getPlayerID();
-        switch(playerID){
-            case 1 :
+        switch(player.getColor()){
+            case RED :
                 setImage("Chicken/RedChicken.png");
                 break;
-            case 2 :
+            case BLUE :
                 setImage("Chicken/BlueChicken.png");
                 break;
-            case 3 :
+            case YELLOW :
                 setImage("Chicken/YellowChicken.png");
                 break;
-            case 4 :
+            case GREEN :
                 setImage("Chicken/GreenChicken.png");
                 break;
         }

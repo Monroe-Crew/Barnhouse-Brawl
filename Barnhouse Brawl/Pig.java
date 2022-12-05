@@ -9,20 +9,20 @@ public class Pig extends Animal
     public Pig(Player player){
         super(Constants.Pig.weight,Constants.Pig.specialCooldown, player);
         int playerID = player.getPlayerID();
-        switch(playerID){
-            case 1 :
+        switch(player.getColor()){
+            case RED :
                 setImage("Pig/RedPig.png");
                 muddy = new GreenfootImage("MuddyPig/RedMuddyPig.png");
                 break;
-            case 2 :
+            case BLUE :
                 setImage("Pig/BluePig.png");
                 muddy = new GreenfootImage("MuddyPig/BlueMuddyPig.png");
                 break;
-            case 3 :
+            case YELLOW :
                 setImage("Pig/YellowPig.png");
                 muddy = new GreenfootImage("MuddyPig/YellowMuddyPig.png");
                 break;
-            case 4 :
+            case GREEN :
                 setImage("Pig/GreenPig.png");
                 muddy = new GreenfootImage("MuddyPig/GreenMuddyPig.png");
                 break;

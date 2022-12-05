@@ -1,11 +1,20 @@
 
 public class Player{
     private int playerID;
+    private Color color;
     private AnimalType animal;
     private int placement;
 
-    public Player(int ID){
+    public enum Color {
+        RED,
+        GREEN,
+        BLUE,
+        YELLOW
+    }
+    
+    public Player(int ID, Color color){
         this.playerID = ID;
+        this.color = color;
         this.placement = Integer.MAX_VALUE;
 
         AllPlayers.addPlayer(this);
@@ -13,6 +22,10 @@ public class Player{
 
     public int getPlayerID(){
         return playerID;
+    }
+    
+    public Color getColor(){
+        return color;
     }
 
     public void setAnimal(AnimalType animal){

@@ -7,18 +7,17 @@ public class Goat extends Animal{
     private boolean goatSpecial = false;
     public Goat(Player player){
         super(Constants.Goat.weight,Constants.Goat.specialCooldown, player);
-        int playerID = player.getPlayerID();
-        switch(playerID){
-            case 1 :
+        switch(player.getColor()){
+            case RED :
             setImage("Goat/RedGoat.png");
             break;
-            case 2 :
+            case BLUE :
             setImage("Goat/BlueGoat.png");
             break;
-            case 3 :
+            case YELLOW :
             setImage("Goat/YellowGoat.png");
             break;
-            case 4 :
+            case GREEN :
             setImage("Goat/GreenGoat.png");
             break;
         }
@@ -26,6 +25,11 @@ public class Goat extends Animal{
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }  
+    
+    public void addedToWorld(World world){
+        super.addedToWorld(world);
+        world.addObject(dashingParticle, getX(), getY());
+    }
 
     public void act() {
         super.act();
@@ -36,6 +40,7 @@ public class Goat extends Animal{
         }
         if(activated){
             dashingParticle.generateParticles(20);
+            dashingParticle.setLocation(getX(),getY());
             specialAbilityTimer++;
             basicPush();
         }
