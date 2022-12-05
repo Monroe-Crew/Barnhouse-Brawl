@@ -31,7 +31,7 @@ public class Cow extends Animal
         getWorld().addObject(moo, getX(), getY());
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
-        hitBox.setSize(actorW+40, actorH+40);
+        hitBox.setSize(actorW+30, actorH+30);
         hitBox.setIndent(0);
         activated = true;
         specialAbilityTimer = 0;

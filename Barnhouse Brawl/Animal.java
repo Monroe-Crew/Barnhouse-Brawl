@@ -15,6 +15,7 @@ public abstract class Animal extends Actor {
     private double decay = Constants.Animal.friction;
     private static double knockbackMultiplier = 1;
     private int frame = 0;
+    private boolean goatSpecial = false;
     protected ParticleEffect walkingParticle;
     protected boolean dead = false;
     protected Hitbox hitBox;
@@ -68,25 +69,30 @@ public abstract class Animal extends Actor {
         if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
         if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
 
-        if(Greenfoot.isKeyDown(controls[0])){
-            movement(Direction.UP);
+        if(!goatSpecial){
+            if(Greenfoot.isKeyDown(controls[0])){
+                movement(Direction.UP);
+            }
+            if(Greenfoot.isKeyDown(controls[1])){
+                movement(Direction.LEFT);
+            }
+            if(Greenfoot.isKeyDown(controls[2])){
+                movement(Direction.DOWN);
+            }
+            if(Greenfoot.isKeyDown(controls[3])){
+                movement(Direction.RIGHT);
+            }
+            if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
+                basicPush();
+                pushCooldownTimer = 0;
+            }
+            if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
+                specialAbility();
+                specialCooldownTimer = 0;
+            }
         }
-        if(Greenfoot.isKeyDown(controls[1])){
-            movement(Direction.LEFT);
-        }
-        if(Greenfoot.isKeyDown(controls[2])){
-            movement(Direction.DOWN);
-        }
-        if(Greenfoot.isKeyDown(controls[3])){
-            movement(Direction.RIGHT);
-        }
-        if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
-            basicPush();
-            pushCooldownTimer = 0;
-        }
-        if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
-            specialAbility();
-            specialCooldownTimer = 0;
+        else{
+            specialMovement(getRotation());
         }
 
         if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
@@ -114,6 +120,25 @@ public abstract class Animal extends Actor {
             animal.knockBack(xStrength, yStrength);
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
+    }
+    
+    public void specialMovement(int rotation){
+        double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
+        if(yVelocity>0){
+            yVelocity += speed;
+        }
+        else{
+            yVelocity -= speed;
+        }
+        if(xVelocity>0){
+            xVelocity += speed;
+        }
+        else{
+            xVelocity -= speed;
+        }
+        
+        walkingParticle.setLocation(getX(),getY());
+        walkingParticle.generateParticles(3);
     }
 
     public void movement(Direction direction) {
@@ -158,6 +183,10 @@ public abstract class Animal extends Actor {
         walkingParticle.setLocation(getX(),getY());
         walkingParticle.generateParticles(3);
     }
+    
+    public void setGoat(boolean value){
+        this.goatSpecial = value;
+    }
 
     public void updatePosition(){
         if(dead) return;
@@ -199,6 +228,19 @@ public abstract class Animal extends Actor {
         this.yVelocity += (double)yStrength*knockbackMultiplier;
     }
 
+    public void setSpeed(double xStrength, double yStrength){
+        this.xVelocity *= xStrength;
+        this.yVelocity *= yStrength;
+    }
+
+    public double getXVelocity(){
+        return this.xVelocity;
+    }
+
+    public double getYVelocity(){
+        return this.yVelocity;
+    }
+
     public int getWeight(){
         return this.weight;
     }
@@ -225,7 +267,7 @@ public abstract class Animal extends Actor {
 
     public void animateDeath(){
         GreenfootImage image = getImage();
-        System.out.println(frame);
+        //System.out.println(frame);
         if(image.getWidth()*.99 < 1 || image.getHeight()*.99 < 1) {
             remove();
         }else{

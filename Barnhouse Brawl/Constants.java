@@ -41,4 +41,10 @@ public class Constants
         public static final double mooLength = 0.1;
         public static final double specialCooldown = 10;
     }
+    
+    public static final class Goat{
+        public static final int weight = 2;
+        public static final double dashLength = 1;
+        public static final double specialCooldown = 4;
+    }
 }
