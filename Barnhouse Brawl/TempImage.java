@@ -4,6 +4,9 @@ public class TempImage extends Actor{
     public TempImage(AnimalType animal){
         changeImage(animal);
     }  
+    public TempImage(String name){
+        changeImage(name);
+    }
 
     public void changeImage(AnimalType animal){
         switch(animal){
@@ -17,6 +20,12 @@ public class TempImage extends Actor{
             animalImage = new GreenfootImage("Chicken.png");
             break;
         }
+        animalImage.scale(animalImage.getWidth()*5, animalImage.getHeight()*5);
+        setImage(animalImage);
+    }
+    
+    public void changeImage(String name){
+        animalImage = new GreenfootImage(name);
         animalImage.scale(animalImage.getWidth()*5, animalImage.getHeight()*5);
         setImage(animalImage);
     }
