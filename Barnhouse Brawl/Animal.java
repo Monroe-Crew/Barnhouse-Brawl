@@ -19,6 +19,7 @@ public abstract class Animal extends Actor {
     protected boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
+    GreenfootSound hit = new GreenfootSound("hit.wav");
 
     private enum Direction {
         UP,
@@ -108,11 +109,14 @@ public abstract class Animal extends Actor {
         // Larger multiplier = harder push for all characters
         int multiplier = 3;
         ArrayList<Animal> touching = hitBox.findTouching();
+        
         for(Animal animal : touching){
             if(animal == this) continue;
             int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
+            
+            hit.play();
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
     }

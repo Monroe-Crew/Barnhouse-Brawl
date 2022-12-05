@@ -3,6 +3,8 @@ import java.util.*;
 
 public class Projectile extends Actor{
     Actor animal;
+    GreenfootSound hit = new GreenfootSound("hit.wav");
+
     public Projectile(Actor actor){
         this.animal = actor;
         getImage().scale(50, 60);
@@ -15,6 +17,8 @@ public class Projectile extends Actor{
         if(a != null && a != animal){
             //Add a stun mechanic in the future
             basicPush(a);
+            
+            hit.play();
             this.getWorld().removeObject(this);
         }
     } 
