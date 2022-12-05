@@ -54,18 +54,22 @@ public class SelectorBox extends Actor {
     private void changeImage(AnimalType animal) {
         switch (animals.get(iterate)) {
             case PIG:
+            player.setAnimal(AnimalType.PIG);
                 setImage(new GreenfootImage("PigSelection.png"));
                 getImage().scale((int) (getImage().getWidth() * 3.35), (int) (getImage().getHeight() * 3.35));
                 break;
             case COW:
+            player.setAnimal(AnimalType.COW);
                 setImage(new GreenfootImage("CowSelection.png"));
                 getImage().scale((int) (getImage().getWidth() * 3.35), (int) (getImage().getHeight() * 3.35));
                 break;
             case CHICKEN:
+            player.setAnimal(AnimalType.CHICKEN);
                 setImage(new GreenfootImage("ChickenSelection.png"));
                 getImage().scale((int) (getImage().getWidth() * 3.35), (int) (getImage().getHeight() * 3.35));
                 break;
             case GOAT:
+            player.setAnimal(AnimalType.GOAT);
                 setImage(new GreenfootImage("GoatSelection.png"));
                 getImage().scale((int) (getImage().getWidth() * 3.35), (int) (getImage().getHeight() * 3.35));
                 break;
