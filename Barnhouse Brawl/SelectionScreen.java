@@ -27,6 +27,7 @@ public class SelectionScreen extends World {
     public SelectionScreen() {
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         AllPlayers.reset();
+        prepare();
     }
 
     public void act() {
@@ -71,5 +72,14 @@ public class SelectionScreen extends World {
 
     }
 
-
+    private void prepare(){
+        TempImage p1Start = new TempImage("PressStart");
+        addObject(selectorBox1, 172, 655);
+        TempImage p2Start = new TempImage("PressStart");
+        TempImage p3Start = new TempImage("PressStart");
+        addObject(selectorBox3, 796, 655);
+        TempImage p4Start = new TempImage("PressStart");
+        
+        
+    }
 }
