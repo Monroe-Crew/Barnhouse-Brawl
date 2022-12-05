@@ -3,6 +3,7 @@ public class Goat extends Animal{
     private GreenfootImage normal;
     private int specialAbilityTimer = 0;
     private boolean activated = false;
+    private boolean goatSpecial = false;
     public Goat(Player player){
         super(Constants.Goat.weight,Constants.Goat.specialCooldown, player);
         normal = getImage();
@@ -13,13 +14,16 @@ public class Goat extends Animal{
         super.act();
         if(specialAbilityTimer > Constants.Goat.dashLength * 60){
             activated = false; 
-            setGoat(false);
+            goatSpecial = false;
             changeDecay(Constants.Animal.friction);
         }
         if(activated){
             walkingParticle.generateParticles(20);
             specialAbilityTimer++;
             basicPush();
+        }
+        if(goatSpecial){
+            specialMovement(getRotation());
         }
     }    
 
@@ -30,7 +34,7 @@ public class Goat extends Animal{
         double multiplyer = (1.0/Math.max(getXVelocity(), getYVelocity()));
         setSpeed(getXVelocity()*multiplyer, getYVelocity()*multiplyer);
         changeDecay(.95);
-        setGoat(true);
+        goatSpecial = true;
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
         activated = true;

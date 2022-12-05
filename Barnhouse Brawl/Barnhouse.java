@@ -19,6 +19,9 @@ public class Barnhouse extends GameWorld {
                 case CHICKEN:
                     animal = new Chicken(player);
                     break;
+                case GOAT:
+                    animal = new Goat(player);
+                    break;
             }
 
             switch (player.getPlayerID()) {
