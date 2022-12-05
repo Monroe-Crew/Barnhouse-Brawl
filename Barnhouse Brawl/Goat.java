@@ -2,6 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Goat extends Animal{  
     private GreenfootImage normal;
     private int specialAbilityTimer = 0;
+    private ParticleEffect dashingParticle;
     private boolean activated = false;
     private boolean goatSpecial = false;
     public Goat(Player player){
@@ -9,18 +10,19 @@ public class Goat extends Animal{
         int playerID = player.getPlayerID();
         switch(playerID){
             case 1 :
-                setImage("Goat/RedGoat.png");
-                break;
+            setImage("Goat/RedGoat.png");
+            break;
             case 2 :
-                setImage("Goat/BlueGoat.png");
-                break;
+            setImage("Goat/BlueGoat.png");
+            break;
             case 3 :
-                setImage("Goat/YellowGoat.png");
-                break;
+            setImage("Goat/YellowGoat.png");
+            break;
             case 4 :
-                setImage("Goat/GreenGoat.png");
-                break;
+            setImage("Goat/GreenGoat.png");
+            break;
         }
+        dashingParticle = new ParticleEffect(80,new Color(255, 255, 255,255));
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }  
@@ -33,7 +35,7 @@ public class Goat extends Animal{
             changeDecay(Constants.Animal.friction);
         }
         if(activated){
-            walkingParticle.generateParticles(20);
+            dashingParticle.generateParticles(20);
             specialAbilityTimer++;
             basicPush();
         }
