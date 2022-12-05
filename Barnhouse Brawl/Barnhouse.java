@@ -8,28 +8,32 @@ public class Barnhouse extends GameWorld{
 
     protected void prepare(){
         super.prepare();
-        
-        Player player1 = new Player(1);
-        Chicken animal1 = new Chicken(player1);
-        player1.setAnimal(AnimalType.CHICKEN);
-        addObject(animal1, 200, Constants.Settings.worldHeight-200);
-        
-        Player player2 = new Player(2);
-        Pig animal2 = new Pig(player2);
-        player2.setAnimal(AnimalType.PIG);
-        addObject(animal2, 200, 200);
 
-        Player player3 = new Player(3);
-        Cow animal3 = new Cow(player3);
-        player3.setAnimal(AnimalType.COW);
-        addObject(animal3, Constants.Settings.worldWidth-200, 200);
-
-        Player player4 = new Player(4);
-        Pig animal4 = new Pig(player4);
-        player4.setAnimal(AnimalType.PIG);
-        addObject(animal4, Constants.Settings.worldWidth-200, Constants.Settings.worldHeight-200);
-
-        Timer timer = new Timer(2,0);
-        addObject(timer, Constants.Settings.worldWidth/2+50, 12);
+        for(Player player : AllPlayers.getPlayers()){
+            Animal animal = new Pig(player);
+            switch(player.getAnimal()){
+                case COW : 
+                animal = new Cow(player);
+                break;
+                case CHICKEN :
+                animal = new Chicken(player);
+                break;
+            }
+            
+            switch(player.getPlayerID()){
+                case 1:
+                addObject(animal, 200, Constants.Settings.worldHeight-200);
+                break;
+                case 2 : 
+                addObject(animal, 200, 200);
+                break;
+                case 3:
+                addObject(animal, Constants.Settings.worldWidth-200, 200);
+                break;
+                case 4:
+                addObject(animal, Constants.Settings.worldWidth-200, Constants.Settings.worldHeight-200);
+                break;
+            }
+        }
     }
 }

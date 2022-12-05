@@ -8,20 +8,10 @@ public class SelectorBox extends Actor{
     private GreenfootSound swap;
     private int iterate;
     private int frame = 30;
-    private int playerID;
-    public SelectorBox(int ID){
-        this.playerID = ID;
-        
-        /* Control order:
-         * Index 0 - Join / Select
-         * Index 1 - Left
-         * Index 2 - Right
-         */        
-        controls = new String[]{"-","-","-"};
-        if(playerID==1) controls = new String[]{"1", "A","D"};
-        if(playerID==2) controls = new String[]{"2","LEFT","RIGHT"};
-        if(playerID==3) controls = new String[]{"3", "J","L"};
-        if(playerID==4) controls = new String[]{"4","1","3"};
+    private Player player;
+    public SelectorBox(Player player, String[] controls){
+        this.player = player;
+        this.controls = controls;
         
         animals =  new ArrayList<AnimalType>(EnumSet.allOf(AnimalType.class));
         iterate=0;
@@ -34,8 +24,8 @@ public class SelectorBox extends Actor{
     
     @Override
     public void addedToWorld(World world) {
-        getWorld().addObject(leftArrow, (int)(getX() - 100), (int)(getY() + 150));
-        getWorld().addObject(rightArrow, (int)(getX() + 100), (int)(getY() + 150));
+        getWorld().addObject(leftArrow, (int)(getX() - 110), getY());
+        getWorld().addObject(rightArrow, (int)(getX() + 110), getY());
     }
     
     public void act() {
@@ -61,14 +51,17 @@ public class SelectorBox extends Actor{
     private void changeImage(AnimalType animal){
         switch(animals.get(iterate)){
                 case PIG : 
+                player.setAnimal(AnimalType.PIG);
                 setImage(new GreenfootImage("Pig.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case COW : 
+                player.setAnimal(AnimalType.COW);
                 setImage(new GreenfootImage("Cow.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
                 case CHICKEN :
+                player.setAnimal(AnimalType.CHICKEN);
                 setImage(new GreenfootImage("Chicken.png"));
                 getImage().scale((int)(getImage().getWidth()*3.35), (int)(getImage().getHeight()*3.35));
                 break;
