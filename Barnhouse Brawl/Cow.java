@@ -10,13 +10,17 @@ public class Cow extends Animal
         int playerID = player.getPlayerID();
         switch(playerID){
             case 1 :
-                setImage("RedCow.png");
+                setImage("Cow/RedCow.png");
+                break;
             case 2 :
-                setImage("BlueCow.png");
+                setImage("Cow/BlueCow.png");
+                break;
             case 3 :
-                setImage("YellowCow.png");
+                setImage("Cow/YellowCow.png");
+                break;
             case 4 :
-                setImage("GreenCow.png");
+                setImage("Cow/GreenCow.png");
+                break;
         }
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);

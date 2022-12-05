@@ -9,13 +9,17 @@ public class Goat extends Animal{
         int playerID = player.getPlayerID();
         switch(playerID){
             case 1 :
-                setImage("RedGoat.png");
+                setImage("Goat/RedGoat.png");
+                break;
             case 2 :
-                setImage("BlueGoat.png");
+                setImage("Goat/BlueGoat.png");
+                break;
             case 3 :
-                setImage("YellowGoat.png");
+                setImage("Goat/YellowGoat.png");
+                break;
             case 4 :
-                setImage("GreenGoat.png");
+                setImage("Goat/GreenGoat.png");
+                break;
         }
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
