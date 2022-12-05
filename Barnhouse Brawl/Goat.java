@@ -45,16 +45,19 @@ public class Goat extends Animal{
             basicPush();
         }
         if(goatSpecial){
-            specialMovement(getRotation());
+            specialMovement();
         }
     }    
 
+    public void movement(Direction direction){
+        if(!activated) super.movement(direction);
+    }
+    
     @Override
     public void specialAbility(){
         //Straight forward dash for 3 seconds
         //Make to where you can't move
         double multiplyer = (1.0/Math.max(getXVelocity(), getYVelocity()));
-        setSpeed(getXVelocity()*multiplyer, getYVelocity()*multiplyer);
         changeDecay(.95);
         goatSpecial = true;
         int actorW = getImage().getWidth();
