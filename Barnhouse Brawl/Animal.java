@@ -15,7 +15,6 @@ public abstract class Animal extends Actor {
     private double decay = Constants.Animal.friction;
     private static double knockbackMultiplier = 1;
     private int frame = 0;
-    private boolean goatSpecial = false;
     protected ParticleEffect walkingParticle;
     protected boolean dead = false;
     protected Hitbox hitBox;
@@ -69,31 +68,27 @@ public abstract class Animal extends Actor {
         if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
         if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
 
-        if(!goatSpecial){
-            if(Greenfoot.isKeyDown(controls[0])){
-                movement(Direction.UP);
-            }
-            if(Greenfoot.isKeyDown(controls[1])){
-                movement(Direction.LEFT);
-            }
-            if(Greenfoot.isKeyDown(controls[2])){
-                movement(Direction.DOWN);
-            }
-            if(Greenfoot.isKeyDown(controls[3])){
-                movement(Direction.RIGHT);
-            }
-            if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
-                basicPush();
-                pushCooldownTimer = 0;
-            }
-            if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
-                specialAbility();
-                specialCooldownTimer = 0;
-            }
+        if(Greenfoot.isKeyDown(controls[0])){
+            movement(Direction.UP);
         }
-        else{
-            specialMovement(getRotation());
+        if(Greenfoot.isKeyDown(controls[1])){
+            movement(Direction.LEFT);
         }
+        if(Greenfoot.isKeyDown(controls[2])){
+            movement(Direction.DOWN);
+        }
+        if(Greenfoot.isKeyDown(controls[3])){
+            movement(Direction.RIGHT);
+        }
+        if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
+            basicPush();
+            pushCooldownTimer = 0;
+        }
+        if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
+            specialAbility();
+            specialCooldownTimer = 0;
+        }
+
 
         if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
             //remove();
@@ -124,7 +119,7 @@ public abstract class Animal extends Actor {
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
     }
-    
+
     public void specialMovement(int rotation){
         double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
         if(yVelocity>0){
@@ -139,7 +134,7 @@ public abstract class Animal extends Actor {
         else{
             xVelocity -= speed;
         }
-        
+
         walkingParticle.setLocation(getX(),getY());
         walkingParticle.generateParticles(3);
     }
@@ -185,10 +180,6 @@ public abstract class Animal extends Actor {
 
         walkingParticle.setLocation(getX(),getY());
         walkingParticle.generateParticles(3);
-    }
-    
-    public void setGoat(boolean value){
-        this.goatSpecial = value;
     }
 
     public void updatePosition(){
