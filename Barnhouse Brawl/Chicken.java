@@ -5,6 +5,17 @@ public class Chicken extends Animal
     private GreenfootImage normal;
     public Chicken(Player player){
         super(Constants.Chicken.weight,Constants.Chicken.specialCooldown, player);
+        int playerID = player.getPlayerID();
+        switch(playerID){
+            case 1 :
+                setImage("RedChicken.png");
+            case 2 :
+                setImage("BlueChicken.png");
+            case 3 :
+                setImage("YellowChicken.png");
+            case 4 :
+                setImage("GreenChicken.png");
+        }
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }

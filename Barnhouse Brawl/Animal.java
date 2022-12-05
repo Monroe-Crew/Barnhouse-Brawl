@@ -44,7 +44,6 @@ public abstract class Animal extends Actor {
          * Index 5 - Special Ability 1
          */
         int playerID = player.getPlayerID();
-
         controls = new String[]{"-","-","-","-","-","-"};
         if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
         if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","B","N"};

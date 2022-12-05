@@ -7,6 +7,17 @@ public class Cow extends Animal
     private boolean activated = false;
     public Cow(Player player){
         super(Constants.Cow.weight,Constants.Cow.specialCooldown, player);
+        int playerID = player.getPlayerID();
+        switch(playerID){
+            case 1 :
+                setImage("RedCow.png");
+            case 2 :
+                setImage("BlueCow.png");
+            case 3 :
+                setImage("YellowCow.png");
+            case 4 :
+                setImage("GreenCow.png");
+        }
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }

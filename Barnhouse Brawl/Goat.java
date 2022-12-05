@@ -5,6 +5,17 @@ public class Goat extends Animal{
     private boolean activated = false;
     public Goat(Player player){
         super(Constants.Goat.weight,Constants.Goat.specialCooldown, player);
+        int playerID = player.getPlayerID();
+        switch(playerID){
+            case 1 :
+                setImage("RedGoat.png");
+            case 2 :
+                setImage("BlueGoat.png");
+            case 3 :
+                setImage("YellowGoat.png");
+            case 4 :
+                setImage("GreenGoat.png");
+        }
         normal = getImage();
         normal.scale(normal.getWidth()*3, normal.getHeight()*3);
     }  
