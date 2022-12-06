@@ -25,7 +25,7 @@ public class Chicken extends Animal
     
     @Override
     public void specialAbility(){
-        GreenfootSound sound = new GreenfootSound("eggThrow.mp3");
+        GreenfootSound sound = new GreenfootSound("eggThrow.wav");
         sound.setVolume(25);
         sound.play();
         getWorld().addObject(new Projectile(this),getX(),getY());
