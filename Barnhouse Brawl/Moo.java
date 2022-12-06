@@ -3,7 +3,7 @@ import greenfoot.*;
 public class Moo extends Actor
 {
     GreenfootImage moo;
-    GifImage gif = new GifImage("MooTest.gif");
+    //GifImage gif = new GifImage("MooTest.gif");
     //int width;
     //int height;
     int time = 0;
@@ -17,7 +17,7 @@ public class Moo extends Actor
     public void act() 
     {
         time++;
-        setImage(gif.getCurrentImage());
+        //setImage(gif.getCurrentImage());
         //GreenfootImage placeholder = new GreenfootImage(moo);
         //double tempW = 128.0;
         //double tempH = 32.0;

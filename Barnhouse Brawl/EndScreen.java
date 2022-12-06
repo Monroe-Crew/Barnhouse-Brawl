@@ -1,5 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;  
+import greenfoot.*; 
 
 /**
  * Write a description of class EndScreen here.

@@ -1,5 +1,4 @@
 import greenfoot.*;
-import java.util.*;
 
 public class Projectile extends Actor{
     Actor animal;

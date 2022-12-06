@@ -1,5 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.awt.image.*;
-import java.awt.*;
+import greenfoot.*;
+
 public class LeftArrow extends SelectorArrows{
 }  

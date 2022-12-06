@@ -1,6 +1,6 @@
 
 import greenfoot.*; 
-import java.util.*;
+import java.util.ArrayList;
 public abstract class Animal extends Actor {
     private int width = getImage().getWidth();
     private int height = getImage().getHeight();
@@ -66,7 +66,7 @@ public abstract class Animal extends Actor {
 
     public void act() {
         //Look at GameWorld timer, and see if equal to -1
-        if(GameWorld.getStartTime()==-1){
+        if(((GameWorld)getWorld()).getStartTime()==-1){
             // Reloads push cooldown
             if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
             if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;

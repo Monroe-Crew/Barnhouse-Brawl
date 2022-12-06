@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 /**
  * Write a description of class EndScreen_Leaderboard here.
  * 

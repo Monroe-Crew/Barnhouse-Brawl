@@ -1,4 +1,3 @@
-import java.util.*;
 import greenfoot.*;
 
 public class SelectionScreen extends World {
@@ -14,19 +13,19 @@ public class SelectionScreen extends World {
      * Index 2 - Right
      */
 
-    private String[] p1Controls = new String[] { "1", "A", "D" };
+    private String[] p1Controls = new String[] { "F1", "A", "D" };
     private SelectorBox selectorBox1;
     private TempImage p1Start = new TempImage(joinSelectName);
 
-    private String[] p2Controls = new String[] { "2", "LEFT", "RIGHT" };
+    private String[] p2Controls = new String[] { "F2", "LEFT", "RIGHT" };
     private SelectorBox selectorBox2;
     private TempImage p2Start = new TempImage(joinSelectName);
 
-    private String[] p3Controls = new String[] { "3", "J", "L" };
+    private String[] p3Controls = new String[] { "F3", "J", "L" };
     private SelectorBox selectorBox3;
     private TempImage p3Start = new TempImage(joinSelectName);
 
-    private String[] p4Controls = new String[] { "4", "1", "3" };
+    private String[] p4Controls = new String[] { "F4", "1", "3" };
     private SelectorBox selectorBox4;
     private TempImage p4Start = new TempImage(joinSelectName);
 

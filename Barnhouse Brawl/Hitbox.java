@@ -1,5 +1,6 @@
 import greenfoot.*;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 public class Hitbox extends Actor
 {
     private Actor actor;

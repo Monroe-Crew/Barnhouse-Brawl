@@ -1,11 +1,12 @@
 import greenfoot.*;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 public abstract class GameWorld extends World
 {
     private GreenfootSound backgroundMusic;
     boolean start = false;
     List<Animal> animalList;
-    private static int startTime = 180;
+    private int startTime = 180;
     private int countdown = 3;
     
     public GameWorld(GreenfootSound backgroundMusic)
@@ -28,12 +29,12 @@ public abstract class GameWorld extends World
         }
         start=true;
         if(startTime%60==0){
-            TempText text = new TempText("Brawl"); //Instead, make tempImage of Brawl
+            //TempText text = new TempText("Brawl"); //Instead, make tempImage of Brawl
             if(countdown!=0){
-                text = new TempText(""+countdown);
+                //text = new TempText(""+countdown);
             }
             countdown--;
-            addObject(text,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
+            //addObject(text,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
         }
         if(startTime!=-1){startTime--;}
         List<Projectile> projectileList = getObjects(Projectile.class);
@@ -54,7 +55,7 @@ public abstract class GameWorld extends World
         }
     }
     
-    public static int getStartTime(){
+    public int getStartTime(){
         return startTime;
     }
 }

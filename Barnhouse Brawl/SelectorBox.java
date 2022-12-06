@@ -1,5 +1,8 @@
 import greenfoot.*;
-import java.util.*;
+//import java.util.*;
+import java.util.List;
+import java.util.EnumSet;
+import java.util.ArrayList;
 
 public class SelectorBox extends Actor {
     private String[] controls;

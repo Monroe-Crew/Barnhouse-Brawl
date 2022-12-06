@@ -1,4 +1,10 @@
 import greenfoot.*;
+public class TempText extends Actor {
+    
+}
+/*
+ * 
+import greenfoot.*;
 import java.awt.Graphics; 
 import java.awt.Font;
 import java.awt.FontMetrics; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
@@ -40,3 +46,4 @@ public class TempText extends Actor{
         act();
     }
 }
+*/

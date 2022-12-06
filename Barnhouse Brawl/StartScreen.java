@@ -3,16 +3,14 @@ public class StartScreen extends World
 {
     boolean start = false;
     private ParticleEffect titleParticle;
-    static GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
-    static public Music music = new Music();
+    GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
+    public Music music = new Music();
     public StartScreen(){    
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
     }
 
     private void prepare(){
-        StartButton startButton = new StartButton();
-        addObject(startButton,598,700);
         titleParticle = new ParticleEffect(300,new Color(230, 136, 73,200));
         addObject(titleParticle,638,370);
         Title title = new Title();
@@ -26,6 +24,10 @@ public class StartScreen extends World
         titleParticle.generateParticles(10);
         if(!start){
             music.playMusic(titleMusic);
+        }
+        
+        if(Greenfoot.isKeyDown("[") ||Greenfoot.isKeyDown("]")||Greenfoot.isKeyDown(";")||Greenfoot.isKeyDown("'")){
+            Greenfoot.setWorld(new SelectionScreen());
         }
         start=true;
     }
