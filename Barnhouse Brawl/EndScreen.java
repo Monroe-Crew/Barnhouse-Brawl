@@ -19,7 +19,7 @@ public class EndScreen extends World
     {    
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
 
-        endMusic1 = new GreenfootSound("EndScreen1.mp3");
+        endMusic1 = new GreenfootSound("EndScreen.mp3");
 
         prepare();
     }

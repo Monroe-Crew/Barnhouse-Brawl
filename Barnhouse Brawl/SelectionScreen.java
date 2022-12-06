@@ -5,7 +5,8 @@ public class SelectionScreen extends World {
     private String confirmButton = "";
     private int frame = 0;
     private String joinSelectName = "JoinSelection.png";
-
+    
+    GreenfootSound selectMusic = new GreenfootSound("SelectionScreen.mp3");
     /*
      * Control order:
      * Index 0 - Join / Select
@@ -32,6 +33,7 @@ public class SelectionScreen extends World {
     public SelectionScreen() {
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         AllPlayers.reset();
+        Music.playMusic(selectMusic);
         prepare();
     }
 
