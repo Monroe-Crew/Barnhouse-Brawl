@@ -19,6 +19,8 @@ public abstract class Animal extends Actor {
     protected boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
+    private boolean start = false;
+
     GreenfootSound hit = new GreenfootSound("hit.wav");
 
     protected enum Direction {
@@ -63,58 +65,59 @@ public abstract class Animal extends Actor {
     }
 
     public void act() {
+        //Look at GameWorld timer, and see if equal to -1
+        if(GameWorld.getStartTime()==-1){
+            // Reloads push cooldown
+            if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
+            if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
 
-        // Reloads push cooldown
-        if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
-        if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
+            if(Greenfoot.isKeyDown(controls[0])){
+                movement(Direction.UP);
+            }
+            if(Greenfoot.isKeyDown(controls[1])){
+                movement(Direction.LEFT);
+            }
+            if(Greenfoot.isKeyDown(controls[2])){
+                movement(Direction.DOWN);
+            }
+            if(Greenfoot.isKeyDown(controls[3])){
+                movement(Direction.RIGHT);
+            }
+            if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
+                basicPush();
+                pushCooldownTimer = 0;
+            }
+            if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
+                specialAbility();
+                specialCooldownTimer = 0;
+            }
 
-        if(Greenfoot.isKeyDown(controls[0])){
-            movement(Direction.UP);
-        }
-        if(Greenfoot.isKeyDown(controls[1])){
-            movement(Direction.LEFT);
-        }
-        if(Greenfoot.isKeyDown(controls[2])){
-            movement(Direction.DOWN);
-        }
-        if(Greenfoot.isKeyDown(controls[3])){
-            movement(Direction.RIGHT);
-        }
-        if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
-            basicPush();
-            pushCooldownTimer = 0;
-        }
-        if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
-            specialAbility();
-            specialCooldownTimer = 0;
-        }
+            if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
+                //remove();
+                this.dead = true;
+            }
 
+            if(dead){
+                frame++;
+                animateDeath();
+            }
 
-        if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
-            //remove();
-            this.dead = true;
+            // Update position using velocities
+            updatePosition();
         }
-
-        if(dead){
-            frame++;
-            animateDeath();
-        }
-
-        // Update position using velocities
-        updatePosition();
     }
 
     public void basicPush(){
         // Larger multiplier = harder push for all characters
         int multiplier = 3;
         ArrayList<Animal> touching = hitBox.findTouching();
-        
+
         for(Animal animal : touching){
             if(animal == this) continue;
             int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
             animal.knockBack(xStrength, yStrength);
-            
+
             hit.play();
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors

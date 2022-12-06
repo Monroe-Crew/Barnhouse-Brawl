@@ -5,6 +5,8 @@ public abstract class GameWorld extends World
     private GreenfootSound backgroundMusic;
     boolean start = false;
     List<Animal> animalList;
+    private static int startTime = 180;
+    private int countdown = 3;
     
     public GameWorld(GreenfootSound backgroundMusic)
     {    
@@ -25,7 +27,15 @@ public abstract class GameWorld extends World
             Music.playMusic(backgroundMusic);
         }
         start=true;
-        
+        if(startTime%60==0){
+            TempText text = new TempText("Brawl"); //Instead, make tempImage of Brawl
+            if(countdown!=0){
+                text = new TempText(""+countdown);
+            }
+            countdown--;
+            addObject(text,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
+        }
+        if(startTime!=-1){startTime--;}
         List<Projectile> projectileList = getObjects(Projectile.class);
         for(Actor a : projectileList){
             if(a.getX()==0||a.getX()>=Constants.Settings.worldWidth-10){
@@ -42,5 +52,9 @@ public abstract class GameWorld extends World
             }
             Greenfoot.setWorld(new EndScreen());
         }
+    }
+    
+    public static int getStartTime(){
+        return startTime;
     }
 }
