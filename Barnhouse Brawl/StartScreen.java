@@ -26,7 +26,7 @@ public class StartScreen extends World
             music.playMusic(titleMusic);
         }
         
-        if(Greenfoot.isKeyDown("1") ||Greenfoot.isKeyDown("2")||Greenfoot.isKeyDown("3")||Greenfoot.isKeyDown("4")){
+        if(Greenfoot.isKeyDown(Constants.PlayerControl.p1Controls[4]) ||Greenfoot.isKeyDown(Constants.PlayerControl.p2Controls[4])||Greenfoot.isKeyDown(Constants.PlayerControl.p3Controls[4])||Greenfoot.isKeyDown(Constants.PlayerControl.p4Controls[4])){
             Greenfoot.setWorld(new SelectionScreen());
         }
         start=true;

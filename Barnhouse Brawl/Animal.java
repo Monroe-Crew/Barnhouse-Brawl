@@ -35,6 +35,7 @@ public abstract class Animal extends Actor {
         this.specialCooldown = specialCooldown;
         this.specialCooldownTimer = (int)(specialCooldown*60/2);
         this.player = player;
+        this.controls = player.getControls();
 
         /* Control order:
          * Index 0 - Up
@@ -44,12 +45,6 @@ public abstract class Animal extends Actor {
          * Index 4 - Basic Push
          * Index 5 - Special Ability 1
          */
-        int playerID = player.getPlayerID();
-        controls = new String[]{"-","-","-","-","-","-"};
-        if(playerID==1) controls = new String[]{"W","A","S","D","Q","E"};
-        if(playerID==2) controls = new String[]{"UP","LEFT","DOWN","RIGHT","B","N"};
-        if(playerID==3) controls = new String[]{"I","J","K","L","U","O"};
-        if(playerID==4) controls = new String[]{"5","1","2","3","7","8"};
     }
 
     @Override
@@ -83,11 +78,11 @@ public abstract class Animal extends Actor {
             if(Greenfoot.isKeyDown(controls[3])){
                 movement(Direction.RIGHT);
             }
-            if(Greenfoot.isKeyDown(controls[4]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
+            if(Greenfoot.isKeyDown(controls[5]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
                 basicPush();
                 pushCooldownTimer = 0;
             }
-            if(Greenfoot.isKeyDown(controls[5]) && ((double)specialCooldownTimer/60 > specialCooldown)){
+            if(Greenfoot.isKeyDown(controls[6]) && ((double)specialCooldownTimer/60 > specialCooldown)){
                 specialAbility();
                 specialCooldownTimer = 0;
             }

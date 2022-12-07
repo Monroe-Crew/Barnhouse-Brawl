@@ -14,9 +14,9 @@ public class SelectorBox extends Actor {
     private int frame = 30;
     private Player player;
 
-    public SelectorBox(Player player, String[] controls) {
+    public SelectorBox(Player player) {
         this.player = player;
-        this.controls = controls;
+        this.controls = player.getControls();
 
         animals = new ArrayList<AnimalType>(EnumSet.allOf(AnimalType.class));
         iterate = 0;
@@ -45,7 +45,7 @@ public class SelectorBox extends Actor {
             leftArrow.changeArrow();
         }
 
-        if (Greenfoot.isKeyDown(controls[2]) && frame > 15) {
+        if (Greenfoot.isKeyDown(controls[3]) && frame > 15) {
             iterate = (iterate + 1) % (animals.size());
             swap.play();
             changeImage(animals.get(iterate));
