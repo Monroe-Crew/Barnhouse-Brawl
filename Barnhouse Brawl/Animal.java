@@ -260,6 +260,10 @@ public abstract class Animal extends Actor {
         getWorld().removeObject(hitBox);
         getWorld().removeObject(this);        
     }
+    
+    public double getAbilityTimer() { return (double)specialCooldownTimer/60; }
+    
+    public double getSpecialCooldown() { return specialCooldown; }
 
     public void setPlacement(int placement){
         player.setPlacement(placement);

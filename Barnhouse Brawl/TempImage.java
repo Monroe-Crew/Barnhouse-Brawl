@@ -5,11 +5,14 @@ public class TempImage extends Actor{
     private int time;
     private int width;
     private int height;
+    private boolean animate = true;
+    private Animal animal;
     public TempImage(AnimalType animal){
         width = getImage().getWidth();
         height = getImage().getHeight();
         changeImage(animal);
     }  
+
     public TempImage(String name){
         width = getImage().getWidth();
         height = getImage().getHeight();
@@ -32,17 +35,28 @@ public class TempImage extends Actor{
         setImage(animalImage);
     }
     
+    public TempImage(String name, Animal animal){
+        width = getImage().getWidth();
+        height = getImage().getHeight();
+        this.animal=animal;
+        changeImage(name);
+    }
+
     public void act(){
         time++;
-        animate();
+        if(animate){animate();}
     }
-    
+
     public void changeImage(String name){
         animalImage = new GreenfootImage(name);
         animalImage.scale(animalImage.getWidth()*4, animalImage.getHeight()*4);
         setImage(animalImage);
     }
     
+    public Animal getAnimal(){
+        return animal;
+    }
+
     public void animate(){
         frame++;
         GreenfootImage placeholder = new GreenfootImage(animalImage);
@@ -52,5 +66,13 @@ public class TempImage extends Actor{
         setImage(placeholder);
         frame = 0;
         if(frame == Integer.MAX_VALUE) frame = 0;
+    }
+
+    public void stopAnimation(){
+        animate=false;
+    }
+    
+    public void startAnimation(){
+        animate=true;
     }
 }
