@@ -1,8 +1,6 @@
 import greenfoot.*;
 
 public class Barnhouse extends GameWorld {
-    private TempImage redCircle;
-    private boolean redGrey = false;
     public Barnhouse() {
         super(new GreenfootSound("mapBackground.mp3"));
         prepare();
@@ -26,7 +24,7 @@ public class Barnhouse extends GameWorld {
 
             switch (player.getPlayerID()) {
                 case 1:
-                redCircle = new TempImage("RedCircle.png", animal);
+                SpecialIndicator redCircle = new SpecialIndicator("RedCircle.png", animal);
                 addObject(redCircle, 40,Constants.Settings.worldHeight - 60);
                 addObject(animal, 200, Constants.Settings.worldHeight - 200);
                 break;
@@ -49,19 +47,5 @@ public class Barnhouse extends GameWorld {
     public void reflectHorizontally(Actor actor){
         actor.setLocation(Constants.Settings.worldWidth-actor.getX(), actor.getY());
     }
-    
-    public void act(){
-        super.act();
-        //Optomize by creating a subclass to tempImage
-        if(redCircle.getAnimal().getAbilityTimer()<redCircle.getAnimal().getSpecialCooldown() && !redGrey){
-            redGrey=true;
-            redCircle.changeImage("GreyCircle.png");
-            redCircle.stopAnimation();
-        }
-        else if(redCircle.getAnimal().getAbilityTimer()>redCircle.getAnimal().getSpecialCooldown() && redGrey){
-            redGrey=false;
-            redCircle.changeImage("RedCircle.png");
-            redCircle.startAnimation();
-        }
-    }
+
 }
