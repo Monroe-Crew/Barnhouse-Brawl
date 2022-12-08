@@ -11,7 +11,7 @@ public abstract class GameWorld extends World
     private int index = 0;
     private boolean done = false;
     private String[] fileNames = {"Three.png","Two.png", "One.png", "Brawl.png"};
-    
+    //private String[] songNames = {"Countdown.mp3"
     public GameWorld(GreenfootSound backgroundMusic)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -27,15 +27,26 @@ public abstract class GameWorld extends World
     }
     
     public void act(){
-        if(!start){
-            Music.playMusic(backgroundMusic);
-        }
-        start=true;
+        //if(!start){
+        //   Music.playMusic(backgroundMusic);
+        //}
+        //start=true;
         if(startTime%60==0 && !done){
-            if(startTime==0){done=true;}
+            Music.playMusic(null);
+            GreenfootSound sound;
+            if(startTime==0){
+                done=true;
+                sound = new GreenfootSound("GO.wav");
+                Music.playMusic(backgroundMusic);
+            }
+            else{
+                sound = new GreenfootSound("123.wav");
+            }
+            sound.setVolume(75);
             TempImage image = new CountDown(fileNames[index]); 
             index++;
-            addObject(image,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
+            addObject(image,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2);
+            sound.play();
         }
         if(startTime!=0){startTime--;}
         List<Projectile> projectileList = getObjects(Projectile.class);
