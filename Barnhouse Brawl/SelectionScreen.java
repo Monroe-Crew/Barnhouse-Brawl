@@ -22,6 +22,8 @@ public class SelectionScreen extends World {
     private String[] p4Controls = Constants.PlayerControl.p4Controls;
     private SelectorBox selectorBox4;
     private TempImage p4Start = new TempImage(joinSelectName);
+    
+
 
     public SelectionScreen() {
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
