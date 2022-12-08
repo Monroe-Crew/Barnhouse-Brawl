@@ -24,7 +24,7 @@ public class Barnhouse extends GameWorld {
 
             switch (player.getPlayerID()) {
                 case 1:
-                SpecialIndicator redCircle = new SpecialIndicator("RedCircle.png", animal);
+                SpecialIndicator redCircle = new SpecialIndicator(animal);
                 addObject(redCircle, 40,Constants.Settings.worldHeight - 60);
                 addObject(animal, 200, Constants.Settings.worldHeight - 200);
                 break;

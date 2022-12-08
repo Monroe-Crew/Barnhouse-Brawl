@@ -26,15 +26,18 @@ public abstract class GameWorld extends World
     public void act(){
         if(!start){
             Music.playMusic(backgroundMusic);
+            start=true;
         }
-        start=true;
         if(startTime%60==0){
             //TempText text = new TempText("Brawl"); //Instead, make tempImage of Brawl
+            //TempImage image = new TempImage("3.png");
             if(countdown!=0){
-                //text = new TempText(""+countdown);
+                //image = new TempImage(countdown + ".png");
+            } else{
+                //image = new TempImage("Brawl.png");
             }
             countdown--;
-            //addObject(text,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
+            //addObject(image,Constants.Settings.worldWidth/2, Constants.Settings.worldHeight/2); //CENTER IT
         }
         if(startTime!=-1){startTime--;}
         List<Projectile> projectileList = getObjects(Projectile.class);
@@ -47,7 +50,6 @@ public abstract class GameWorld extends World
             }
         }
         if(getObjects(Animal.class).size() == 1){
-            Music.playMusic(null);
             for(Animal animal : getObjects(Animal.class)){
                 animal.setPlacement(1);
             }
