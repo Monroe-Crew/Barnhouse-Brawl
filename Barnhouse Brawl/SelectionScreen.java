@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.Random;
 
 public class SelectionScreen extends World {
     private String confirmButton = "";
@@ -70,8 +71,17 @@ public class SelectionScreen extends World {
         }
 
         if (frame > 60) {
-            if (Greenfoot.isKeyDown(confirmButton))
+            if (Greenfoot.isKeyDown(confirmButton)){
+                Random rand = new Random();
+                switch(rand.nextInt(2)){
+                    case 0:
                 Greenfoot.setWorld(new Barnhouse());
+                break;
+                case 1:
+                Greenfoot.setWorld(new Grassfield());
+                break;
+            }
+            }
         } else if (!confirmButton.equals("")) {
             frame++;
         }

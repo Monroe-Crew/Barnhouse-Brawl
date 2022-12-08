@@ -1,7 +1,7 @@
 import greenfoot.*;
 
-public class Barnhouse extends GameWorld {
-    public Barnhouse() {
+public class Grassfield extends GameWorld {
+    public Grassfield() {
         super(new GreenfootSound("mapBackground.mp3"));
         prepare();
     }
@@ -25,31 +25,25 @@ public class Barnhouse extends GameWorld {
             switch (player.getPlayerID()) {
                 case 1:
                 SpecialIndicator redCircle = new SpecialIndicator("RedCircle.png", animal);
-                addObject(redCircle, 40,60);
-                addObject(animal, 200, 200);
-                
+                addObject(redCircle, 40,Constants.Settings.worldHeight - 60);
+                addObject(animal, 200, Constants.Settings.worldHeight - 200);
                 break;
                 case 2:
                 SpecialIndicator greenCircle = new SpecialIndicator("GreenCircle.png", animal);
-                addObject(greenCircle, 40,Constants.Settings.worldHeight - 60);
-                addObject(animal, 200, Constants.Settings.worldHeight - 200);
+                addObject(greenCircle, 40,60);
+                addObject(animal, 200, 200);
                 break;
                 case 3:
                 SpecialIndicator blueCircle = new SpecialIndicator("BlueCircle.png", animal);
-                addObject(blueCircle, Constants.Settings.worldWidth - 40,Constants.Settings.worldHeight - 60);
-                addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
+                addObject(blueCircle, Constants.Settings.worldWidth - 40,60);
+                addObject(animal, Constants.Settings.worldWidth - 200, 200);
                 break;
                 case 4:
                 SpecialIndicator yellowCircle = new SpecialIndicator("YellowCircle.png", animal);
-                addObject(yellowCircle, Constants.Settings.worldWidth - 40,60);
-                addObject(animal, Constants.Settings.worldWidth - 200, 200);
+                addObject(yellowCircle, Constants.Settings.worldWidth - 40,Constants.Settings.worldHeight - 60);
+                addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
                 break;
             }
         }
     }
-
-    public void reflectHorizontally(Actor actor){
-        actor.setLocation(Constants.Settings.worldWidth-actor.getX(), actor.getY());
-    }
-
 }

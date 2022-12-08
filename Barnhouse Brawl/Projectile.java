@@ -24,7 +24,7 @@ public class Projectile extends Actor{
 
     public void basicPush(Animal animal){
         // Larger multiplier = harder push for all characters
-        double multiplier = 3;
+        double multiplier = Constants.Chicken.eggStrength;
         int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight())*multiplier);
         int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight())*multiplier);
         animal.knockBack(xStrength, yStrength);
