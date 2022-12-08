@@ -33,5 +33,8 @@ public class SpecialIndicator extends TempImage{
             changeImage(imageName);
             startAnimation();
         }
+        if(animal.getDead()){
+            getWorld().removeObject(this);
+        }
     }    
 }
