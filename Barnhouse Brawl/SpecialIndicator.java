@@ -1,20 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/**
- * Write a description of class specialIndicator here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class SpecialIndicator extends TempImage
-{
+public class SpecialIndicator extends TempImage{
     private int width;
     private int height;
     private Animal animal;
     private boolean redGrey = false;
+    private String imageName;
     
     public SpecialIndicator(String name, Animal animal){
         super(name);
+        imageName=name;
         width = getImage().getWidth();
         height = getImage().getHeight();
         this.animal=animal;
@@ -36,7 +30,7 @@ public class SpecialIndicator extends TempImage
         }
         else if(getAnimal().getAbilityTimer()>getAnimal().getSpecialCooldown() && redGrey){
             redGrey=false;
-            changeImage("RedCircle.png");
+            changeImage(imageName);
             startAnimation();
         }
     }    

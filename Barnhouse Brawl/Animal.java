@@ -61,7 +61,7 @@ public abstract class Animal extends Actor {
 
     public void act() {
         //Look at GameWorld timer, and see if equal to -1
-        if(((GameWorld)getWorld()).getStartTime()==-1){
+        if(((GameWorld)getWorld()).getStartTime()==0){
             // Reloads push cooldown
             if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
             if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
@@ -124,16 +124,16 @@ public abstract class Animal extends Actor {
         System.out.println("xVelocity " + xVelocity);
         System.out.println("yVelocity " + yVelocity);
         if(yVelocity>0){
-            yVelocity += speed;
-        }
-        else{
             yVelocity -= speed;
         }
+        else{
+            yVelocity += speed;
+        }
         if(xVelocity>0){
-            xVelocity += speed;
+            xVelocity -= speed;
         }
         else{
-            xVelocity -= speed;
+            xVelocity += speed;
         }
 
         walkingParticle.setLocation(getX(),getY());

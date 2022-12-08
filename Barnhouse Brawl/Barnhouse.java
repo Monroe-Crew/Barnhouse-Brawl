@@ -29,15 +29,18 @@ public class Barnhouse extends GameWorld {
                 addObject(animal, 200, Constants.Settings.worldHeight - 200);
                 break;
                 case 2:
-                //add a blue circle
+                SpecialIndicator greenCircle = new SpecialIndicator("GreenCircle.png", animal);
+                addObject(greenCircle, 40,60);
                 addObject(animal, 200, 200);
                 break;
                 case 3:
-                //add a yellow circle
+                SpecialIndicator blueCircle = new SpecialIndicator("BlueCircle.png", animal);
+                addObject(blueCircle, Constants.Settings.worldWidth - 40,60);
                 addObject(animal, Constants.Settings.worldWidth - 200, 200);
                 break;
                 case 4:
-                //add a green circle
+                SpecialIndicator yellowCircle = new SpecialIndicator("YellowCircle.png", animal);
+                addObject(yellowCircle, Constants.Settings.worldWidth - 40,Constants.Settings.worldHeight - 60);
                 addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
                 break;
             }
