@@ -43,11 +43,13 @@ public class Cow extends Animal
     public void specialAbility(){
         Moo moo = new Moo();
         getWorld().addObject(moo, getX(), getY());
-        int actorW = getImage().getWidth();
-        int actorH = getImage().getHeight();
+        getWorld().addObject(new CountDown("steel-ball.png"), getX(), getY());
+        int actorW = (int)(getImage().getWidth()*2.5);
+        int actorH = (int)(getImage().getHeight()*2.5);
         hitBox.setSize(actorW+30, actorH+30);
         hitBox.setIndent(0);
         activated = true;
         specialAbilityTimer = 0;
+        
     }
 }

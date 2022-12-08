@@ -118,28 +118,6 @@ public abstract class Animal extends Actor {
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
     }
 
-    public void specialMovement(){
-        double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
-        System.out.println("Speed " + speed);
-        System.out.println("xVelocity " + xVelocity);
-        System.out.println("yVelocity " + yVelocity);
-        if(yVelocity>0){
-            yVelocity -= speed;
-        }
-        else{
-            yVelocity += speed;
-        }
-        if(xVelocity>0){
-            xVelocity -= speed;
-        }
-        else{
-            xVelocity += speed;
-        }
-
-        walkingParticle.setLocation(getX(),getY());
-        walkingParticle.generateParticles(3);
-    }
-
     public void movement(Direction direction) {
         double oldXVelocity = 0 + xVelocity;
         double oldYVelocity = 0 + yVelocity;
@@ -262,6 +240,10 @@ public abstract class Animal extends Actor {
 
     public void setPlacement(int placement){
         player.setPlacement(placement);
+    }
+    
+    public boolean getDead(){
+        return dead;
     }
 
     public void animateDeath(){
