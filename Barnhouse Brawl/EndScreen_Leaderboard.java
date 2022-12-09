@@ -23,9 +23,6 @@ public class EndScreen_Leaderboard extends Actor
             leaderboard += playerString + "\n";
         }
         
-        GreenfootImage descBg = new GreenfootImage(1000, 500);
-        descBg.setColor(new Color(75, 75, 75, 200));
-        descBg.fillRect(0, 0, 1000, 500);
         GreenfootImage partDescText = new GreenfootImage(leaderboard, 80, Color.BLACK, null);
         setImage(partDescText);
     }

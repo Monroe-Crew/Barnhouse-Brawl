@@ -36,15 +36,6 @@ public abstract class Animal extends Actor {
         this.specialCooldownTimer = (int)(specialCooldown*60/2);
         this.player = player;
         this.controls = player.getControls();
-
-        /* Control order:
-         * Index 0 - Up
-         * Index 1 - Left
-         * Index 2 - Down
-         * Index 3 - Right
-         * Index 4 - Basic Push
-         * Index 5 - Special Ability 1
-         */
     }
 
     @Override
@@ -60,6 +51,24 @@ public abstract class Animal extends Actor {
     }
 
     public void act() {
+        /* 
+         * Checks for intersection for individual X and Y positions. 
+         * If there is intersection then it goes back to previous position.
+         */
+
+        int oldX = getX();
+        int oldY = getY();
+
+        setLocation(getX() + (int)xVelocity, getY());
+        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
+            setLocation(oldX, getY());
+        }
+
+        setLocation(getX(), getY() + (int)yVelocity);
+        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
+            setLocation(getX(), oldY);
+        }
+        
         //Look at GameWorld timer, and see if equal to -1
         if(((GameWorld)getWorld()).getStartTime()==0){
             // Reloads push cooldown
@@ -168,24 +177,6 @@ public abstract class Animal extends Actor {
         xVelocity = xVelocity > maxVelocity ? maxVelocity : xVelocity;
         yVelocity = yVelocity > maxVelocity ? maxVelocity : yVelocity;
 
-        /* 
-         * Checks for intersection for individual X and Y positions. 
-         * If there is intersection then it goes back to previous position.
-         */
-
-        int oldX = getX();
-        int oldY = getY();
-
-        setLocation(getX() + (int)xVelocity, getY());
-        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
-            setLocation(oldX, getY());
-        }
-
-        setLocation(getX(), getY() + (int)yVelocity);
-        if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
-            setLocation(getX(), oldY);
-        }
-
         // Friction
         xVelocity *= decay;
         yVelocity *= decay;
@@ -194,7 +185,7 @@ public abstract class Animal extends Actor {
         if(Math.abs(xVelocity) < .001) xVelocity = 0;
         if(Math.abs(yVelocity) < .001) yVelocity = 0;
     }
-
+    
     public void knockBack(int xStrength, int yStrength){
         this.xVelocity += (double)xStrength*knockbackMultiplier;
         this.yVelocity += (double)yStrength*knockbackMultiplier;
@@ -244,6 +235,8 @@ public abstract class Animal extends Actor {
     public boolean getDead(){
         return dead;
     }
+    
+    public Player getPlayer(){ return player; }
 
     public void animateDeath(){
         GreenfootImage image = getImage();

@@ -43,7 +43,7 @@ public class Cow extends Animal
     public void specialAbility(){
         Moo moo = new Moo();
         getWorld().addObject(moo, getX(), getY());
-        getWorld().addObject(new CountDown("MooAura.png"), getX(), getY());
+        getWorld().addObject(new ExpandFadeImage(new GreenfootImage("MooAura.png")), getX(), getY());
         int actorW = (int)(getImage().getWidth()*2.5);
         int actorH = (int)(getImage().getHeight()*2.5);
         hitBox.setSize(actorW+30, actorH+30);

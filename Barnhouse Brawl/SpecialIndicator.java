@@ -10,12 +10,26 @@ public class SpecialIndicator extends BobbingImage {
     private Animal animal;
     private boolean redGrey = false;
     GreenfootImage greyCircle = new GreenfootImage("GreyCircle.png");
-    GreenfootImage redCircle = new GreenfootImage("RedCircle.png");
+    GreenfootImage activeCircle;
 
     public SpecialIndicator(Animal animal) {
         super(1, 10);
+        switch(animal.getPlayer().getColor()){
+            case RED :
+                activeCircle = new GreenfootImage("RedCircle.png");
+                break;
+            case BLUE :
+                activeCircle = new GreenfootImage("BlueCircle.png");
+                break;
+            case YELLOW :
+                activeCircle = new GreenfootImage("YellowCircle.png");
+                break;
+            case GREEN :
+                activeCircle = new GreenfootImage("GreenCircle.png");
+                break;
+        }
         greyCircle.scale(greyCircle.getWidth() * 4, greyCircle.getHeight() * 4);
-        redCircle.scale(redCircle.getWidth() * 4, redCircle.getHeight() * 4);
+        activeCircle.scale(activeCircle.getWidth() * 4, activeCircle.getHeight() * 4);
         this.animal = animal;
     }
 
@@ -32,7 +46,7 @@ public class SpecialIndicator extends BobbingImage {
             stopAnimation();
         } else if (getAnimal().getAbilityTimer() > getAnimal().getSpecialCooldown() && redGrey) {
             redGrey = false;
-            changeImage(new GreenfootImage(redCircle));
+            changeImage(new GreenfootImage(activeCircle));
             startAnimation();
         }
         if (animal.getDead()) {

@@ -1,16 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-public class CountDown extends TempImage{
+public class ExpandFadeImage extends TempImage{
     private GreenfootImage image;
-    private int opacity;
-    private int scale;
-    public CountDown(String name){
-        super(name);
-        setImage(name);
-        opacity=255;
-        scale=100;
-        image = this.getImage();
+    private int opacity=255;
+    private int scale=100;
+    public ExpandFadeImage(){
+        super();
+        this.image = this.getImage();
     }
-    public void act(){
+    
+    public ExpandFadeImage(GreenfootImage image){
+        super();
+        this.image = image;
+    }
+    
+    public void animate(){
         GreenfootImage placeholder = new GreenfootImage(image);
         placeholder.scale(scale,scale);
         setImage(placeholder);
@@ -22,6 +25,6 @@ public class CountDown extends TempImage{
         }
     }
     public void addedToWorld(World world){
-        act();
+        super.act();
     }
 }

@@ -10,7 +10,7 @@ public abstract class GameWorld extends World {
     private int countdown = 3;
     private int index = 0;
     private boolean done = false;
-    private String[] fileNames = { "Three.png", "Two.png", "One.png", "Brawl.png" };
+    private String[] fileNames = { "3.png", "2.png", "1.png", "Brawl.png" };
 
     // private String[] songNames = {"Countdown.mp3"
     public GameWorld(GreenfootSound backgroundMusic) {
@@ -42,7 +42,7 @@ public abstract class GameWorld extends World {
                 sound = new GreenfootSound("123.wav");
             }
             sound.setVolume(75);
-            TempImage image = new CountDown(fileNames[index]);
+            TempImage image = new ExpandFadeImage(new GreenfootImage(fileNames[index]));
             index++;
             addObject(image, Constants.Settings.worldWidth / 2, Constants.Settings.worldHeight / 2);
             sound.play();

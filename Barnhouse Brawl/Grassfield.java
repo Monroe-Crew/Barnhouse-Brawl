@@ -24,22 +24,22 @@ public class Grassfield extends GameWorld {
 
             switch (player.getPlayerID()) {
                 case 1:
-                SpecialIndicator redCircle = new SpecialIndicator("RedCircle.png", animal);
+                SpecialIndicator redCircle = new SpecialIndicator(animal);
                 addObject(redCircle, 40,Constants.Settings.worldHeight - 60);
                 addObject(animal, 200, Constants.Settings.worldHeight - 200);
                 break;
                 case 2:
-                SpecialIndicator greenCircle = new SpecialIndicator("GreenCircle.png", animal);
+                SpecialIndicator greenCircle = new SpecialIndicator(animal);
                 addObject(greenCircle, 40,60);
                 addObject(animal, 200, 200);
                 break;
                 case 3:
-                SpecialIndicator blueCircle = new SpecialIndicator("BlueCircle.png", animal);
+                SpecialIndicator blueCircle = new SpecialIndicator(animal);
                 addObject(blueCircle, Constants.Settings.worldWidth - 40,60);
                 addObject(animal, Constants.Settings.worldWidth - 200, 200);
                 break;
                 case 4:
-                SpecialIndicator yellowCircle = new SpecialIndicator("YellowCircle.png", animal);
+                SpecialIndicator yellowCircle = new SpecialIndicator(animal);
                 addObject(yellowCircle, Constants.Settings.worldWidth - 40,Constants.Settings.worldHeight - 60);
                 addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
                 break;
