@@ -1,7 +1,7 @@
 public class Constants  
 {
     public static final class Settings{
-        public static final boolean debugMode = false;
+        public static final boolean debugMode = true;
         public static final int worldWidth = 1280;
         public static final int worldHeight = 960;
         public static final int volume = 30;
@@ -43,26 +43,26 @@ public class Constants
         public static final double friction = .9;
         public static final double movementSpeed = .75;
 
-        public static final double defaultKnockback = 1;
+        public static final double defaultKnockback = 2;
         public static final double lowTimeKnockback = 1.5;
     }
 
     public static final class Chicken{
         public static final int weight = 1;
         public static final double specialCooldown = .75;
-        public static final double eggStrength = 10;
+        public static final double eggStrength = 10.15;
     }
 
     public static final class Pig{
         public static final int weight = 2;
-        public static final double slideLength = 3;
+        public static final double slideLength = 1.5;
         public static final double specialCooldown = 5; // Includes slide length
     }
 
     public static final class Cow{
         public static final int weight = 3;
         public static final double mooLength = 0.1;
-        public static final double mooStrength = 8;
+        public static final double mooStrength = 6;
         public static final double specialCooldown = 5;
     }
 
