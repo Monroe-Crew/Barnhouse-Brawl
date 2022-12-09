@@ -96,17 +96,17 @@ public abstract class Animal extends Actor {
                 specialCooldownTimer = 0;
             }
 
+            
+            
             if(getX()<100 || getX()>1198 || getY()<100 || getY()>870){
-                //remove();
                 this.dead = true;
             }
-
+            
             if(dead){
+            changeDecay(.75);
                 frame++;
                 animateDeath();
             }
-
-            // Update position using velocities
             updatePosition();
         }
     }
@@ -114,7 +114,11 @@ public abstract class Animal extends Actor {
     public void basicPush(double multiplier){
         // Larger multiplier = harder push for all characters
         ArrayList<Animal> touching = hitBox.findTouching();
-
+        
+        GameWorld world = (GameWorld)getWorld();
+        
+        multiplier += world.getKnockbackMultiplier();
+        
         for(Animal animal : touching){
             if(animal == this) continue;
             double rotation = Math.atan2((animal.getY()-getY()),(animal.getX()-getX()));
@@ -129,6 +133,7 @@ public abstract class Animal extends Actor {
     }
 
     public void movement(Direction direction) {
+        if(dead) return;
         double oldXVelocity = 0 + xVelocity;
         double oldYVelocity = 0 + yVelocity;
         // Physics: The heavier the slower you are
@@ -172,7 +177,6 @@ public abstract class Animal extends Actor {
     }
 
     public void updatePosition(){
-        if(dead) return;
         int maxVelocity = 50;
 
         // Sets max velocity

@@ -26,44 +26,57 @@ public class EndScreen extends World
     private void prepare(){
         EndScreen_Leaderboard endScreen_Leaderboard = new EndScreen_Leaderboard();
         addObject(endScreen_Leaderboard,Constants.Settings.worldWidth/2,(int)(Constants.Settings.worldHeight/2.5));
-        
-        players = endScreen_Leaderboard.getSortedList();
-        int iterate = 1;
+
+        players = AllPlayers.getPlayers();
         for(Player player : players){
-            StaticImage image = new StaticImage(new GreenfootImage("Cow.png"));
+            TempImage image = new StaticImage(new GreenfootImage("Cow.png"));
             switch(player.getAnimal()){
+                case GOAT:
+                image = new StaticImage(new GreenfootImage("Goat.png"));
+                break;
                 case COW :
                 image = new StaticImage(new GreenfootImage("Cow.png"));
                 break;
                 case PIG : 
                 image = new StaticImage(new GreenfootImage("Pig.png"));
                 break;
-                case GOAT:
-                image = new StaticImage(new GreenfootImage("Goat.png"));
-                break;
                 case CHICKEN :
                 image = new StaticImage(new GreenfootImage("Chicken.png"));
                 break;
             }
-            //sacle image
-            switch(iterate){
+            image.scale(image.getImage().getWidth()*2,image.getImage().getHeight()*2);
+            switch(player.getPlacement()){
                 case 1 :
-                addObject(image, 50,50);
+                addObject(image, 400,310);
                 break;
                 case 2 :
-                addObject(image, 100,100);
+                addObject(image, 900,385);
                 break;
                 case 3 :
-                addObject(image, 150,150);
+                addObject(image, 400,475);
                 break;
                 case 4 : 
-                addObject(image, 200,200);
+                addObject(image, 900,550);
                 break;
             }
-            iterate++;
         }
     }
 
+        
+    public List<Player> sortList(List<Player> list){
+        for(int i=0; i<list.size(); i++){
+            for(int s=i+1; s<list.size(); s++){
+                if(list.get(s).getPlacement()<list.get(i).getPlacement()){
+                    list.add(i,list.get(s));
+                    list.set(s+1, list.get(i));
+                    list.remove(i+1);
+                    i--;
+                }
+            }
+        }
+        return list;
+    }
+    
     public void act(){
         if(!start){
             Music.playMusic(endMusic1);
