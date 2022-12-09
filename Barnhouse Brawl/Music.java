@@ -9,7 +9,7 @@ public class Music  {
             currentlyPlaying.play();
             currentlyPlaying.setVolume(Constants.Settings.volume);
             currentlyPlaying.playLoop();
-        } else{
+        } else if(currentlyPlaying != null){
             currentlyPlaying.setVolume(0);
         }
     }

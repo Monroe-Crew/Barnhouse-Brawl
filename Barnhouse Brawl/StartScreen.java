@@ -20,7 +20,7 @@ public class StartScreen extends World
         setPaintOrder(Title.class,Particle.class);
         StartText startText = new StartText();
         addObject(startText,602,699);
-        Names names = new Names();
+        TempImage names = new StaticImage(new GreenfootImage("Names.png"));
         addObject(names,157,876);
     }
 

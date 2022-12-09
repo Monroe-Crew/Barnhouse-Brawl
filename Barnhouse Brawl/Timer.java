@@ -45,9 +45,5 @@ public class Timer extends Actor{
             seconds--;
             updateImage();
         }
-        if(seconds == 30){
-            Animal.changeKnockbackMultiplier(
-            Constants.Animal.lowTimeKnockback);
-        }
     }    
 }

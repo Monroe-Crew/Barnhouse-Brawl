@@ -16,6 +16,7 @@ public abstract class Animal extends Actor {
     private static double knockbackMultiplier = 1;
     private int frame = 0;
     protected ParticleEffect walkingParticle;
+    private ParticleEffect deathParticle;
     protected boolean dead = false;
     protected Hitbox hitBox;
     protected Hurtbox hurtBox;
@@ -48,6 +49,8 @@ public abstract class Animal extends Actor {
 
         this.walkingParticle = new ParticleEffect(80,new Color(230, 136, 73,200));
         getWorld().addObject(walkingParticle,getX(),getY());
+        
+        this.deathParticle = new ParticleEffect(80,new Color(230, 136, 73,200));
     }
 
     public void act() {
