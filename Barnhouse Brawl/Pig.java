@@ -40,7 +40,10 @@ public class Pig extends Animal
             changeDecay(Constants.Animal.friction);
             hitBox.resetSize();
             hitBox.resetIndent();
+            int currWidth = getImage().getWidth();
+            int currHeight = getImage().getHeight();
             setImage(normal);
+            getImage().scale(currWidth, currHeight);
         }
         if(activated){
             walkingParticle.generateParticles(20);

@@ -25,6 +25,10 @@ public class Projectile extends Actor{
     public void basicPush(Animal animal){
         double multiplier = Constants.Chicken.eggStrength;
         
+        GameWorld world = (GameWorld)getWorld();
+        
+        multiplier += world.getKnockbackMultiplier();
+        
         double rotation = Math.atan2((animal.getY()-getY()),(animal.getX()-getX()));
         double xStrength = Math.cos (rotation)*multiplier;
         double yStrength = Math.sin (rotation)*multiplier;

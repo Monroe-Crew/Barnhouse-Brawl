@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public abstract class GameWorld extends World {
     private GreenfootSound backgroundMusic;
+    private double knockbackMultiplier;
     boolean start = false;
     List<Animal> animalList;
     private int startTime = 180;
     private int countdown = 3;
     private int index = 0;
     private boolean done = false;
+    private int frame = 0;
     private String[] fileNames = { "3.png", "2.png", "1.png", "Brawl.png" };
 
     // private String[] songNames = {"Countdown.mp3"
@@ -64,8 +66,18 @@ public abstract class GameWorld extends World {
             }
             Greenfoot.setWorld(new EndScreen());
         }
+
+        if(frame % 60 == 0){
+            double knockbackInc = Constants.Settings.knockbackInc;
+            knockbackMultiplier += knockbackInc;
+        }
+        frame++;
     }
 
+    public double getKnockbackMultiplier(){
+        return knockbackMultiplier;
+    }
+    
     public int getStartTime() {
         return startTime;
     }
