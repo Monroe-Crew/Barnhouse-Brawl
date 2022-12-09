@@ -43,7 +43,7 @@ public class Goat extends Animal{
             dashingParticle.setLocation(getX(),getY());
             dashingParticle.generateParticles(20);
             specialAbilityTimer++;
-            basicPush(3);
+            basicPush(10);
         }
 
     }    

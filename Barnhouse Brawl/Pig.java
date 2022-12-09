@@ -45,7 +45,7 @@ public class Pig extends Animal
         if(activated){
             walkingParticle.generateParticles(20);
             specialAbilityTimer++;
-            basicPush(3);
+            basicPush(7);
         }
 
     }

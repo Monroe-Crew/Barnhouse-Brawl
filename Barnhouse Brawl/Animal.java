@@ -68,7 +68,7 @@ public abstract class Animal extends Actor {
         if(this.getOneIntersectingObject(Animal.class) != null || this.getOneIntersectingObject(Obstacles.class) != null){ 
             setLocation(getX(), oldY);
         }
-        
+
         //Look at GameWorld timer, and see if equal to -1
         if(((GameWorld)getWorld()).getStartTime()==0){
             // Reloads push cooldown
@@ -88,7 +88,7 @@ public abstract class Animal extends Actor {
                 movement(Direction.RIGHT);
             }
             if(Greenfoot.isKeyDown(controls[5]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
-                basicPush(3);
+                basicPush(7);
                 pushCooldownTimer = 0;
             }
             if(Greenfoot.isKeyDown(controls[6]) && ((double)specialCooldownTimer/60 > specialCooldown)){
@@ -110,16 +110,18 @@ public abstract class Animal extends Actor {
             updatePosition();
         }
     }
-    
+
     public void basicPush(double multiplier){
         // Larger multiplier = harder push for all characters
         ArrayList<Animal> touching = hitBox.findTouching();
 
         for(Animal animal : touching){
             if(animal == this) continue;
-            int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight())*multiplier);
-            int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight())*multiplier);
-            animal.knockBack(xStrength, yStrength);
+            double rotation = Math.atan2((animal.getY()-getY()),(animal.getX()-getX()));
+            System.out.println(Math.toDegrees(rotation));
+            double xStrength = Math.cos (rotation)*multiplier;
+            double yStrength = Math.sin (rotation)*multiplier;
+            animal.knockBack((int)xStrength, (int)yStrength);
 
             hit.play();
         }
@@ -133,20 +135,20 @@ public abstract class Animal extends Actor {
         double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
         switch(direction){
             case UP: 
-            yVelocity -= speed;
-            break;
+                yVelocity -= speed;
+                break;
 
             case DOWN: 
-            yVelocity += speed;
-            break;
+                yVelocity += speed;
+                break;
 
             case LEFT: 
-            xVelocity -= speed;
-            break;
+                xVelocity -= speed;
+                break;
 
             case RIGHT: 
-            xVelocity += speed;
-            break;
+                xVelocity += speed;
+                break;
         }
 
         // Changes rotation based on velocity.
@@ -185,7 +187,7 @@ public abstract class Animal extends Actor {
         if(Math.abs(xVelocity) < .001) xVelocity = 0;
         if(Math.abs(yVelocity) < .001) yVelocity = 0;
     }
-    
+
     public void knockBack(int xStrength, int yStrength){
         this.xVelocity += (double)xStrength*knockbackMultiplier;
         this.yVelocity += (double)yStrength*knockbackMultiplier;
@@ -223,19 +225,19 @@ public abstract class Animal extends Actor {
         getWorld().removeObject(hitBox);
         getWorld().removeObject(this);        
     }
-    
+
     public double getAbilityTimer() { return (double)specialCooldownTimer/60; }
-    
+
     public double getSpecialCooldown() { return specialCooldown; }
 
     public void setPlacement(int placement){
         player.setPlacement(placement);
     }
-    
+
     public boolean getDead(){
         return dead;
     }
-    
+
     public Player getPlayer(){ return player; }
 
     public void animateDeath(){

@@ -20,7 +20,7 @@ public class ParticleEffect extends Actor
     public void generateParticles(int amount){
         frame++;
         if(frame > 60 / amount){
-            Particle particle = new Particle(radius,1,20,20,color);
+            Particle particle = new Particle(radius,1,20,20,color, getX(), getY());
             getWorld().addObject(particle, getX(), getY());
             frame = 0;
         }

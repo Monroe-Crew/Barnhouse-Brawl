@@ -16,18 +16,18 @@ public class Projectile extends Actor{
         if(a != null && a != animal){
             //Add a stun mechanic in the future
             basicPush(a);
-            
+
             hit.play();
             this.getWorld().removeObject(this);
         }
     } 
 
     public void basicPush(Animal animal){
-        // Larger multiplier = harder push for all characters
         double multiplier = Constants.Chicken.eggStrength;
-        int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight())*multiplier);
-        int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight())*multiplier);
-        animal.knockBack(xStrength, yStrength);
-        //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
+        
+        double rotation = Math.atan2((animal.getY()-getY()),(animal.getX()-getX()));
+        double xStrength = Math.cos (rotation)*multiplier;
+        double yStrength = Math.sin (rotation)*multiplier;
+        animal.knockBack((int)xStrength, (int)yStrength);
     }
 }
