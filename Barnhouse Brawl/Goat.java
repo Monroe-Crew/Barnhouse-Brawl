@@ -4,7 +4,6 @@ public class Goat extends Animal{
     private int specialAbilityTimer = 0;
     private ParticleEffect dashingParticle;
     private boolean activated = false;
-    private boolean goatSpecial = false;
     public Goat(Player player){
         super(Constants.Goat.weight,Constants.Goat.specialCooldown, player);
         switch(player.getColor()){
@@ -35,18 +34,18 @@ public class Goat extends Animal{
         super.act();
         if(specialAbilityTimer > Constants.Goat.dashLength * 60){
             activated = false; 
-            goatSpecial = false;
             changeDecay(Constants.Animal.friction);
         }
         if(activated){
-            dashingParticle.generateParticles(20);
+            setRotation(getRotation()-90);
+            move(10);
+            setRotation(getRotation()+90);
             dashingParticle.setLocation(getX(),getY());
+            dashingParticle.generateParticles(20);
             specialAbilityTimer++;
-            basicPush();
+            basicPush(3);
         }
-        if(goatSpecial){
-            specialMovement();
-        }
+
     }    
 
     public void movement(Direction direction){
@@ -57,9 +56,6 @@ public class Goat extends Animal{
     public void specialAbility(){
         //Straight forward dash for 3 seconds
         //Make to where you can't move
-        double multiplyer = (1.0/Math.max(getXVelocity(), getYVelocity()));
-        changeDecay(.95);
-        goatSpecial = true;
         int actorW = getImage().getWidth();
         int actorH = getImage().getHeight();
         activated = true;

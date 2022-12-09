@@ -61,7 +61,7 @@ public abstract class Animal extends Actor {
 
     public void act() {
         //Look at GameWorld timer, and see if equal to -1
-        if(((GameWorld)getWorld()).getStartTime()==-1){
+        if(((GameWorld)getWorld()).getStartTime()==0){
             // Reloads push cooldown
             if(pushCooldownTimer < Constants.Animal.pushCooldown*60+1) pushCooldownTimer += 1;
             if(specialCooldownTimer < specialCooldown*60+1) specialCooldownTimer += 1;
@@ -79,7 +79,7 @@ public abstract class Animal extends Actor {
                 movement(Direction.RIGHT);
             }
             if(Greenfoot.isKeyDown(controls[5]) && ((double)pushCooldownTimer/60 > Constants.Animal.pushCooldown)){
-                basicPush();
+                basicPush(3);
                 pushCooldownTimer = 0;
             }
             if(Greenfoot.isKeyDown(controls[6]) && ((double)specialCooldownTimer/60 > specialCooldown)){
@@ -101,43 +101,20 @@ public abstract class Animal extends Actor {
             updatePosition();
         }
     }
-
-    public void basicPush(){
+    
+    public void basicPush(double multiplier){
         // Larger multiplier = harder push for all characters
-        int multiplier = 3;
         ArrayList<Animal> touching = hitBox.findTouching();
 
         for(Animal animal : touching){
             if(animal == this) continue;
-            int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
-            int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight()))*multiplier;
+            int xStrength = (int)(((animal.getX() - this.getX() > 0 ? 1 : -1) * (double)animal.getX()/this.getX() * 5)/Math.sqrt(animal.getWeight())*multiplier);
+            int yStrength = (int)(((animal.getY() - this.getY() > 0 ? 1 : -1) * (double)animal.getY()/this.getY() * 5)/Math.sqrt(animal.getWeight())*multiplier);
             animal.knockBack(xStrength, yStrength);
 
             hit.play();
         }
         //call getObjects(class) or getObjectsAt(x,y,class) on world to get all actors
-    }
-
-    public void specialMovement(){
-        double speed = ((1.0/weight)*Constants.Animal.movementSpeed);
-        System.out.println("Speed " + speed);
-        System.out.println("xVelocity " + xVelocity);
-        System.out.println("yVelocity " + yVelocity);
-        if(yVelocity>0){
-            yVelocity += speed;
-        }
-        else{
-            yVelocity -= speed;
-        }
-        if(xVelocity>0){
-            xVelocity += speed;
-        }
-        else{
-            xVelocity -= speed;
-        }
-
-        walkingParticle.setLocation(getX(),getY());
-        walkingParticle.generateParticles(3);
     }
 
     public void movement(Direction direction) {
@@ -262,6 +239,10 @@ public abstract class Animal extends Actor {
 
     public void setPlacement(int placement){
         player.setPlacement(placement);
+    }
+    
+    public boolean getDead(){
+        return dead;
     }
 
     public void animateDeath(){

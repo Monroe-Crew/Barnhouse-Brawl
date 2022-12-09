@@ -12,40 +12,44 @@ public class Barnhouse extends GameWorld {
             Animal animal = new Pig(player);
             switch (player.getAnimal()) {
                 case COW:
-                animal = new Cow(player);
-                break;
+                    animal = new Cow(player);
+                    break;
                 case CHICKEN:
-                animal = new Chicken(player);
-                break;
+                    animal = new Chicken(player);
+                    break;
                 case GOAT:
-                animal = new Goat(player);
-                break;
+                    animal = new Goat(player);
+                    break;
             }
 
             switch (player.getPlayerID()) {
                 case 1:
-                SpecialIndicator redCircle = new SpecialIndicator(animal);
-                addObject(redCircle, 40,Constants.Settings.worldHeight - 60);
-                addObject(animal, 200, Constants.Settings.worldHeight - 200);
-                break;
+                    SpecialIndicator redCircle = new SpecialIndicator("RedCircle.png", animal);
+                    addObject(redCircle, 40, 60);
+                    addObject(animal, 200, 200);
+
+                    break;
                 case 2:
-                //add a blue circle
-                addObject(animal, 200, 200);
-                break;
+                    SpecialIndicator greenCircle = new SpecialIndicator("GreenCircle.png", animal);
+                    addObject(greenCircle, 40, Constants.Settings.worldHeight - 60);
+                    addObject(animal, 200, Constants.Settings.worldHeight - 200);
+                    break;
                 case 3:
-                //add a yellow circle
-                addObject(animal, Constants.Settings.worldWidth - 200, 200);
-                break;
+                    SpecialIndicator blueCircle = new SpecialIndicator("BlueCircle.png", animal);
+                    addObject(blueCircle, Constants.Settings.worldWidth - 40, Constants.Settings.worldHeight - 60);
+                    addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
+                    break;
                 case 4:
-                //add a green circle
-                addObject(animal, Constants.Settings.worldWidth - 200, Constants.Settings.worldHeight - 200);
-                break;
+                    SpecialIndicator yellowCircle = new SpecialIndicator("YellowCircle.png", animal);
+                    addObject(yellowCircle, Constants.Settings.worldWidth - 40, 60);
+                    addObject(animal, Constants.Settings.worldWidth - 200, 200);
+                    break;
             }
         }
     }
 
-    public void reflectHorizontally(Actor actor){
-        actor.setLocation(Constants.Settings.worldWidth-actor.getX(), actor.getY());
+    public void reflectHorizontally(Actor actor) {
+        actor.setLocation(Constants.Settings.worldWidth - actor.getX(), actor.getY());
     }
 
 }

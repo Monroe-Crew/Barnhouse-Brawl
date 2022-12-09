@@ -49,7 +49,8 @@ public class Constants
 
     public static final class Chicken{
         public static final int weight = 1;
-        public static final double specialCooldown = .5;
+        public static final double specialCooldown = .75;
+        public static final double eggStrength = 5;
     }
 
     public static final class Pig{
@@ -61,12 +62,13 @@ public class Constants
     public static final class Cow{
         public static final int weight = 3;
         public static final double mooLength = 0.1;
-        public static final double specialCooldown = 10;
+        public static final double mooStrength = 1;
+        public static final double specialCooldown = 5;
     }
 
     public static final class Goat{
         public static final int weight = 2;
-        public static final double dashLength = 1;
+        public static final double dashLength = .5;
         public static final double specialCooldown = 4;
     }
 }
