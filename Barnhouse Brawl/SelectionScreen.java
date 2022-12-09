@@ -31,6 +31,11 @@ public class SelectionScreen extends World {
     private SelectorBox selectorBox4;
     private BobbingImage p4Start = new BobbingImage(new GreenfootImage(joinSelectImage), joinSelectAmplitude,
             joinSelectFrequency);
+            
+    GreenfootSound P1Join = new GreenfootSound("Join.wav");
+    GreenfootSound P2Join = new GreenfootSound("Join.wav");
+    GreenfootSound P3Join = new GreenfootSound("Join.wav");
+    GreenfootSound P4Join = new GreenfootSound("Join.wav");
 
     public SelectionScreen() {
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
@@ -51,6 +56,7 @@ public class SelectionScreen extends World {
             Player player1 = new Player(1);
             selectorBox1 = new SelectorBox(player1);
             addObject(selectorBox1, 172, 655);
+            P1Join.play();
         }
 
         if (Greenfoot.isKeyDown(p2Controls[4]) && selectorBox2 == null) {
@@ -60,6 +66,7 @@ public class SelectionScreen extends World {
             Player player2 = new Player(2);
             selectorBox2 = new SelectorBox(player2);
             addObject(selectorBox2, 485, 655);
+            P2Join.play();
         }
 
         if (Greenfoot.isKeyDown(p3Controls[4]) && selectorBox3 == null) {
@@ -69,6 +76,7 @@ public class SelectionScreen extends World {
             Player player3 = new Player(3);
             selectorBox3 = new SelectorBox(player3);
             addObject(selectorBox3, 796, 655);
+            P3Join.play();
         }
 
         if (Greenfoot.isKeyDown(p4Controls[4]) && selectorBox4 == null) {
@@ -78,6 +86,7 @@ public class SelectionScreen extends World {
             Player player4 = new Player(4);
             selectorBox4 = new SelectorBox(player4);
             addObject(selectorBox4, 1108, 655);
+            P4Join.play();
         }
 
         if (frame > 60) {
