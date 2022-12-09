@@ -37,6 +37,11 @@ public class Constants
         public static final double arrowFrequency = 20;
         public static final double arrowAmplitude = .25;
     }
+    
+    public static final class StartText{
+        public static final double frequency = 20;
+        public static final double amplitude = .05;
+    }
 
     public static final class Animal{
         public static final double pushCooldown = .5;

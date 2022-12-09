@@ -16,8 +16,12 @@ public class StartScreen extends World
         Title title = new Title();
         addObject(title,638,370);
         AllPlayers.reset();
-        
+
         setPaintOrder(Title.class,Particle.class);
+        StartText startText = new StartText();
+        addObject(startText,602,699);
+        Names names = new Names();
+        addObject(names,157,876);
     }
 
     public void act(){

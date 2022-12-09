@@ -1,0 +1,25 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class StartText here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class StartText extends BobbingImage
+{
+    public StartText(){
+        super(Constants.StartText.amplitude, Constants.StartText.frequency);
+    }
+    
+    /**
+     * Act - do whatever the StartText wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act() 
+    {
+        
+        time++;
+        animate();
+    }    
+}
