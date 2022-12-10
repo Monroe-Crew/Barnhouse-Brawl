@@ -37,7 +37,7 @@ public class StartScreen extends World
         TempImage names = new StaticImage(new GreenfootImage("OLDNames.png"));
         addObject(names,170,810);
 
-        setPaintOrder(Title.class,StartText.class,StaticImage.class,Particle.class);
+        setPaintOrder(Title.class,StartText.class,TempImage.class,Particle.class,StaticImage.class);
     }
 
     public void act(){
@@ -62,9 +62,9 @@ public class StartScreen extends World
             goat.setRotation(90);
         }
         if(goatAnimate){
-            goat.setLocation(goat.getX()+3, goat.getY());
-            goatParticle.setLocation(goat.getX(),goat.getY());
+            goatParticle.setLocation(goatParticle.getX()+3,goatParticle.getY());
             goatParticle.generateParticles(20);
+            goat.setLocation(goatParticle.getX(), goatParticle.getY());
             if(goat.getX() > Constants.Settings.worldWidth + goat.getImage().getWidth()){
                 goatAnimate = false;
                 removeObject(goat);
