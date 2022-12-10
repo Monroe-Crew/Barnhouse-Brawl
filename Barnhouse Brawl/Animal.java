@@ -125,7 +125,6 @@ public abstract class Animal extends Actor {
         for(Animal animal : touching){
             if(animal == this) continue;
             double rotation = Math.atan2((animal.getY()-getY()),(animal.getX()-getX()));
-            System.out.println(Math.toDegrees(rotation));
             double xStrength = Math.cos (rotation)*multiplier;
             double yStrength = Math.sin (rotation)*multiplier;
             animal.knockBack((int)xStrength, (int)yStrength);

@@ -5,6 +5,8 @@ public class StartScreen extends World
     private ParticleEffect titleParticle;
     GreenfootSound titleMusic = new GreenfootSound("StartScreen.mp3");
     public Music music = new Music();
+    TempImage bg = new StaticImage(new GreenfootImage("BigGrassTitle.png"));
+    int bgTimer = 0;
     public StartScreen(){    
         super(Constants.Settings.worldWidth, Constants.Settings.worldHeight, 1);
         prepare();
@@ -17,17 +19,27 @@ public class StartScreen extends World
         addObject(title,638,370);
         AllPlayers.reset();
 
-        setPaintOrder(Title.class,Particle.class);
         StartText startText = new StartText();
         addObject(startText,602,699);
-        TempImage names = new StaticImage(new GreenfootImage("Names.png"));
+
+        addObject(bg,1920,480);
+        TempImage names = new StaticImage(new GreenfootImage("OLDNames.png"));
         addObject(names,157,876);
+
+        setPaintOrder(Title.class,Particle.class,StartText.class,StaticImage.class);
     }
 
     public void act(){
         titleParticle.generateParticles(10);
         if(!start){
             music.playMusic(titleMusic);
+        }
+        bgTimer++;
+        if(bgTimer < (1280)){
+            bg.move(-1);
+        }else{
+            bg.setLocation(1920,480);
+            bgTimer = 0;
         }
         
         if(Greenfoot.isKeyDown(Constants.PlayerControl.p1Controls[4]) ||Greenfoot.isKeyDown(Constants.PlayerControl.p2Controls[4])||Greenfoot.isKeyDown(Constants.PlayerControl.p3Controls[4])||Greenfoot.isKeyDown(Constants.PlayerControl.p4Controls[4])){
