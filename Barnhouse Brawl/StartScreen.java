@@ -8,7 +8,7 @@ public class StartScreen extends World
     TempImage bg = new StaticImage(new GreenfootImage("BigGrassTitle.png"));
     
     ParticleEffect goatParticle = new ParticleEffect(80,new Color(255, 255, 255,255));
-    TempImage goat = new StaticImage(new GreenfootImage("goat.png"));
+    TempImage goat = new StaticImage(new GreenfootImage("Goat.png"));
     
     int bgTimer = 0;
     
