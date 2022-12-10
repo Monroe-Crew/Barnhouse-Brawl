@@ -2,7 +2,7 @@ import greenfoot.*;
 public abstract class TempImage extends Actor{
     protected int frame;
     protected int time;
-    protected GreenfootImage image;
+    public GreenfootImage image;
     private boolean animate = true;
 
     public TempImage(){
