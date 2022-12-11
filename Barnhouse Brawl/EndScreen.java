@@ -24,6 +24,9 @@ public class EndScreen extends World
     }
 
     private void prepare(){
+        TextDisplay startText = new TextDisplay("Press START to play again!");
+        addObject(startText,630,50);
+        
         EndScreen_Leaderboard endScreen_Leaderboard = new EndScreen_Leaderboard();
         addObject(endScreen_Leaderboard,Constants.Settings.worldWidth/2,(int)(Constants.Settings.worldHeight/2.5));
 
