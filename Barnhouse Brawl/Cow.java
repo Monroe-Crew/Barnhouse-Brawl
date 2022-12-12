@@ -41,8 +41,8 @@ public class Cow extends Animal
     }    
     @Override
     public void specialAbility(){
-        Moo moo = new Moo();
-        getWorld().addObject(moo, getX(), getY());
+        //Moo moo = new Moo();
+        //getWorld().addObject(moo, getX(), getY());
         getWorld().addObject(new ExpandFadeImage(new GreenfootImage("MooAura.png")), getX(), getY());
         int actorW = (int)(getImage().getWidth()*2);
         int actorH = (int)(getImage().getHeight()*2);

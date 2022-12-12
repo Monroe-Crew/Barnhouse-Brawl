@@ -35,7 +35,7 @@ public class EndScreen extends World
             TempImage image = new StaticImage(new GreenfootImage("Cow.png"));
             switch(player.getAnimal()){
                 case GOAT:
-                image = new StaticImage(new GreenfootImage("goat.png"));
+                image = new StaticImage(new GreenfootImage("Goat.png"));
                 break;
                 case COW :
                 image = new StaticImage(new GreenfootImage("Cow.png"));

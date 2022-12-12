@@ -115,6 +115,7 @@ public abstract class Animal extends Actor {
     }
 
     public void basicPush(double multiplier){
+        if(dead) return;
         // Larger multiplier = harder push for all characters
         ArrayList<Animal> touching = hitBox.findTouching();
         
