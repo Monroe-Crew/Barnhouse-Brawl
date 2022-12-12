@@ -8,7 +8,7 @@ public class StartScreen extends World
     TempImage bg = new StaticImage(new GreenfootImage("BigGrassTitle.png"));
     
     ParticleEffect goatParticle = new ParticleEffect(80,new Color(255, 255, 255,255));
-    TempImage goat = new StaticImage(new GreenfootImage("Goat.png"));
+    TempImage goat = new StaticImage(new GreenfootImage("goat.png"));
     
     int bgTimer = 0;
     
@@ -23,7 +23,7 @@ public class StartScreen extends World
 
     private void prepare(){
         goat.scale(goat.image.getWidth()*3, goat.image.getHeight()*3);
-        
+
         titleParticle = new ParticleEffect(300,new Color(230, 136, 73,200));
         addObject(titleParticle,638,370);
         Title title = new Title();
@@ -38,6 +38,9 @@ public class StartScreen extends World
         addObject(names,170,810);
 
         setPaintOrder(Title.class,StartText.class,TempImage.class,Particle.class,StaticImage.class);
+        
+        AstroEasterEgg astroEasterEgg = new AstroEasterEgg();
+        addObject(astroEasterEgg,1320,704);
     }
 
     public void act(){
